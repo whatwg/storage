@@ -10,7 +10,7 @@ No Editor: true
 !Commits: <a href=https://github.com/whatwg/storage/commits>GitHub whatwg/storage/commits</a>
 !Commits: <a href=https://twitter.com/storagestandard>@storagestandard</a>
 Logo: https://resources.whatwg.org/logo.svg
-Abstract: Storage defines an API for persistent storage and quota estimates, as well as the platform storage architecture.
+Abstract: The Storage Standard defines an API for persistent storage and quota estimates, as well as the platform storage architecture.
 </pre>
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
@@ -152,11 +152,11 @@ Navigator implements NavigatorStorage;
 WorkerNavigator implements NavigatorStorage;
 </pre>
 
-Each <a>environment settings object</a> has an associated <code>StorageManager</code>
-object. [[HTML]]
+Each <a>environment settings object</a> has an associated {{StorageManager}} object.
+[[HTML]]
 
-The <dfn><code>storage</code></dfn> attribute's getter must return its global object's
-<a>environment settings object</a>'s <code>StorageManager</code>.
+The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> attribute's getter must
+return its global object's <a>environment settings object</a>'s {{StorageManager}} object.
 
 <pre class=idl>
 [Exposed=(Window,Worker)]
@@ -176,8 +176,8 @@ dictionary StorageInfo {
 enum PersistentStoragePermission { "default", "denied", "granted" }; // XXX merge with NotificationPermission
 </pre>
 
-The <dfn><code>requestPersistent()</code></dfn> method, when invoked, must run these
-steps:
+The <dfn method for=StorageManager><code>requestPersistent()</code></dfn> method, when
+invoked, must run these steps:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
@@ -203,8 +203,8 @@ steps:
  <li><p>Return <var>promise</var>.
 </ol>
 
-The <dfn><code>persistentPermission()</code></dfn> method, when invoked, must run these
-steps:
+The <dfn method for=StorageManager><code>persistentPermission()</code></dfn> method, when
+invoked, must run these steps:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
@@ -225,7 +225,8 @@ steps:
  <li><p>Return <var>promise</var>.
 </ol>
 
-The <dfn><code>estimate()</code></dfn> method, when invoked, must run these steps:
+The <dfn method for=StorageManager><code>estimate()</code></dfn> method, when invoked,
+must run these steps:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
@@ -244,8 +245,8 @@ The <dfn><code>estimate()</code></dfn> method, when invoked, must run these step
    <li><p>Let <var>quota</var> be a rough estimate of the amount of bytes available within
    <var>origin</var>'s <a>non-persistent origin storage unit quota</a>.
 
-   <li><p>Let <var>dictionary</var> be a new dictionary whose <code>usage</code> member is
-   <var>usage</var> and <code>quota</code> member is <var>quota</var>.
+   <li><p>Let <var>dictionary</var> be a new {{StorageInfo}} dictionary whose {{usage}}
+   member is <var>usage</var> and {{quota}} member is <var>quota</var>.
 
    <li><p>Resolve <var>promise</var> with <var>dictionary</var>.
   </ol>
@@ -253,8 +254,8 @@ The <dfn><code>estimate()</code></dfn> method, when invoked, must run these step
  <li><p>Return <var>promise</var>.
 </ol>
 
-The <dfn><code>persistentEstimate()</code></dfn> method, when invoked, must run these
-steps:
+The <dfn method for=StorageManager><code>persistentEstimate()</code></dfn> method, when
+invoked, must run these steps:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.

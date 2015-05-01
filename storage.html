@@ -52,7 +52,7 @@
   
 
   <div class="p-summary" data-fill-with="abstract">
-   <p>Storage defines an API for persistent storage and quota estimates, as well as the platform storage architecture.</p>
+   <p>The Storage Standard defines an API for persistent storage and quota estimates, as well as the platform storage architecture.</p>
 
 </div>
   
@@ -261,28 +261,28 @@ sufficient space by clearing <a data-link-type="dfn" href="#network-storage">net
    <pre class="idl">[NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="navigatorstorage">NavigatorStorage<a class="self-link" href="#navigatorstorage"></a></dfn> {
-  readonly attribute <a data-link-type="idl-name" href="#storagemanager">StorageManager</a> <dfn class="idl-code" data-dfn-for="NavigatorStorage" data-dfn-type="attribute" data-export="" data-global-name="NavigatorStorage<interface>/storage<attribute>" data-readonly="" data-type="StorageManager " id="dom-navigatorstorage-storage">storage<a class="self-link" href="#dom-navigatorstorage-storage"></a></dfn>;
+  readonly attribute <a data-link-type="idl-name" href="#storagemanager">StorageManager</a> <a class="idl-code" data-global-name="NavigatorStorage<interface>/storage<attribute>" data-link-type="attribute" data-readonly="" data-type="StorageManager " href="#dom-navigatorstorage-storage">storage</a>;
 };
 <a data-link-type="idl-name" href="https://html.spec.whatwg.org/#navigator">Navigator</a> implements <a data-link-type="idl-name" href="#navigatorstorage">NavigatorStorage</a>;
 <a data-link-type="idl-name" href="https://html.spec.whatwg.org/#workernavigator">WorkerNavigator</a> implements <a data-link-type="idl-name" href="#navigatorstorage">NavigatorStorage</a>;
 </pre>
 
 
-   <p>Each <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a> has an associated <code>StorageManager</code>
-object. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
+   <p>Each <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a> has an associated <code class="idl"><a data-link-type="idl" href="#storagemanager">StorageManager</a></code> object.
+<a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
 
 
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="storage"><code>storage</code><a class="self-link" href="#storage"></a></dfn> attribute’s getter must return its global object’s
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>’s <code>StorageManager</code>.</p>
+   <p>The <dfn class="idl-code" data-dfn-for="NavigatorStorage" data-dfn-type="attribute" data-export="" id="dom-navigatorstorage-storage"><code>storage</code><a class="self-link" href="#dom-navigatorstorage-storage"></a></dfn> attribute’s getter must
+return its global object’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>’s <code class="idl"><a data-link-type="idl" href="#storagemanager">StorageManager</a></code> object.</p>
 
 
    <pre class="idl">[Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" data-global-name="" id="storagemanager">StorageManager<a class="self-link" href="#storagemanager"></a></dfn> {
-  [Exposed=Window] Promise&lt;<a data-link-type="idl-name" href="#enumdef-persistentstoragepermission">PersistentStoragePermission</a>> <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" data-global-name="StorageManager<interface>/requestPersistent()<method>" data-lt="requestPersistent()" id="dom-storagemanager-requestpersistent">requestPersistent<a class="self-link" href="#dom-storagemanager-requestpersistent"></a></dfn>();
-  Promise&lt;<a data-link-type="idl-name" href="#enumdef-persistentstoragepermission">PersistentStoragePermission</a>> <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" data-global-name="StorageManager<interface>/persistentPermission()<method>" data-lt="persistentPermission()" id="dom-storagemanager-persistentpermission">persistentPermission<a class="self-link" href="#dom-storagemanager-persistentpermission"></a></dfn>();
+  [Exposed=Window] Promise&lt;<a data-link-type="idl-name" href="#enumdef-persistentstoragepermission">PersistentStoragePermission</a>> <a class="idl-code" data-global-name="StorageManager<interface>/requestPersistent()<method>" data-link-type="method" href="#dom-storagemanager-requestpersistent">requestPersistent</a>();
+  Promise&lt;<a data-link-type="idl-name" href="#enumdef-persistentstoragepermission">PersistentStoragePermission</a>> <a class="idl-code" data-global-name="StorageManager<interface>/persistentPermission()<method>" data-link-type="method" href="#dom-storagemanager-persistentpermission">persistentPermission</a>();
 
-  Promise&lt;<a data-link-type="idl-name" href="#dictdef-storageinfo">StorageInfo</a>> <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" data-global-name="StorageManager<interface>/estimate()<method>" data-lt="estimate()" id="dom-storagemanager-estimate">estimate<a class="self-link" href="#dom-storagemanager-estimate"></a></dfn>();
-  Promise&lt;<a data-link-type="idl-name" href="#dictdef-storageinfo">StorageInfo</a>> <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" data-global-name="StorageManager<interface>/persistentEstimate()<method>" data-lt="persistentEstimate()" id="dom-storagemanager-persistentestimate">persistentEstimate<a class="self-link" href="#dom-storagemanager-persistentestimate"></a></dfn>();
+  Promise&lt;<a data-link-type="idl-name" href="#dictdef-storageinfo">StorageInfo</a>> <a class="idl-code" data-global-name="StorageManager<interface>/estimate()<method>" data-link-type="method" href="#dom-storagemanager-estimate">estimate</a>();
+  Promise&lt;<a data-link-type="idl-name" href="#dictdef-storageinfo">StorageInfo</a>> <a class="idl-code" data-global-name="StorageManager<interface>/persistentEstimate()<method>" data-link-type="method" href="#dom-storagemanager-persistentestimate">persistentEstimate</a>();
 };
 
 dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" data-global-name="" id="dictdef-storageinfo">StorageInfo<a class="self-link" href="#dictdef-storageinfo"></a></dfn> {
@@ -294,8 +294,8 @@ enum <dfn class="idl-code" data-dfn-type="enum" data-export="" data-global-name=
 </pre>
 
 
-   <p>The <dfn class="css" data-dfn-type="function" data-export="" id="funcdef-requestpersistent"><code>requestPersistent()</code><a class="self-link" href="#funcdef-requestpersistent"></a></dfn> method, when invoked, must run these
-steps:</p>
+   <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-requestpersistent"><code>requestPersistent()</code><a class="self-link" href="#dom-storagemanager-requestpersistent"></a></dfn> method, when
+invoked, must run these steps:</p>
 
 
    <ol>
@@ -340,8 +340,8 @@ steps:</p>
 </p></ol>
 
 
-   <p>The <dfn class="css" data-dfn-type="function" data-export="" id="funcdef-persistentpermission"><code>persistentPermission()</code><a class="self-link" href="#funcdef-persistentpermission"></a></dfn> method, when invoked, must run these
-steps:</p>
+   <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-persistentpermission"><code>persistentPermission()</code><a class="self-link" href="#dom-storagemanager-persistentpermission"></a></dfn> method, when
+invoked, must run these steps:</p>
 
 
    <ol>
@@ -379,7 +379,8 @@ steps:</p>
 </p></ol>
 
 
-   <p>The <dfn class="css" data-dfn-type="function" data-export="" id="funcdef-estimate"><code>estimate()</code><a class="self-link" href="#funcdef-estimate"></a></dfn> method, when invoked, must run these steps:</p>
+   <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-estimate"><code>estimate()</code><a class="self-link" href="#dom-storagemanager-estimate"></a></dfn> method, when invoked,
+must run these steps:</p>
 
 
    <ol>
@@ -412,8 +413,8 @@ steps:</p>
 
    </p>
       <li>
-       <p>Let <var>dictionary</var> be a new dictionary whose <code>usage</code> member is
-   <var>usage</var> and <code>quota</code> member is <var>quota</var>.
+       <p>Let <var>dictionary</var> be a new <code class="idl"><a data-link-type="idl" href="#dictdef-storageinfo">StorageInfo</a></code> dictionary whose <code class="idl"><a data-link-type="idl" href="#dom-storageinfo-usage">usage</a></code>
+   member is <var>usage</var> and <code class="idl"><a data-link-type="idl" href="#dom-storageinfo-quota">quota</a></code> member is <var>quota</var>.
 
    </p>
       <li>
@@ -428,8 +429,8 @@ steps:</p>
 </p></ol>
 
 
-   <p>The <dfn class="css" data-dfn-type="function" data-export="" id="funcdef-persistentestimate"><code>persistentEstimate()</code><a class="self-link" href="#funcdef-persistentestimate"></a></dfn> method, when invoked, must run these
-steps:</p>
+   <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-persistentestimate"><code>persistentEstimate()</code><a class="self-link" href="#dom-storagemanager-persistentestimate"></a></dfn> method, when
+invoked, must run these steps:</p>
 
 
    <ol>
@@ -544,11 +545,7 @@ rights to this work.</p>
   <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="indexlist">
    <li>box, <a href="#box">3</a>
-   <li>estimate()
-    <ul>
-     <li>method for StorageManager, <a href="#dom-storagemanager-estimate">7</a>
-     <li>(function), <a href="#funcdef-estimate">7</a>
-    </ul>
+   <li>estimate(), <a href="#dom-storagemanager-estimate">7</a>
    <li>global quota, <a href="#global-quota">5</a>
    <li>mode, <a href="#mode">3.1</a>
    <li>NavigatorStorage, <a href="#navigatorstorage">7</a>
@@ -560,31 +557,15 @@ rights to this work.</p>
    <li>origin storage units, <a href="#origin-storage-units">3</a>
    <li>permission, <a href="#permission">4</a>
    <li>persistent box, <a href="#persistent-box">3.1</a>
-   <li>persistentEstimate()
-    <ul>
-     <li>method for StorageManager, <a href="#dom-storagemanager-persistentestimate">7</a>
-     <li>(function), <a href="#funcdef-persistentestimate">7</a>
-    </ul>
-   <li>persistentPermission()
-    <ul>
-     <li>method for StorageManager, <a href="#dom-storagemanager-persistentpermission">7</a>
-     <li>(function), <a href="#funcdef-persistentpermission">7</a>
-    </ul>
+   <li>persistentEstimate(), <a href="#dom-storagemanager-persistentestimate">7</a>
+   <li>persistentPermission(), <a href="#dom-storagemanager-persistentpermission">7</a>
    <li>PersistentStoragePermission, <a href="#enumdef-persistentstoragepermission">7</a>
    <li>quota, <a href="#dom-storageinfo-quota">7</a>
-   <li>requestPersistent()
-    <ul>
-     <li>method for StorageManager, <a href="#dom-storagemanager-requestpersistent">7</a>
-     <li>(function), <a href="#funcdef-requestpersistent">7</a>
-    </ul>
+   <li>requestPersistent(), <a href="#dom-storagemanager-requestpersistent">7</a>
    <li>site, <a href="#site">2</a>
    <li>site storage, <a href="#site-storage">3</a>
    <li>site storage units, <a href="#site-storage-units">3</a>
-   <li>storage
-    <ul>
-     <li>attribute for NavigatorStorage, <a href="#dom-navigatorstorage-storage">7</a>
-     <li>definition of, <a href="#storage">7</a>
-    </ul>
+   <li>storage, <a href="#dom-navigatorstorage-storage">7</a>
    <li>StorageInfo, <a href="#dictdef-storageinfo">7</a>
    <li>StorageManager, <a href="#storagemanager">7</a>
    <li>usage, <a href="#dom-storageinfo-usage">7</a></ul>
@@ -607,18 +588,18 @@ rights to this work.</p>
   <pre class="idl">[NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <a data-global-name="" href="#navigatorstorage">NavigatorStorage</a> {
-  readonly attribute <a data-link-type="idl-name" href="#storagemanager">StorageManager</a> <a data-global-name="NavigatorStorage<interface>/storage<attribute>" data-readonly="" data-type="StorageManager " href="#dom-navigatorstorage-storage">storage</a>;
+  readonly attribute <a data-link-type="idl-name" href="#storagemanager">StorageManager</a> <a class="idl-code" data-global-name="NavigatorStorage<interface>/storage<attribute>" data-link-type="attribute" data-readonly="" data-type="StorageManager " href="#dom-navigatorstorage-storage">storage</a>;
 };
 <a data-link-type="idl-name" href="https://html.spec.whatwg.org/#navigator">Navigator</a> implements <a data-link-type="idl-name" href="#navigatorstorage">NavigatorStorage</a>;
 <a data-link-type="idl-name" href="https://html.spec.whatwg.org/#workernavigator">WorkerNavigator</a> implements <a data-link-type="idl-name" href="#navigatorstorage">NavigatorStorage</a>;
 
 [Exposed=(Window,Worker)]
 interface <a data-global-name="" href="#storagemanager">StorageManager</a> {
-  [Exposed=Window] Promise&lt;<a data-link-type="idl-name" href="#enumdef-persistentstoragepermission">PersistentStoragePermission</a>> <a data-global-name="StorageManager<interface>/requestPersistent()<method>" href="#dom-storagemanager-requestpersistent">requestPersistent</a>();
-  Promise&lt;<a data-link-type="idl-name" href="#enumdef-persistentstoragepermission">PersistentStoragePermission</a>> <a data-global-name="StorageManager<interface>/persistentPermission()<method>" href="#dom-storagemanager-persistentpermission">persistentPermission</a>();
+  [Exposed=Window] Promise&lt;<a data-link-type="idl-name" href="#enumdef-persistentstoragepermission">PersistentStoragePermission</a>> <a class="idl-code" data-global-name="StorageManager<interface>/requestPersistent()<method>" data-link-type="method" href="#dom-storagemanager-requestpersistent">requestPersistent</a>();
+  Promise&lt;<a data-link-type="idl-name" href="#enumdef-persistentstoragepermission">PersistentStoragePermission</a>> <a class="idl-code" data-global-name="StorageManager<interface>/persistentPermission()<method>" data-link-type="method" href="#dom-storagemanager-persistentpermission">persistentPermission</a>();
 
-  Promise&lt;<a data-link-type="idl-name" href="#dictdef-storageinfo">StorageInfo</a>> <a data-global-name="StorageManager<interface>/estimate()<method>" href="#dom-storagemanager-estimate">estimate</a>();
-  Promise&lt;<a data-link-type="idl-name" href="#dictdef-storageinfo">StorageInfo</a>> <a data-global-name="StorageManager<interface>/persistentEstimate()<method>" href="#dom-storagemanager-persistentestimate">persistentEstimate</a>();
+  Promise&lt;<a data-link-type="idl-name" href="#dictdef-storageinfo">StorageInfo</a>> <a class="idl-code" data-global-name="StorageManager<interface>/estimate()<method>" data-link-type="method" href="#dom-storagemanager-estimate">estimate</a>();
+  Promise&lt;<a data-link-type="idl-name" href="#dictdef-storageinfo">StorageInfo</a>> <a class="idl-code" data-global-name="StorageManager<interface>/persistentEstimate()<method>" data-link-type="method" href="#dom-storagemanager-persistentestimate">persistentEstimate</a>();
 };
 
 dictionary <a data-global-name="" href="#dictdef-storageinfo">StorageInfo</a> {
