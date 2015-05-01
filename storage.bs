@@ -1,0 +1,321 @@
+<pre class='metadata'>
+Title: Storage WIP
+H1: Storage
+Shortname: storage
+Status: LS
+Group: WHATWG
+No Editor: true
+!Participate: <a href=https://github.com/whatwg/storage>GitHub whatwg/storage</a> (<a href=https://github.com/whatwg/storage/issues/new>new issue</a>, <a href=https://github.com/whatwg/storage/issues>open issues</a>)
+!Participate: <a href=https://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a>
+!Commits: <a href=https://github.com/whatwg/storage/commits>GitHub whatwg/storage/commits</a>
+!Commits: <a href=https://twitter.com/storagestandard>@storagestandard</a>
+Logo: https://resources.whatwg.org/logo.svg
+Abstract: Storage defines an API for persistent storage and quota estimates, as well as the platform storage architecture.
+</pre>
+
+<script src=https://resources.whatwg.org/file-issue.js async></script>
+
+<pre class='anchors'>
+urlPrefix: https://html.spec.whatwg.org/multipage/
+    type: dfn
+        urlPrefix: browsers.html
+            text: origin
+        urlPrefix: webappapis.html
+            text: environment settings object
+</pre>
+
+
+
+<h2 id=introduction>Introduction</h2>
+
+Over the years the web has grown various APIs that can be used for storage, e.g.
+IndexedDB, <code>localStorage</code>, and <code>showNotification()</code>. The
+Storage Standard defines the storage box they all tie into, a way of making that box
+persistent, and a way of getting quota estimates for that box.
+
+
+
+<h2 id=terminology>Terminology</h2>
+
+A <dfn>site</dfn> is eTLD+1. <span class=XXX>Needs a more formal definition.</span>
+
+
+
+<h2 id=infrastructure>Infrastructure</h2>
+
+A user agent has <dfn>network storage</dfn> and <dfn>site storage</dfn>.
+<a>Network storage</a> concerns the HTTP cache and cookies. <a>Site storage</a> concerns
+the various APIs that can be used for storing data, such as
+<code>history.pushState()</code>.
+
+<a>Network storage</a> is not defined in detail for now and left as an exercise for the
+reader.
+
+<a>Site storage</a> consists of zero or more <dfn>site storage units</dfn>.
+
+Each <a>site storage unit</a> has an associated <a>site</a>, and zero or more
+<dfn>origin storage units</dfn>.
+
+Each <a>origin storage unit</a> has an associated <a>origin</a> and a
+<dfn>box</dfn>. [[HTML]]
+
+
+<h3 id=boxes>Boxes</h3>
+
+A <a>box</a> has <dfn>mode</dfn> which is either "<code title>atomic</code>" or
+"<code title>persistent</code>". A <dfn>persistent box</dfn> is a <a>box</a> whose
+<a>mode</a> is "<code title>persistent</code>". A <dfn>non-persistent box</dfn> is a
+<a>box</a> whose <a>mode</a> is <em>not</em> "<code title>persistent</code>".
+
+Whenever a <a>box</a> is cleared by the user agent, it must be cleared in its entirety.
+
+
+
+<h2 id=persistence>Persistence</h2>
+
+A <a>box</a> can only be turned into a <a>persistent box</a> if the user (or user agent
+on behalf of the user) has granted <dfn>permission</dfn>. The <a>permission</a> for a
+given <a>origin</a> is one of three strings:
+
+<dl>
+  <dt>"<code>default</code>"
+  <dd><p>This is equivalent to "<code>denied</code>", but the user has made no explicit
+  choice thus far.
+
+  <dt>"<code>denied</code>"
+  <dd><p>This means the user does not want <a>persistent boxes</a>.
+
+  <dt>"<code>granted</code>"
+  <dd><p>This means the existing <a>box</a> becomes a <a>persistent box</a>.
+</dl>
+
+<p class=note>There is no equivalent to "<code>default</code>" meaning
+"<code>granted</code>". In that case "<code>granted</code>" is simply returned as there
+would be no reason for the application to ask for <a>permission</a>.
+
+
+
+<h2 id=quota>Quota</h2>
+
+The <dfn>global quota</dfn> is the total available storage space as set by the user agent.
+User agents should makes this less than the total available storage space on the hard
+drive to give users and the operating system (if any) some wiggle room.
+
+The <dfn>non-persistent site storage global quota</dfn> is a segment of the
+<a>global quota</a> available to <a>site storage</a> as determined by the user agent,
+excluding any <a>origin storage units</a> whose <a>box</a>'s <a>mode</a> is
+"<code title>persistent</code>".
+
+The <dfn>non-persistent site storage unit quota</dfn> is a segment of the
+<a>non-persistent site storage global quota</a> available to <a>site storage units</a> as
+determined by the user agent. User agents are strongly encouraged to let factors such as
+navigation frequency, recency of visit, bookmarking, and other indications of popularity
+impact the <a>non-persistent site storage unit quota</a>.
+
+The <dfn>non-persistent origin storage unit quota</dfn> is a segment of the
+<a>non-persistent site storage unit quota</a> available to <a>origin storage units</a> as
+determined by the user agent. It is typically identical to the
+<a>non-persistent site storage unit quota</a> to avoid the risk of sites minting lots of
+subdomains to fill the available storage space, but user agents should feel free to
+experiment.
+
+
+
+<h2 id=ui-guidelines>User Interface Guidelines</h2>
+
+User agents should not distinguish between <a>network storage</a> and <a>site storage</a>.
+Instead user agents should offer users the ability to remove all storage for a given
+<a>site</a>. This ensures that storage from one source cannot be used to revive storage
+from another source.
+
+<p class=XXX>This is still a concern due to HTTP ETag...
+
+
+<h3 id=storage-pressure>Storage Pressure</h3>
+
+When the user agent notices it comes under storage pressure and it cannot free up
+sufficient space by clearing <a>network storage</a> and <a>non-persistent boxes</a> within
+<a>site storage</a>, the user agent should alert the user and offer a way to clear
+<a>persistent boxes</a>.
+
+
+
+<h2 id=api>API</h2>
+
+<pre class=idl>
+[NoInterfaceObject,
+ Exposed=(Window,Worker)]
+interface NavigatorStorage {
+  readonly attribute StorageManager storage;
+};
+Navigator implements NavigatorStorage;
+WorkerNavigator implements NavigatorStorage;
+</pre>
+
+Each <a>environment settings object</a> has an associated <code>StorageManager</code>
+object. [[HTML]]
+
+The <dfn><code>storage</code></dfn> attribute's getter must return its global object's
+<a>environment settings object</a>'s <code>StorageManager</code>.
+
+<pre class=idl>
+[Exposed=(Window,Worker)]
+interface StorageManager {
+  [Exposed=Window] Promise&lt;PersistentStoragePermission> requestPersistent();
+  Promise&lt;PersistentStoragePermission> persistentPermission();
+
+  Promise&lt;StorageInfo> estimate();
+  Promise&lt;StorageInfo> persistentEstimate();
+};
+
+dictionary StorageInfo {
+  unsigned long long usage;
+  unsigned long long quota;
+};
+
+enum PersistentStoragePermission { "default", "denied", "granted" }; // XXX merge with NotificationPermission
+</pre>
+
+The <dfn><code>requestPersistent()</code></dfn> method, when invoked, must run these
+steps:
+
+<ol>
+ <li><p>Let <var>promise</var> be a new promise.
+
+ <li>
+  <p>Run these substeps <a spec=html>in parallel</a>: [[HTML]]
+
+  <ol>
+   <li><p>Let <var>origin</var> be context object's global object's
+   <a>environment settings object</a>'s <a>origin</a>.
+   <!-- XXX bz -->
+
+   <li><p>Let <var>permission</var> be <a>permission</a> for <var>origin</var>.
+
+   <li><p>If <var>permission</var> is "<code title>default</code>", ask the user whether
+   turning <var>origin</var>'s <a>box</a> into a <a>persistent box</a> is acceptable.
+   If it is, set <a>permission</a> to "<code title>granted</code>", and
+   "<code title>denied</code>" otherwise.
+
+   <li><p>Resolve <var>promise</var> with <a>permission</a>.
+  </ol>
+
+ <li><p>Return <var>promise</var>.
+</ol>
+
+The <dfn><code>persistentPermission()</code></dfn> method, when invoked, must run these
+steps:
+
+<ol>
+ <li><p>Let <var>promise</var> be a new promise.
+
+ <li>
+  <p>Run these substeps <a spec=html>in parallel</a>:
+
+  <ol>
+   <li><p>Let <var>origin</var> be context object's global object's
+   <a>environment settings object</a>'s <a>origin</a>.
+   <!-- XXX bz -->
+
+   <li><p>Let <var>permission</var> be <a>permission</a> for <var>origin</var>.
+
+   <li><p>Resolve <var>promise</var> with <a>permission</a>.
+  </ol>
+
+ <li><p>Return <var>promise</var>.
+</ol>
+
+The <dfn><code>estimate()</code></dfn> method, when invoked, must run these steps:
+
+<ol>
+ <li><p>Let <var>promise</var> be a new promise.
+
+ <li>
+  <p>Run these substeps <a spec=html>in parallel</a>:
+
+  <ol>
+   <li><p>Let <var>origin</var> be context object's global object's
+   <a>environment settings object</a>'s <a>origin</a>.
+   <!-- XXX bz -->
+
+   <li><p>Let <var>usage</var> be a rough estimate of the amount of bytes used within
+   <var>origin</var>'s <a>origin storage unit</a>.
+
+   <li><p>Let <var>quota</var> be a rough estimate of the amount of bytes available within
+   <var>origin</var>'s <a>non-persistent origin storage unit quota</a>.
+
+   <li><p>Let <var>dictionary</var> be a new dictionary whose <code>usage</code> member is
+   <var>usage</var> and <code>quota</code> member is <var>quota</var>.
+
+   <li><p>Resolve <var>promise</var> with <var>dictionary</var>.
+  </ol>
+
+ <li><p>Return <var>promise</var>.
+</ol>
+
+The <dfn><code>persistentEstimate()</code></dfn> method, when invoked, must run these
+steps:
+
+<ol>
+ <li><p>Let <var>promise</var> be a new promise.
+
+ <li>
+  <p>Run these substeps <a spec=html>in parallel</a>:
+
+  <ol>
+   <li><p>Let <var>origin</var> be context object's global object's
+   <a>environment settings object</a>'s <a>origin</a>.
+   <!-- XXX bz -->
+
+   <li><p>If <a>permission</a> for <var>origin</var> is not
+   "<code title>granted</code>", reject <var>promise</var> with a <code>TypeError</code>
+   and terminate these steps.
+
+   <li><p>Let <var>usage</var> be a rough estimate of the amount of bytes used within
+   <var>origin</var>'s <a>origin storage unit</a>.
+
+   <li><p>Let <var>quota</var> be a rough estimate of the amount of bytes available within
+   <a>global quota</a>.
+
+   <li><p>Let <var>dictionary</var> be a new dictionary whose <code>usage</code> member is
+   <var>usage</var> and <code>quota</code> member is <var>quota</var>.
+
+   <li><p>Resolve <var>promise</var> with <var>dictionary</var>.
+  </ol>
+
+ <li><p>Return <var>promise</var>.
+</ol>
+
+
+
+<h2 class=no-num id="acks">Acknowledgments</h2>
+
+With that, many thanks to
+Adrian Bateman,
+Alex Russell,
+Aislinn Grigas,
+Ali Alabbas,
+Ben Kelly,
+Ben Turner,
+David Grogan,
+Jake Archibald<!-- technically B.J. Archibald -->,
+Jonas Sicking,
+Joshua Bell,
+Kenji Baheux,
+Kinuko Yasuda,
+Luke Wagner, and
+Shachar Zohar
+for being awesome!
+
+This standard is written by
+<a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
+(<a href=https://www.mozilla.org/>Mozilla</a>,
+<a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
+
+Per <a rel=license href=https://creativecommons.org/publicdomain/zero/1.0/>CC0</a>, to the
+extent possible under law, the editor has waived all copyright and related or neighboring
+rights to this work.
+
+
+
+<script id=head src=https://resources.whatwg.org/dfn.js></script>
