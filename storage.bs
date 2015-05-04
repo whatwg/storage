@@ -9,7 +9,7 @@ No Editor: true
 !Participate: <a href=https://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a>
 !Commits: <a href=https://github.com/whatwg/storage/commits>GitHub whatwg/storage/commits</a>
 !Commits: <a href=https://twitter.com/storagestandard>@storagestandard</a>
-Logo: https://resources.whatwg.org/logo.svg
+Logo: https://resources.whatwg.org/logo-storage.svg
 Abstract: The Storage Standard defines an API for persistent storage and quota estimates, as well as the platform storage architecture.
 </pre>
 
