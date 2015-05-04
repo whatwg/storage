@@ -379,14 +379,14 @@ invoked, must run these steps:</p>
 </p></ol>
 
 
-   <div class="example" id="example-b94117a4"><a class="self-link" href="#example-b94117a4"></a>
+   <div class="example" id="example-d3f1e01a"><a class="self-link" href="#example-d3f1e01a"></a>
  
     <p>To be clear, <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-persistentpermission">persistentPermission()</a></code>'s promise resolves as soon as the
  <a data-link-type="dfn" href="#permission">permission</a> is retrieved and does not wait for <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-requestpersistent">requestPersistent()</a></code>. In the
  following example <code>c2</code> is likely invoked before <code>c1</code>:
 
  </p>
-    <pre>navigator.storage.requestPermission().then(c1)
+    <pre>navigator.storage.requestPersistent().then(c1)
 navigator.storage.persistentPermission().then(c2)
 </pre>
 </div>

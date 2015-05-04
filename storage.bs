@@ -231,7 +231,7 @@ invoked, must run these steps:
  following example <code>c2</code> is likely invoked before <code>c1</code>:
 
  <pre>
-   navigator.storage.requestPermission().then(c1)
+   navigator.storage.requestPersistent().then(c1)
    navigator.storage.persistentPermission().then(c2)
  </pre>
 </div>
