@@ -161,7 +161,7 @@ return its global object's <a>environment settings object</a>'s {{StorageManager
 <pre class=idl>
 [Exposed=(Window,Worker)]
 interface StorageManager {
-  [Exposed=Window] Promise&lt;PersistentStoragePermission> requestPersistent();
+  [Exposed=Window] Promise&lt;boolean> requestPersistent();
   Promise&lt;PersistentStoragePermission> persistentPermission();
 
   Promise&lt;StorageInfo> estimate();
@@ -194,10 +194,25 @@ invoked, must run these steps:
 
    <li><p>If <var>permission</var> is "<code title>default</code>", ask the user whether
    turning <var>origin</var>'s <a>box</a> into a <a>persistent box</a> is acceptable.
-   If it is, set <a>permission</a> to "<code title>granted</code>", and
+   If it is, set <var>permission</var> to "<code title>granted</code>", and
    "<code title>denied</code>" otherwise.
 
-   <li><p>Resolve <var>promise</var> with <a>permission</a>.
+   <li><p>Let <var>isPersistent</var> be true if <var>origin</var>'s <a>box</a> is a
+   <a>persistent box</a>, and false otherwise.
+
+   <li>
+    <p><a spec=html>Queue a task</a> to run these subsubsteps:
+    <!-- XXX not 100% clear whether the changes below should be in a task -->
+
+    <ol>
+     <li><p>Set <a>permission</a> for <var>origin</var> to <var>permission</var>.
+
+     <li><p>If <var>isPersistent</var> is false and <var>permission</var> is
+     "<code>granted</code>", set <var>isPersistent</var> to true and set
+     <var>origin</var>'s <a>box</a>'s <a>mode</a> to "<code>persistent</code>".
+
+     <li><p>Resolve <var>promise</var> with <var>isPersistent</var>.
+    </ol>
   </ol>
 
  <li><p>Return <var>promise</var>.
