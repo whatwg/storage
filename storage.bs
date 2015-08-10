@@ -284,8 +284,8 @@ must run these steps:
    <li><p>Let <var>usage</var> be a rough estimate of the amount of bytes used within
    <var>origin</var>'s <a>origin storage unit</a>.
 
-   <li><p>Let <var>quota</var> be a rough estimate of the amount of bytes available within
-   <var>origin</var>'s <a>non-persistent origin storage unit quota</a>.
+   <li><p>Let <var>quota</var> be a conservative estimate of the amount of bytes available
+   within <var>origin</var>'s <a>non-persistent origin storage unit quota</a>.
 
    <li><p>Let <var>dictionary</var> be a new {{StorageInfo}} dictionary whose {{usage}}
    member is <var>usage</var> and {{quota}} member is <var>quota</var>.
@@ -322,8 +322,8 @@ invoked, must run these steps:
    <li><p>Let <var>usage</var> be a rough estimate of the amount of bytes used within
    <var>origin</var>'s <a>origin storage unit</a>.
 
-   <li><p>Let <var>quota</var> be a rough estimate of the amount of bytes available within
-   <a>global quota</a>.
+   <li><p>Let <var>quota</var> be a conservative estimate of the amount of bytes available
+   within <a>global quota</a>.
 
    <li><p>Let <var>dictionary</var> be a new dictionary whose <code>usage</code> member is
    <var>usage</var> and <code>quota</code> member is <var>quota</var>.
