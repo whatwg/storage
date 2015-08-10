@@ -305,15 +305,20 @@ invoked, must run these steps:</p>
 
  </p>
     <li>
+     <p>Let <var>environment</var> be <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s
+ <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>.
+
+ </p>
+    <li>
   
-     <p>Run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
+     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps
+  <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: <a data-link-type="biblio" href="#biblio-powerful-features">[POWERFUL-FEATURES]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
 
   </p>
      <ol>
    
       <li>
-       <p>Let <var>origin</var> be context object’s global object’s
-   <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
+       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
    
 
    </p>
@@ -336,6 +341,7 @@ invoked, must run these steps:</p>
       <li>
     
        <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">Queue a task</a> to run these subsubsteps:
+    
 
     </p>
        <ol>
@@ -361,6 +367,10 @@ invoked, must run these steps:</p>
 
  
     <li>
+     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
+
+ </p>
+    <li>
      <p>Return <var>promise</var>.
 </p></ol>
 
@@ -376,15 +386,20 @@ invoked, must run these steps:</p>
 
  </p>
     <li>
+     <p>Let <var>environment</var> be <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s
+ <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>.
+
+ </p>
+    <li>
   
-     <p>Run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
+     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps
+  <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
 
   </p>
      <ol>
    
       <li>
-       <p>Let <var>origin</var> be context object’s global object’s
-   <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
+       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
    
 
    </p>
@@ -399,6 +414,10 @@ invoked, must run these steps:</p>
      
 
  
+    <li>
+     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
+
+ </p>
     <li>
      <p>Return <var>promise</var>.
 </p></ol>
@@ -428,15 +447,20 @@ must run these steps:</p>
 
  </p>
     <li>
+     <p>Let <var>environment</var> be <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s
+ <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>.
+
+ </p>
+    <li>
   
-     <p>Run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
+     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps
+  <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
 
   </p>
      <ol>
    
       <li>
-       <p>Let <var>origin</var> be context object’s global object’s
-   <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
+       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
    
 
    </p>
@@ -463,6 +487,10 @@ must run these steps:</p>
 
  
     <li>
+     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
+
+ </p>
+    <li>
      <p>Return <var>promise</var>.
 </p></ol>
 
@@ -478,15 +506,20 @@ invoked, must run these steps:</p>
 
  </p>
     <li>
+     <p>Let <var>environment</var> be <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s
+ <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>.
+
+ </p>
+    <li>
   
-     <p>Run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
+     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps
+  <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
 
   </p>
      <ol>
    
       <li>
-       <p>Let <var>origin</var> be context object’s global object’s
-   <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
+       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
    
 
    </p>
@@ -518,6 +551,10 @@ invoked, must run these steps:</p>
      
 
  
+    <li>
+     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
+
+ </p>
     <li>
      <p>Return <var>promise</var>.
 </p></ol>
@@ -609,6 +646,10 @@ rights to this work.</p>
    <li><a href="#dom-storageinfo-usage">usage</a><span>, in §7</span></ul>
   <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="indexlist">
+   <li><a data-link-type="biblio" href="#biblio-dom-ls">[dom-ls]</a> defines the following terms:
+    <ul>
+     <li><a href="http://dom.spec.whatwg.org/#context-object">context object</a>
+    </ul>
    <li><a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#navigator">Navigator</a>
@@ -621,6 +662,10 @@ rights to this work.</p>
   <dl>
    <dt id="biblio-html"><a class="self-link" href="#biblio-html"></a>[HTML]
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+   <dt id="biblio-dom-ls"><a class="self-link" href="#biblio-dom-ls"></a>[DOM-LS]
+   <dd>Document Object Model URL: <a href="http://dom.spec.whatwg.org/">http://dom.spec.whatwg.org/</a>
+   <dt id="biblio-powerful-features"><a class="self-link" href="#biblio-powerful-features"></a>[POWERFUL-FEATURES]
+   <dd>Mike West; Yan Zhu. <a href="https://w3c.github.io/webappsec/specs/powerfulfeatures/">Privileged Contexts</a>. 24 April 2015. WD. URL: <a href="https://w3c.github.io/webappsec/specs/powerfulfeatures/">https://w3c.github.io/webappsec/specs/powerfulfeatures/</a>
    <dt id="biblio-rfc2119"><a class="self-link" href="#biblio-rfc2119"></a>[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a></dl>
   <h2 class="no-num heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>

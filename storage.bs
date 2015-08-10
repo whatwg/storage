@@ -22,6 +22,9 @@ urlPrefix: https://html.spec.whatwg.org/multipage/
             text: origin
         urlPrefix: webappapis.html
             text: environment settings object
+urlPrefix: https://w3c.github.io/webappsec/specs/powerfulfeatures/#
+    type: dfn
+        text: a secure context; url: settings-secure
 </pre>
 
 
@@ -182,12 +185,15 @@ invoked, must run these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
+ <li><p>Let <var>environment</var> be <a spec=dom>context object</a>'s global object's
+ <a>environment settings object</a>.
+
  <li>
-  <p>Run these substeps <a spec=html>in parallel</a>: [[HTML]]
+  <p>If <var>environment</var> is <a>a secure context</a>, run these substeps
+  <a spec=html>in parallel</a>: [[!POWERFUL-FEATURES]] [[!HTML]]
 
   <ol>
-   <li><p>Let <var>origin</var> be context object's global object's
-   <a>environment settings object</a>'s <a>origin</a>.
+   <li><p>Let <var>origin</var> be <var>environment</var>'s <a>origin</a>.
    <!-- XXX bz -->
 
    <li><p>Let <var>permission</var> be <a>permission</a> for <var>origin</var>.
@@ -215,6 +221,8 @@ invoked, must run these steps:
     </ol>
   </ol>
 
+ <li><p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
+
  <li><p>Return <var>promise</var>.
 </ol>
 
@@ -224,18 +232,23 @@ invoked, must run these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
+ <li><p>Let <var>environment</var> be <a spec=dom>context object</a>'s global object's
+ <a>environment settings object</a>.
+
  <li>
-  <p>Run these substeps <a spec=html>in parallel</a>:
+  <p>If <var>environment</var> is <a>a secure context</a>, run these substeps
+  <a spec=html>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>origin</var> be context object's global object's
-   <a>environment settings object</a>'s <a>origin</a>.
+   <li><p>Let <var>origin</var> be <var>environment</var>'s <a>origin</a>.
    <!-- XXX bz -->
 
    <li><p>Let <var>permission</var> be <a>permission</a> for <var>origin</var>.
 
    <li><p>Resolve <var>promise</var> with <a>permission</a>.
   </ol>
+
+ <li><p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
 
  <li><p>Return <var>promise</var>.
 </ol>
@@ -257,12 +270,15 @@ must run these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
+ <li><p>Let <var>environment</var> be <a spec=dom>context object</a>'s global object's
+ <a>environment settings object</a>.
+
  <li>
-  <p>Run these substeps <a spec=html>in parallel</a>:
+  <p>If <var>environment</var> is <a>a secure context</a>, run these substeps
+  <a spec=html>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>origin</var> be context object's global object's
-   <a>environment settings object</a>'s <a>origin</a>.
+   <li><p>Let <var>origin</var> be <var>environment</var>'s <a>origin</a>.
    <!-- XXX bz -->
 
    <li><p>Let <var>usage</var> be a rough estimate of the amount of bytes used within
@@ -277,6 +293,8 @@ must run these steps:
    <li><p>Resolve <var>promise</var> with <var>dictionary</var>.
   </ol>
 
+ <li><p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
+
  <li><p>Return <var>promise</var>.
 </ol>
 
@@ -286,12 +304,15 @@ invoked, must run these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
+ <li><p>Let <var>environment</var> be <a spec=dom>context object</a>'s global object's
+ <a>environment settings object</a>.
+
  <li>
-  <p>Run these substeps <a spec=html>in parallel</a>:
+  <p>If <var>environment</var> is <a>a secure context</a>, run these substeps
+  <a spec=html>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>origin</var> be context object's global object's
-   <a>environment settings object</a>'s <a>origin</a>.
+   <li><p>Let <var>origin</var> be <var>environment</var>'s <a>origin</a>.
    <!-- XXX bz -->
 
    <li><p>If <a>permission</a> for <var>origin</var> is not
@@ -309,6 +330,8 @@ invoked, must run these steps:
 
    <li><p>Resolve <var>promise</var> with <var>dictionary</var>.
   </ol>
+
+ <li><p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
 
  <li><p>Return <var>promise</var>.
 </ol>
