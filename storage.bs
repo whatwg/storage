@@ -38,6 +38,33 @@ IndexedDB, <code>localStorage</code>, and <code>showNotification()</code>. The
 Storage Standard defines the storage box they all tie into, a way of making that box
 persistent, and a way of getting quota estimates for that box.
 
+<div class="example">
+ <p>A simple way to make storage persistent is through invoking the {{requestPersistent()}} method.
+ It simultaneously requests the end user for permission and changes the storage to be persistent
+ once granted:</p>
+
+ <pre><code class="lang-javascript">navigator.storage.requestPersistent().then(permission => {
+  if(permission == "granted") {
+    /* &hellip; */
+  }
+})</code></pre>
+
+ <p>To not show user-agent-driven dialogs to the end user unannounced slightly more involved code
+ can be written:</p>
+
+ <pre><code class="lang-javascript">Promise.all([
+  navigator.storage.persistent(),
+  navigator.storage.persistentPermission()
+]).then((isPersistent, permission) => {
+  if(!isPersistent &amp;&amp; permission == "granted") {
+    navigator.storage.requestPersistent().then( /* &hellip; */ )
+  } else if(!persistent &amp;&amp; permission == "default") {
+    showPersistentStorageExplanation()
+  }
+})</code></pre>
+
+</div>
+
 
 
 <h2 id=terminology>Terminology</h2>
@@ -260,10 +287,8 @@ invoked, must run these steps:
  <a>permission</a> is retrieved and does not wait for {{requestPersistent()}}. In the
  following example <code>c2</code> is likely invoked before <code>c1</code>:
 
- <pre>
-   navigator.storage.requestPersistent().then(c1)
-   navigator.storage.persistentPermission().then(c2)
- </pre>
+ <pre><code class="lang-javascript">navigator.storage.requestPersistent().then(c1)
+navigator.storage.persistentPermission().then(c2)</code></pre>
 </div>
 
 The <dfn method for=StorageManager><code>estimate()</code></dfn> method, when invoked,
