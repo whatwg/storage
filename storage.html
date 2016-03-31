@@ -86,7 +86,7 @@ persistent, and a way of getting quota estimates for that box.</p>
     <dt>Permissions 
     <dd>
      <p>Permissions for various features, such as geolocation </p>
-    <dt>Site storage 
+    <dt>Site 
     <dd>Indexed DB, Cache API, service worker registrations, <code>localStorage</code>, <code>history.pushState()</code> 
    </dl>
    <p>This specification primarily concerns itself with <dfn data-dfn-type="dfn" data-noexport="" id="site-storage">site storage<a class="self-link" href="#site-storage"></a></dfn>.</p>
@@ -131,6 +131,7 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="nav
    <p>The <dfn class="idl-code" data-dfn-for="NavigatorStorage" data-dfn-type="attribute" data-export="" id="dom-navigatorstorage-storage"><code>storage</code><a class="self-link" href="#dom-navigatorstorage-storage"></a></dfn> attribute’s getter must return <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>’s <code class="idl"><a data-link-type="idl" href="#storagemanager">StorageManager</a></code> object.</p>
 <pre class="idl def">[Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="storagemanager">StorageManager<a class="self-link" href="#storagemanager"></a></dfn> {
+  Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-persistent">persistent</a>();
   [Exposed=Window] Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-requestpersistent">requestPersistent</a>();
   Promise&lt;<a data-link-type="idl-name">PermissionState</a>> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-persistentpermission">persistentPermission</a>();
 
@@ -142,6 +143,26 @@ dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" id="d
   unsigned long long <dfn class="idl-code" data-dfn-for="StorageEstimate" data-dfn-type="dict-member" data-export="" data-type="unsigned long long " id="dom-storageestimate-quota">quota<a class="self-link" href="#dom-storageestimate-quota"></a></dfn>;
 };
 </pre>
+   <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-persistent"><code>persistent()</code><a class="self-link" href="#dom-storagemanager-persistent"></a></dfn> method, when invoked, must run
+these steps:</p>
+   <ol>
+    <li>
+     <p>Let <var>promise</var> be a new promise. </p>
+    <li>
+     <p>Let <var>settingsObject</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>. </p>
+    <li>
+     <p>If <var>settingsObject</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: <a data-link-type="biblio" href="#biblio-powerful-features">[POWERFUL-FEATURES]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
+     <ol>
+      <li>
+       <p>Let <var>origin</var> be <var>settingsObject</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
+      <li>
+       <p>Let <var>isPersistent</var> be true if <var>origin</var>’s <a data-link-type="dfn" href="#box">box</a> is a <a data-link-type="dfn" href="#persistent-box">persistent box</a>, and false otherwise. </p>
+      <li>
+       <p>Resolve <var>promise</var> with <var>isPersistent</var>. </p>
+     </ol>
+    <li>
+     <p>Return <var>promise</var>. </p>
+   </ol>
    <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-requestpersistent"><code>requestPersistent()</code><a class="self-link" href="#dom-storagemanager-requestpersistent"></a></dfn> method, when
 invoked, must run these steps:</p>
    <ol>
@@ -278,6 +299,7 @@ rights to this work.</p>
    <li><a href="#non-persistent-storage-unit-quota">non-persistent storage unit quota</a><span>, in §5</span>
    <li><a href="#origin-storage-units">origin storage units</a><span>, in §3</span>
    <li><a href="#permission">permission</a><span>, in §4</span>
+   <li><a href="#dom-storagemanager-persistent">persistent()</a><span>, in §7</span>
    <li><a href="#persistent-box">persistent box</a><span>, in §3.1</span>
    <li><a href="#dom-storagemanager-persistentpermission">persistentPermission()</a><span>, in §7</span>
    <li><a href="#dom-storageestimate-quota">quota</a><span>, in §7</span>
@@ -329,6 +351,7 @@ interface <a href="#navigatorstorage">NavigatorStorage</a> {
 
 [Exposed=(Window,Worker)]
 interface <a href="#storagemanager">StorageManager</a> {
+  Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-persistent">persistent</a>();
   [Exposed=Window] Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-requestpersistent">requestPersistent</a>();
   Promise&lt;<a data-link-type="idl-name">PermissionState</a>> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-persistentpermission">persistentPermission</a>();
 
