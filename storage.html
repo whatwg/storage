@@ -129,18 +129,20 @@
 IndexedDB, <code>localStorage</code>, and <code>showNotification()</code>. The
 Storage Standard defines the storage box they all tie into, a way of making that box
 persistent, and a way of getting quota estimates for that box.</p>
-   <div class="example" id="example-55b7a8f9">
-    <a class="self-link" href="#example-55b7a8f9"></a> 
+   <div class="example" id="example-d3fbf4bd">
+    <a class="self-link" href="#example-d3fbf4bd"></a> 
     <p>A simple way to make storage persistent is through invoking the <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-requestpersistent">requestPersistent()</a></code> method.
  It simultaneously requests the end user for permission and changes the storage to be persistent
  once granted:</p>
-<pre><code class="lang-javascript highlight"><span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">requestPersistent</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">permission</span> <span class="o">=></span> <span class="p">{</span>  <span class="k">if</span><span class="p">(</span><span class="nx">permission</span> <span class="o">==</span> <span class="s2">"granted"</span><span class="p">)</span> <span class="p">{</span>
+<pre><code class="lang-javascript highlight"><span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">requestPersistent</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">permission</span> <span class="o">=></span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">permission</span> <span class="o">==</span> <span class="s2">"granted"</span><span class="p">)</span> <span class="p">{</span>
     <span class="cm">/* … */</span>
   <span class="p">}</span>
 <span class="p">})</span></code></pre>
     <p>To not show user-agent-driven dialogs to the end user unannounced slightly more involved code
  can be written:</p>
-<pre><code class="lang-javascript highlight"><span class="nx">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span>  <span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">persistent</span><span class="p">(),</span>
+<pre><code class="lang-javascript highlight"><span class="nx">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span>
+  <span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">persistent</span><span class="p">(),</span>
   <span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">persistentPermission</span><span class="p">()</span>
 <span class="p">]).</span><span class="nx">then</span><span class="p">((</span><span class="nx">isPersistent</span><span class="p">,</span> <span class="nx">permission</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">isPersistent</span> <span class="o">&amp;&amp;</span> <span class="nx">permission</span> <span class="o">==</span> <span class="s2">"granted"</span><span class="p">)</span> <span class="p">{</span>

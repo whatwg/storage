@@ -43,16 +43,19 @@ persistent, and a way of getting quota estimates for that box.
  It simultaneously requests the end user for permission and changes the storage to be persistent
  once granted:</p>
 
- <pre><code class="lang-javascript">navigator.storage.requestPersistent().then(permission => {
+ <pre><code class="lang-javascript">
+navigator.storage.requestPersistent().then(permission => {
   if(permission == "granted") {
     /* &hellip; */
   }
-})</code></pre>
+})
+</code></pre>
 
  <p>To not show user-agent-driven dialogs to the end user unannounced slightly more involved code
  can be written:</p>
 
- <pre><code class="lang-javascript">Promise.all([
+ <pre><code class="lang-javascript">
+Promise.all([
   navigator.storage.persistent(),
   navigator.storage.persistentPermission()
 ]).then((isPersistent, permission) => {
@@ -61,7 +64,8 @@ persistent, and a way of getting quota estimates for that box.
   } else if(!persistent &amp;&amp; permission == "default") {
     showPersistentStorageExplanation()
   }
-})</code></pre>
+})
+</code></pre>
 
 </div>
 
