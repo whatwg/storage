@@ -11,9 +11,11 @@ No Editor: true
 !Commits: <a href=https://twitter.com/storagestandard>@storagestandard</a>
 Logo: https://resources.whatwg.org/logo-storage.svg
 Abstract: The Storage Standard defines an API for persistent storage and quota estimates, as well as the platform storage architecture.
+Boilerplate: omit feedback-header
 </pre>
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
+<script id=head src=https://resources.whatwg.org/dfn.js defer></script>
 
 <pre class=anchors>
 urlPrefix: https://html.spec.whatwg.org/multipage/
@@ -39,6 +41,8 @@ persistent, and a way of getting quota estimates for that box.
 
 
 <h2 id=terminology>Terminology</h2>
+
+This specification uses terminology from the DOM and HTML Standards. [[DOM]] [[HTML]]
 
 A <dfn>site</dfn> is eTLD+1. <span class=XXX>Needs a more formal definition.</span>
 
@@ -365,7 +369,3 @@ This standard is written by
 Per <a rel=license href=https://creativecommons.org/publicdomain/zero/1.0/>CC0</a>, to the
 extent possible under law, the editor has waived all copyright and related or neighboring
 rights to this work.
-
-
-
-<script id=head src=https://resources.whatwg.org/dfn.js></script>

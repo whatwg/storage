@@ -1,37 +1,17 @@
-<!doctype html>
-<html lang="en">
+<!doctype html><html lang="en">
  <head>
   <meta charset="utf-8">
-  
-  
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <title>Storage Standard</title>
-  
-  
-  <link href="https://www.whatwg.org/style/specification" rel="stylesheet">
-  
-  
+  <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
-  
-  
   <link href="https://resources.whatwg.org/logo-storage.svg" rel="icon">
-  
-
   <meta content="Bikeshed 1.0.0" name="generator">
- </head>
  <body class="h-entry status-LS">
-
   <div class="head">
-  
-   <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/">
-    <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-storage.svg">
-</a>
-</p>
-  
+   <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-storage.svg"> </a> </p>
    <h1 class="p-name no-ref" id="title">Storage</h1>
-  
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated
-    <time class="dt-updated" datetime="2015-08-10">10 August 2015</time></span></h2>
-  
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-03-31">31 March 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -42,223 +22,114 @@
      <dd><span><a href="https://twitter.com/storagestandard">@storagestandard</a></span>
     </dl>
    </div>
-  
    <div data-fill-with="warning"></div>
-</div>
-  
-
-
+  </div>
   <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
-  
-
   <div class="p-summary" data-fill-with="abstract">
    <p>The Storage Standard defines an API for persistent storage and quota estimates, as well as the platform storage architecture.</p>
-
-</div>
-  
-
+  </div>
   <div data-fill-with="at-risk"></div>
-  
-
-
-  <h2 class="no-num no-toc no-ref heading settled" id="contents"><span class="content">Table of Contents</span></h2>
-  
-
-  <div data-fill-with="table-of-contents" role="navigation">
-   <ul class="toc" role="directory">
+  <nav data-fill-with="table-of-contents" id="toc">
+   <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
+   <ol class="toc" role="directory">
     <li><a href="#introduction"><span class="secno">1</span> <span class="content">Introduction</span></a>
     <li><a href="#terminology"><span class="secno">2</span> <span class="content">Terminology</span></a>
-    <li><a href="#infrastructure"><span class="secno">3</span> <span class="content">Infrastructure</span></a>
-     <ul class="toc">
+    <li>
+     <a href="#infrastructure"><span class="secno">3</span> <span class="content">Infrastructure</span></a>
+     <ol class="toc">
       <li><a href="#boxes"><span class="secno">3.1</span> <span class="content">Boxes</span></a>
-     </ul>
+     </ol>
     <li><a href="#persistence"><span class="secno">4</span> <span class="content">Persistence</span></a>
     <li><a href="#quota"><span class="secno">5</span> <span class="content">Quota</span></a>
-    <li><a href="#ui-guidelines"><span class="secno">6</span> <span class="content">User Interface Guidelines</span></a>
-     <ul class="toc">
+    <li>
+     <a href="#ui-guidelines"><span class="secno">6</span> <span class="content">User Interface Guidelines</span></a>
+     <ol class="toc">
       <li><a href="#storage-pressure"><span class="secno">6.1</span> <span class="content">Storage Pressure</span></a>
-     </ul>
+     </ol>
     <li><a href="#api"><span class="secno">7</span> <span class="content">API</span></a>
     <li><a href="#acks"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content">Conformance</span></a>
-    <li><a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
-     <ul class="toc">
+    <li>
+     <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
+     <ol class="toc">
       <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
       <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
-     </ul>
-    <li><a href="#references"><span class="secno"></span> <span class="content">References</span></a>
-     <ul class="toc">
+     </ol>
+    <li>
+     <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
+     <ol class="toc">
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
-     </ul>
+     </ol>
     <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
-   </ul></div>
-  
-
+   </ol>
+  </nav>
   <main>
-
-
-
-   <script async="" src="https://resources.whatwg.org/file-issue.js"></script>
-
-
-
-
-
-
+<script async="" src="https://resources.whatwg.org/file-issue.js"></script>
+<script defer="" id="head" src="https://resources.whatwg.org/dfn.js"></script>
    <h2 class="heading settled" data-level="1" id="introduction"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
-
-
    <p>Over the years the web has grown various APIs that can be used for storage, e.g.
 IndexedDB, <code>localStorage</code>, and <code>showNotification()</code>. The
 Storage Standard defines the storage box they all tie into, a way of making that box
 persistent, and a way of getting quota estimates for that box.</p>
-
-
-
-
    <h2 class="heading settled" data-level="2" id="terminology"><span class="secno">2. </span><span class="content">Terminology</span><a class="self-link" href="#terminology"></a></h2>
-
-
+   <p>This specification uses terminology from the DOM and HTML Standards. <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="site">site<a class="self-link" href="#site"></a></dfn> is eTLD+1. <span class="XXX">Needs a more formal definition.</span></p>
-
-
-
-
    <h2 class="heading settled" data-level="3" id="infrastructure"><span class="secno">3. </span><span class="content">Infrastructure</span><a class="self-link" href="#infrastructure"></a></h2>
-
-
-   <p>A user agent has <dfn data-dfn-type="dfn" data-noexport="" id="network-storage">network storage<a class="self-link" href="#network-storage"></a></dfn> and <dfn data-dfn-type="dfn" data-noexport="" id="site-storage">site storage<a class="self-link" href="#site-storage"></a></dfn>.
-<a data-link-type="dfn" href="#network-storage">Network storage</a> concerns the HTTP cache and cookies. <a data-link-type="dfn" href="#site-storage">Site storage</a> concerns
-the various APIs that can be used for storing data, such as
-<code>history.pushState()</code>.</p>
-
-
+   <p>A user agent has <dfn data-dfn-type="dfn" data-noexport="" id="network-storage">network storage<a class="self-link" href="#network-storage"></a></dfn> and <dfn data-dfn-type="dfn" data-noexport="" id="site-storage">site storage<a class="self-link" href="#site-storage"></a></dfn>. <a data-link-type="dfn" href="#network-storage">Network storage</a> concerns the HTTP cache and cookies. <a data-link-type="dfn" href="#site-storage">Site storage</a> concerns
+the various APIs that can be used for storing data, such as <code>history.pushState()</code>.</p>
    <p><a data-link-type="dfn" href="#network-storage">Network storage</a> is not defined in detail for now and left as an exercise for the
 reader.</p>
-
-
    <p><a data-link-type="dfn" href="#site-storage">Site storage</a> consists of zero or more <dfn data-dfn-type="dfn" data-noexport="" id="site-storage-units">site storage units<a class="self-link" href="#site-storage-units"></a></dfn>.</p>
-
-
-   <p>Each <a data-link-type="dfn" href="#site-storage-units">site storage unit</a> has an associated <a data-link-type="dfn" href="#site">site</a>, and zero or more
-<dfn data-dfn-type="dfn" data-noexport="" id="origin-storage-units">origin storage units<a class="self-link" href="#origin-storage-units"></a></dfn>.</p>
-
-
-   <p>Each <a data-link-type="dfn" href="#origin-storage-units">origin storage unit</a> has an associated <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> and a
-<dfn data-dfn-type="dfn" data-noexport="" id="box">box<a class="self-link" href="#box"></a></dfn>. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
-
-
-
+   <p>Each <a data-link-type="dfn" href="#site-storage-units">site storage unit</a> has an associated <a data-link-type="dfn" href="#site">site</a>, and zero or more <dfn data-dfn-type="dfn" data-noexport="" id="origin-storage-units">origin storage units<a class="self-link" href="#origin-storage-units"></a></dfn>.</p>
+   <p>Each <a data-link-type="dfn" href="#origin-storage-units">origin storage unit</a> has an associated <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> and a <dfn data-dfn-type="dfn" data-noexport="" id="box">box<a class="self-link" href="#box"></a></dfn>. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
    <h3 class="heading settled" data-level="3.1" id="boxes"><span class="secno">3.1. </span><span class="content">Boxes</span><a class="self-link" href="#boxes"></a></h3>
-
-
    <p>A <a data-link-type="dfn" href="#box">box</a> has <dfn data-dfn-type="dfn" data-noexport="" id="mode">mode<a class="self-link" href="#mode"></a></dfn> which is either "<code title="">atomic</code>" or
-"<code title="">persistent</code>". A <dfn data-dfn-type="dfn" data-noexport="" id="persistent-box">persistent box<a class="self-link" href="#persistent-box"></a></dfn> is a <a data-link-type="dfn" href="#box">box</a> whose
-<a data-link-type="dfn" href="#mode">mode</a> is "<code title="">persistent</code>". A <dfn data-dfn-type="dfn" data-noexport="" id="non_persistent-box">non-persistent box<a class="self-link" href="#non_persistent-box"></a></dfn> is a
-<a data-link-type="dfn" href="#box">box</a> whose <a data-link-type="dfn" href="#mode">mode</a> is <em>not</em> "<code title="">persistent</code>".</p>
-
-
+"<code title="">persistent</code>". A <dfn data-dfn-type="dfn" data-noexport="" id="persistent-box">persistent box<a class="self-link" href="#persistent-box"></a></dfn> is a <a data-link-type="dfn" href="#box">box</a> whose <a data-link-type="dfn" href="#mode">mode</a> is "<code title="">persistent</code>". A <dfn data-dfn-type="dfn" data-noexport="" id="non-persistent-box">non-persistent box<a class="self-link" href="#non-persistent-box"></a></dfn> is a <a data-link-type="dfn" href="#box">box</a> whose <a data-link-type="dfn" href="#mode">mode</a> is <em>not</em> "<code title="">persistent</code>".</p>
    <p>Whenever a <a data-link-type="dfn" href="#box">box</a> is cleared by the user agent, it must be cleared in its entirety.</p>
-
-
-
-
    <h2 class="heading settled" data-level="4" id="persistence"><span class="secno">4. </span><span class="content">Persistence</span><a class="self-link" href="#persistence"></a></h2>
-
-
    <p>A <a data-link-type="dfn" href="#box">box</a> can only be turned into a <a data-link-type="dfn" href="#persistent-box">persistent box</a> if the user (or user agent
 on behalf of the user) has granted <dfn data-dfn-type="dfn" data-noexport="" id="permission">permission<a class="self-link" href="#permission"></a></dfn>. The <a data-link-type="dfn" href="#permission">permission</a> for a
 given <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> is one of three strings:</p>
-
-
    <dl>
-  
-    <dt>"<code>default</code>"
-  
+    <dt>"<code>default</code>" 
     <dd>
      <p>This is equivalent to "<code>denied</code>", but the user has made no explicit
-  choice thus far.
-
-  </p>
-    <dt>"<code>denied</code>"
-  
+  choice thus far. </p>
+    <dt>"<code>denied</code>" 
     <dd>
-     <p>This means the user does not want <a data-link-type="dfn" href="#persistent-box">persistent boxes</a>.
-
-  </p>
-    <dt>"<code>granted</code>"
-  
+     <p>This means the user does not want <a data-link-type="dfn" href="#persistent-box">persistent boxes</a>. </p>
+    <dt>"<code>granted</code>" 
     <dd>
-     <p>This means the existing <a data-link-type="dfn" href="#box">box</a> becomes a <a data-link-type="dfn" href="#persistent-box">persistent box</a>.
-</p></dl>
-
-
+     <p>This means the existing <a data-link-type="dfn" href="#box">box</a> becomes a <a data-link-type="dfn" href="#persistent-box">persistent box</a>. </p>
+   </dl>
    <p class="note" role="note">There is no equivalent to "<code>default</code>" meaning
 "<code>granted</code>". In that case "<code>granted</code>" is simply returned as there
-would be no reason for the application to ask for <a data-link-type="dfn" href="#permission">permission</a>.
-
-
-
-</p>
+would be no reason for the application to ask for <a data-link-type="dfn" href="#permission">permission</a>. </p>
    <h2 class="heading settled" data-level="5" id="quota"><span class="secno">5. </span><span class="content">Quota</span><a class="self-link" href="#quota"></a></h2>
-
-
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="global-quota">global quota<a class="self-link" href="#global-quota"></a></dfn> is the total available storage space as set by the user agent.
 User agents should makes this less than the total available storage space on the hard
 drive to give users and the operating system (if any) some wiggle room.</p>
-
-
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="non_persistent-site-storage-global-quota">non-persistent site storage global quota<a class="self-link" href="#non_persistent-site-storage-global-quota"></a></dfn> is a segment of the
-<a data-link-type="dfn" href="#global-quota">global quota</a> available to <a data-link-type="dfn" href="#site-storage">site storage</a> as determined by the user agent,
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="non-persistent-site-storage-global-quota">non-persistent site storage global quota<a class="self-link" href="#non-persistent-site-storage-global-quota"></a></dfn> is a segment of the <a data-link-type="dfn" href="#global-quota">global quota</a> available to <a data-link-type="dfn" href="#site-storage">site storage</a> as determined by the user agent,
 excluding any <a data-link-type="dfn" href="#origin-storage-units">origin storage units</a> whose <a data-link-type="dfn" href="#box">box</a>’s <a data-link-type="dfn" href="#mode">mode</a> is
 "<code title="">persistent</code>".</p>
-
-
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="non_persistent-site-storage-unit-quota">non-persistent site storage unit quota<a class="self-link" href="#non_persistent-site-storage-unit-quota"></a></dfn> is a segment of the
-<a data-link-type="dfn" href="#non_persistent-site-storage-global-quota">non-persistent site storage global quota</a> available to <a data-link-type="dfn" href="#site-storage-units">site storage units</a> as
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="non-persistent-site-storage-unit-quota">non-persistent site storage unit quota<a class="self-link" href="#non-persistent-site-storage-unit-quota"></a></dfn> is a segment of the <a data-link-type="dfn" href="#non-persistent-site-storage-global-quota">non-persistent site storage global quota</a> available to <a data-link-type="dfn" href="#site-storage-units">site storage units</a> as
 determined by the user agent. User agents are strongly encouraged to let factors such as
 navigation frequency, recency of visit, bookmarking, and other indications of popularity
-impact the <a data-link-type="dfn" href="#non_persistent-site-storage-unit-quota">non-persistent site storage unit quota</a>.</p>
-
-
-   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="non_persistent-origin-storage-unit-quota">non-persistent origin storage unit quota<a class="self-link" href="#non_persistent-origin-storage-unit-quota"></a></dfn> is a segment of the
-<a data-link-type="dfn" href="#non_persistent-site-storage-unit-quota">non-persistent site storage unit quota</a> available to <a data-link-type="dfn" href="#origin-storage-units">origin storage units</a> as
-determined by the user agent. It is typically identical to the
-<a data-link-type="dfn" href="#non_persistent-site-storage-unit-quota">non-persistent site storage unit quota</a> to avoid the risk of sites minting lots of
+impact the <a data-link-type="dfn" href="#non-persistent-site-storage-unit-quota">non-persistent site storage unit quota</a>.</p>
+   <p>The <dfn data-dfn-type="dfn" data-noexport="" id="non-persistent-origin-storage-unit-quota">non-persistent origin storage unit quota<a class="self-link" href="#non-persistent-origin-storage-unit-quota"></a></dfn> is a segment of the <a data-link-type="dfn" href="#non-persistent-site-storage-unit-quota">non-persistent site storage unit quota</a> available to <a data-link-type="dfn" href="#origin-storage-units">origin storage units</a> as
+determined by the user agent. It is typically identical to the <a data-link-type="dfn" href="#non-persistent-site-storage-unit-quota">non-persistent site storage unit quota</a> to avoid the risk of sites minting lots of
 subdomains to fill the available storage space, but user agents should feel free to
 experiment.</p>
-
-
-
-
    <h2 class="heading settled" data-level="6" id="ui-guidelines"><span class="secno">6. </span><span class="content">User Interface Guidelines</span><a class="self-link" href="#ui-guidelines"></a></h2>
-
-
    <p>User agents should not distinguish between <a data-link-type="dfn" href="#network-storage">network storage</a> and <a data-link-type="dfn" href="#site-storage">site storage</a>.
-Instead user agents should offer users the ability to remove all storage for a given
-<a data-link-type="dfn" href="#site">site</a>. This ensures that storage from one source cannot be used to revive storage
+Instead user agents should offer users the ability to remove all storage for a given <a data-link-type="dfn" href="#site">site</a>. This ensures that storage from one source cannot be used to revive storage
 from another source.</p>
-
-
-   <p class="XXX">This is still a concern due to HTTP ETag...
-
-
-</p>
+   <p class="XXX">This is still a concern due to HTTP ETag... </p>
    <h3 class="heading settled" data-level="6.1" id="storage-pressure"><span class="secno">6.1. </span><span class="content">Storage Pressure</span><a class="self-link" href="#storage-pressure"></a></h3>
-
-
    <p>When the user agent notices it comes under storage pressure and it cannot free up
-sufficient space by clearing <a data-link-type="dfn" href="#network-storage">network storage</a> and <a data-link-type="dfn" href="#non_persistent-box">non-persistent boxes</a> within
-<a data-link-type="dfn" href="#site-storage">site storage</a>, the user agent should alert the user and offer a way to clear
-<a data-link-type="dfn" href="#persistent-box">persistent boxes</a>.</p>
-
-
-
-
+sufficient space by clearing <a data-link-type="dfn" href="#network-storage">network storage</a> and <a data-link-type="dfn" href="#non-persistent-box">non-persistent boxes</a> within <a data-link-type="dfn" href="#site-storage">site storage</a>, the user agent should alert the user and offer a way to clear <a data-link-type="dfn" href="#persistent-box">persistent boxes</a>.</p>
    <h2 class="heading settled" data-level="7" id="api"><span class="secno">7. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
-
-
-   <pre class="idl">[NoInterfaceObject,
+<pre class="idl def">[NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="navigatorstorage">NavigatorStorage<a class="self-link" href="#navigatorstorage"></a></dfn> {
   readonly attribute <a data-link-type="idl-name" href="#storagemanager">StorageManager</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="StorageManager " href="#dom-navigatorstorage-storage">storage</a>;
@@ -266,17 +137,10 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="nav
 <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#navigator">Navigator</a> implements <a data-link-type="idl-name" href="#navigatorstorage">NavigatorStorage</a>;
 <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/workers.html#workernavigator">WorkerNavigator</a> implements <a data-link-type="idl-name" href="#navigatorstorage">NavigatorStorage</a>;
 </pre>
-
-
-   <p>Each <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a> has an associated <code class="idl"><a data-link-type="idl" href="#storagemanager">StorageManager</a></code> object.
-<a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
-
-
+   <p>Each <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a> has an associated <code class="idl"><a data-link-type="idl" href="#storagemanager">StorageManager</a></code> object. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
    <p>The <dfn class="idl-code" data-dfn-for="NavigatorStorage" data-dfn-type="attribute" data-export="" id="dom-navigatorstorage-storage"><code>storage</code><a class="self-link" href="#dom-navigatorstorage-storage"></a></dfn> attribute’s getter must
 return its global object’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>’s <code class="idl"><a data-link-type="idl" href="#storagemanager">StorageManager</a></code> object.</p>
-
-
-   <pre class="idl">[Exposed=(Window,Worker)]
+<pre class="idl def">[Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="storagemanager">StorageManager<a class="self-link" href="#storagemanager"></a></dfn> {
   [Exposed=Window] Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-requestpersistent">requestPersistent</a>();
   Promise&lt;<a data-link-type="idl-name" href="#enumdef-persistentstoragepermission">PersistentStoragePermission</a>> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-persistentpermission">persistentPermission</a>();
@@ -290,281 +154,134 @@ dictionary <dfn class="idl-code" data-dfn-type="dictionary" data-export="" id="d
   unsigned long long <dfn class="idl-code" data-dfn-for="StorageInfo" data-dfn-type="dict-member" data-export="" data-type="unsigned long long " id="dom-storageinfo-quota">quota<a class="self-link" href="#dom-storageinfo-quota"></a></dfn>;
 };
 
-enum <dfn class="idl-code" data-dfn-type="enum" data-export="" id="enumdef-persistentstoragepermission">PersistentStoragePermission<a class="self-link" href="#enumdef-persistentstoragepermission"></a></dfn> { "default", "denied", "granted" }; // XXX merge with NotificationPermission
+enum <dfn class="idl-code" data-dfn-type="enum" data-export="" id="enumdef-persistentstoragepermission">PersistentStoragePermission<a class="self-link" href="#enumdef-persistentstoragepermission"></a></dfn> { <dfn class="idl-code" data-dfn-for="PersistentStoragePermission" data-dfn-type="enum-value" data-export="" id="dom-persistentstoragepermission-default">"default"<a class="self-link" href="#dom-persistentstoragepermission-default"></a></dfn>, <dfn class="idl-code" data-dfn-for="PersistentStoragePermission" data-dfn-type="enum-value" data-export="" id="dom-persistentstoragepermission-denied">"denied"<a class="self-link" href="#dom-persistentstoragepermission-denied"></a></dfn>, <dfn class="idl-code" data-dfn-for="PersistentStoragePermission" data-dfn-type="enum-value" data-export="" id="dom-persistentstoragepermission-granted">"granted"<a class="self-link" href="#dom-persistentstoragepermission-granted"></a></dfn> }; // XXX merge with NotificationPermission
 </pre>
-
-
    <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-requestpersistent"><code>requestPersistent()</code><a class="self-link" href="#dom-storagemanager-requestpersistent"></a></dfn> method, when
 invoked, must run these steps:</p>
-
-
    <ol>
- 
     <li>
-     <p>Let <var>promise</var> be a new promise.
-
- </p>
+     <p>Let <var>promise</var> be a new promise. </p>
     <li>
-     <p>Let <var>environment</var> be <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s
- <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>.
-
- </p>
+     <p>Let <var>environment</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>. </p>
     <li>
-  
-     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps
-  <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: <a data-link-type="biblio" href="#biblio-powerful-features">[POWERFUL-FEATURES]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a>
-
-  </p>
+     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: <a data-link-type="biblio" href="#biblio-powerful-features">[POWERFUL-FEATURES]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
      <ol>
-   
       <li>
-       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
-   
-
-   </p>
+       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
       <li>
-       <p>Let <var>permission</var> be <a data-link-type="dfn" href="#permission">permission</a> for <var>origin</var>.
-
-   </p>
+       <p>Let <var>permission</var> be <a data-link-type="dfn" href="#permission">permission</a> for <var>origin</var>. </p>
       <li>
        <p>If <var>permission</var> is "<code title="">default</code>", ask the user whether
    turning <var>origin</var>’s <a data-link-type="dfn" href="#box">box</a> into a <a data-link-type="dfn" href="#persistent-box">persistent box</a> is acceptable.
    If it is, set <var>permission</var> to "<code title="">granted</code>", and
-   "<code title="">denied</code>" otherwise.
-
-   </p>
+   "<code title="">denied</code>" otherwise. </p>
       <li>
-       <p>Let <var>isPersistent</var> be true if <var>origin</var>’s <a data-link-type="dfn" href="#box">box</a> is a
-   <a data-link-type="dfn" href="#persistent-box">persistent box</a>, and false otherwise.
-
-   </p>
+       <p>Let <var>isPersistent</var> be true if <var>origin</var>’s <a data-link-type="dfn" href="#box">box</a> is a <a data-link-type="dfn" href="#persistent-box">persistent box</a>, and false otherwise. </p>
       <li>
-    
-       <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">Queue a task</a> to run these subsubsteps:
-    
-
-    </p>
+       <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">Queue a task</a> to run these subsubsteps: </p>
        <ol>
-     
         <li>
-         <p>Set <a data-link-type="dfn" href="#permission">permission</a> for <var>origin</var> to <var>permission</var>.
-
-     </p>
+         <p>Set <a data-link-type="dfn" href="#permission">permission</a> for <var>origin</var> to <var>permission</var>. </p>
         <li>
          <p>If <var>isPersistent</var> is false and <var>permission</var> is
-     "<code>granted</code>", set <var>isPersistent</var> to true and set
-     <var>origin</var>’s <a data-link-type="dfn" href="#box">box</a>’s <a data-link-type="dfn" href="#mode">mode</a> to "<code>persistent</code>".
-
-     </p>
+     "<code>granted</code>", set <var>isPersistent</var> to true and set <var>origin</var>’s <a data-link-type="dfn" href="#box">box</a>’s <a data-link-type="dfn" href="#mode">mode</a> to "<code>persistent</code>". </p>
         <li>
-         <p>Resolve <var>promise</var> with <var>isPersistent</var>.
-    </p>
+         <p>Resolve <var>promise</var> with <var>isPersistent</var>. </p>
        </ol>
-       
-  
      </ol>
-     
-
- 
     <li>
-     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
-
- </p>
+     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>. </p>
     <li>
-     <p>Return <var>promise</var>.
-</p></ol>
-
-
+     <p>Return <var>promise</var>. </p>
+   </ol>
    <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-persistentpermission"><code>persistentPermission()</code><a class="self-link" href="#dom-storagemanager-persistentpermission"></a></dfn> method, when
 invoked, must run these steps:</p>
-
-
    <ol>
- 
     <li>
-     <p>Let <var>promise</var> be a new promise.
-
- </p>
+     <p>Let <var>promise</var> be a new promise. </p>
     <li>
-     <p>Let <var>environment</var> be <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s
- <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>.
-
- </p>
+     <p>Let <var>environment</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>. </p>
     <li>
-  
-     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps
-  <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
-
-  </p>
+     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: </p>
      <ol>
-   
       <li>
-       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
-   
-
-   </p>
+       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
       <li>
-       <p>Let <var>permission</var> be <a data-link-type="dfn" href="#permission">permission</a> for <var>origin</var>.
-
-   </p>
+       <p>Let <var>permission</var> be <a data-link-type="dfn" href="#permission">permission</a> for <var>origin</var>. </p>
       <li>
-       <p>Resolve <var>promise</var> with <a data-link-type="dfn" href="#permission">permission</a>.
-  </p>
+       <p>Resolve <var>promise</var> with <a data-link-type="dfn" href="#permission">permission</a>. </p>
      </ol>
-     
-
- 
     <li>
-     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
-
- </p>
+     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>. </p>
     <li>
-     <p>Return <var>promise</var>.
-</p></ol>
-
-
-   <div class="example" id="example-e1bb717b"><a class="self-link" href="#example-e1bb717b"></a>
- 
-    <p>To be clear, <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-persistentpermission">persistentPermission()</a></code>'s promise resolves as soon as the
- <a data-link-type="dfn" href="#permission">permission</a> is retrieved and does not wait for <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-requestpersistent">requestPersistent()</a></code>. In the
- following example <code>c2</code> is likely invoked before <code>c1</code>:
-
- </p>
-    <pre>navigator.storage.requestPersistent().then(c1)
+     <p>Return <var>promise</var>. </p>
+   </ol>
+   <div class="example" id="example-e1bb717b">
+    <a class="self-link" href="#example-e1bb717b"></a> 
+    <p>To be clear, <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-persistentpermission">persistentPermission()</a></code>'s promise resolves as soon as the <a data-link-type="dfn" href="#permission">permission</a> is retrieved and does not wait for <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-requestpersistent">requestPersistent()</a></code>. In the
+ following example <code>c2</code> is likely invoked before <code>c1</code>: </p>
+<pre>navigator.storage.requestPersistent().then(c1)
 navigator.storage.persistentPermission().then(c2)
 </pre>
-</div>
-
-
+   </div>
    <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-estimate"><code>estimate()</code><a class="self-link" href="#dom-storagemanager-estimate"></a></dfn> method, when invoked,
 must run these steps:</p>
-
-
    <ol>
- 
     <li>
-     <p>Let <var>promise</var> be a new promise.
-
- </p>
+     <p>Let <var>promise</var> be a new promise. </p>
     <li>
-     <p>Let <var>environment</var> be <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s
- <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>.
-
- </p>
+     <p>Let <var>environment</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>. </p>
     <li>
-  
-     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps
-  <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
-
-  </p>
+     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: </p>
      <ol>
-   
       <li>
-       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
-   
-
-   </p>
+       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
       <li>
-       <p>Let <var>usage</var> be a rough estimate of the amount of bytes used within
-   <var>origin</var>’s <a data-link-type="dfn" href="#origin-storage-units">origin storage unit</a>.
-
-   </p>
+       <p>Let <var>usage</var> be a rough estimate of the amount of bytes used within <var>origin</var>’s <a data-link-type="dfn" href="#origin-storage-units">origin storage unit</a>. </p>
       <li>
        <p>Let <var>quota</var> be a conservative estimate of the amount of bytes available
-   within <var>origin</var>’s <a data-link-type="dfn" href="#non_persistent-origin-storage-unit-quota">non-persistent origin storage unit quota</a>.
-
-   </p>
+   within <var>origin</var>’s <a data-link-type="dfn" href="#non-persistent-origin-storage-unit-quota">non-persistent origin storage unit quota</a>. </p>
       <li>
-       <p>Let <var>dictionary</var> be a new <code class="idl"><a data-link-type="idl" href="#dictdef-storageinfo">StorageInfo</a></code> dictionary whose <code class="idl"><a data-link-type="idl" href="#dom-storageinfo-usage">usage</a></code>
-   member is <var>usage</var> and <code class="idl"><a data-link-type="idl" href="#dom-storageinfo-quota">quota</a></code> member is <var>quota</var>.
-
-   </p>
+       <p>Let <var>dictionary</var> be a new <code class="idl"><a data-link-type="idl" href="#dictdef-storageinfo">StorageInfo</a></code> dictionary whose <code class="idl"><a data-link-type="idl" href="#dom-storageinfo-usage">usage</a></code> member is <var>usage</var> and <code class="idl"><a data-link-type="idl" href="#dom-storageinfo-quota">quota</a></code> member is <var>quota</var>. </p>
       <li>
-       <p>Resolve <var>promise</var> with <var>dictionary</var>.
-  </p>
+       <p>Resolve <var>promise</var> with <var>dictionary</var>. </p>
      </ol>
-     
-
- 
     <li>
-     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
-
- </p>
+     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>. </p>
     <li>
-     <p>Return <var>promise</var>.
-</p></ol>
-
-
+     <p>Return <var>promise</var>. </p>
+   </ol>
    <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-persistentestimate"><code>persistentEstimate()</code><a class="self-link" href="#dom-storagemanager-persistentestimate"></a></dfn> method, when
 invoked, must run these steps:</p>
-
-
    <ol>
- 
     <li>
-     <p>Let <var>promise</var> be a new promise.
-
- </p>
+     <p>Let <var>promise</var> be a new promise. </p>
     <li>
-     <p>Let <var>environment</var> be <a data-link-type="dfn" href="http://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s
- <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>.
-
- </p>
+     <p>Let <var>environment</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s global object’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a>. </p>
     <li>
-  
-     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps
-  <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>:
-
-  </p>
+     <p>If <var>environment</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: </p>
      <ol>
-   
       <li>
-       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
-   
-
-   </p>
+       <p>Let <var>origin</var> be <var>environment</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
       <li>
        <p>If <a data-link-type="dfn" href="#permission">permission</a> for <var>origin</var> is not
-   "<code title="">granted</code>", reject <var>promise</var> with a <code>TypeError</code>
-   and terminate these steps.
-
-   </p>
+   "<code title="">granted</code>", reject <var>promise</var> with a <code>TypeError</code> and terminate these steps. </p>
       <li>
-       <p>Let <var>usage</var> be a rough estimate of the amount of bytes used within
-   <var>origin</var>’s <a data-link-type="dfn" href="#origin-storage-units">origin storage unit</a>.
-
-   </p>
+       <p>Let <var>usage</var> be a rough estimate of the amount of bytes used within <var>origin</var>’s <a data-link-type="dfn" href="#origin-storage-units">origin storage unit</a>. </p>
       <li>
        <p>Let <var>quota</var> be a conservative estimate of the amount of bytes available
-   within <a data-link-type="dfn" href="#global-quota">global quota</a>.
-
-   </p>
+   within <a data-link-type="dfn" href="#global-quota">global quota</a>. </p>
       <li>
-       <p>Let <var>dictionary</var> be a new dictionary whose <code>usage</code> member is
-   <var>usage</var> and <code>quota</code> member is <var>quota</var>.
-
-   </p>
+       <p>Let <var>dictionary</var> be a new dictionary whose <code>usage</code> member is <var>usage</var> and <code>quota</code> member is <var>quota</var>. </p>
       <li>
-       <p>Resolve <var>promise</var> with <var>dictionary</var>.
-  </p>
+       <p>Resolve <var>promise</var> with <var>dictionary</var>. </p>
      </ol>
-     
-
- 
     <li>
-     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
-
- </p>
+     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>. </p>
     <li>
-     <p>Return <var>promise</var>.
-</p></ol>
-
-
-
-
+     <p>Return <var>promise</var>. </p>
+   </ol>
    <h2 class="no-num heading settled" id="acks"><span class="content">Acknowledgments</span><a class="self-link" href="#acks"></a></h2>
-
-
    <p>With that, many thanks to
 Adrian Bateman,
 Alex Russell,
@@ -581,54 +298,33 @@ Kinuko Yasuda,
 Luke Wagner, and
 Shachar Zohar
 for being awesome!</p>
-
-
-   <p>This standard is written by
-<a href="https://annevankesteren.nl/" lang="nl">Anne van Kesteren</a>
-(<a href="https://www.mozilla.org/">Mozilla</a>,
-<a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>).</p>
-
-
+   <p>This standard is written by <a href="https://annevankesteren.nl/" lang="nl">Anne van Kesteren</a> (<a href="https://www.mozilla.org/">Mozilla</a>, <a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>).</p>
    <p>Per <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0</a>, to the
 extent possible under law, the editor has waived all copyright and related or neighboring
 rights to this work.</p>
-
-
-
-
-   <script id="head" src="https://resources.whatwg.org/dfn.js"></script>
-
-</main>
-  
-
+  </main>
   <div data-fill-with="conformance">
-	
    <h2 class="no-num no-ref heading settled" id="conformance"><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
-
-	
-   <p>All diagrams, examples, and notes in this specification are non-normative, as are all sections explicitly marked non-normative. Everything else in this specification is normative.
-
-	</p>
-   <p>The key words "MUST", "MUST NOT", "REQUIRED",  "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this specification are to be interpreted as described in RFC2119. For readability, these words do not appear in all uppercase letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a>
-
-	</p>
-   <p>Conformance requirements phrased as algorithms or specific steps may be implemented in any manner, so long as the end result is equivalent. (In particular, the algorithms defined in this specification are intended to be easy to follow, and not intended to be performant.)
-</p></div>
-  
-
-  <h2 class="no-num heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
-  <h3 class="no-num heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
-  <ul class="indexlist">
+   <p>All diagrams, examples, and notes in this specification are non-normative, as are all sections explicitly marked non-normative. Everything else in this specification is normative. </p>
+   <p>The key words “MUST”, “MUST NOT”, “REQUIRED”,  “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in the normative parts of this specification are to be interpreted as described in RFC2119. For readability, these words do not appear in all uppercase letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a> </p>
+   <p>Conformance requirements phrased as algorithms or specific steps may be implemented in any manner, so long as the end result is equivalent. (In particular, the algorithms defined in this specification are intended to be easy to follow, and not intended to be performant.) </p>
+  </div>
+  <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="index">
    <li><a href="#box">box</a><span>, in §3</span>
+   <li><a href="#dom-persistentstoragepermission-default">"default"</a><span>, in §7</span>
+   <li><a href="#dom-persistentstoragepermission-denied">"denied"</a><span>, in §7</span>
    <li><a href="#dom-storagemanager-estimate">estimate()</a><span>, in §7</span>
    <li><a href="#global-quota">global quota</a><span>, in §5</span>
+   <li><a href="#dom-persistentstoragepermission-granted">"granted"</a><span>, in §7</span>
    <li><a href="#mode">mode</a><span>, in §3.1</span>
    <li><a href="#navigatorstorage">NavigatorStorage</a><span>, in §7</span>
    <li><a href="#network-storage">network storage</a><span>, in §3</span>
-   <li><a href="#non_persistent-box">non-persistent box</a><span>, in §3.1</span>
-   <li><a href="#non_persistent-origin-storage-unit-quota">non-persistent origin storage unit quota</a><span>, in §5</span>
-   <li><a href="#non_persistent-site-storage-global-quota">non-persistent site storage global quota</a><span>, in §5</span>
-   <li><a href="#non_persistent-site-storage-unit-quota">non-persistent site storage unit quota</a><span>, in §5</span>
+   <li><a href="#non-persistent-box">non-persistent box</a><span>, in §3.1</span>
+   <li><a href="#non-persistent-origin-storage-unit-quota">non-persistent origin storage unit quota</a><span>, in §5</span>
+   <li><a href="#non-persistent-site-storage-global-quota">non-persistent site storage global quota</a><span>, in §5</span>
+   <li><a href="#non-persistent-site-storage-unit-quota">non-persistent site storage unit quota</a><span>, in §5</span>
    <li><a href="#origin-storage-units">origin storage units</a><span>, in §3</span>
    <li><a href="#permission">permission</a><span>, in §4</span>
    <li><a href="#persistent-box">persistent box</a><span>, in §3.1</span>
@@ -643,33 +339,38 @@ rights to this work.</p>
    <li><a href="#dom-navigatorstorage-storage">storage</a><span>, in §7</span>
    <li><a href="#dictdef-storageinfo">StorageInfo</a><span>, in §7</span>
    <li><a href="#storagemanager">StorageManager</a><span>, in §7</span>
-   <li><a href="#dom-storageinfo-usage">usage</a><span>, in §7</span></ul>
-  <h3 class="no-num heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
-  <ul class="indexlist">
-   <li><a data-link-type="biblio" href="#biblio-dom-ls">[dom-ls]</a> defines the following terms:
+   <li><a href="#dom-storageinfo-usage">usage</a><span>, in §7</span>
+  </ul>
+  <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
+  <ul class="index">
+   <li>
+    <a data-link-type="biblio">[DOM]</a> defines the following terms:
     <ul>
-     <li><a href="http://dom.spec.whatwg.org/#context-object">context object</a>
+     <li><a href="https://dom.spec.whatwg.org/#context-object">context object</a>
     </ul>
-   <li><a data-link-type="biblio" href="#biblio-html">[HTML]</a> defines the following terms:
+   <li>
+    <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#navigator">Navigator</a>
      <li><a href="https://html.spec.whatwg.org/multipage/workers.html#workernavigator">WorkerNavigator</a>
      <li><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a>
-    </ul></ul>
-  <h2 class="no-num heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
-  <h3 class="no-num heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
+    </ul>
+  </ul>
+  <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
-   <dt id="biblio-html"><a class="self-link" href="#biblio-html"></a>[HTML]
+   <dt id="biblio-dom">[DOM]
+   <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
+   <dt id="biblio-html">[HTML]
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
-   <dt id="biblio-dom-ls"><a class="self-link" href="#biblio-dom-ls"></a>[DOM-LS]
-   <dd>Document Object Model URL: <a href="http://dom.spec.whatwg.org/">http://dom.spec.whatwg.org/</a>
-   <dt id="biblio-powerful-features"><a class="self-link" href="#biblio-powerful-features"></a>[POWERFUL-FEATURES]
+   <dt id="biblio-powerful-features">[POWERFUL-FEATURES]
    <dd>Mike West; Yan Zhu. <a href="https://w3c.github.io/webappsec/specs/powerfulfeatures/">Privileged Contexts</a>. 24 April 2015. WD. URL: <a href="https://w3c.github.io/webappsec/specs/powerfulfeatures/">https://w3c.github.io/webappsec/specs/powerfulfeatures/</a>
-   <dt id="biblio-rfc2119"><a class="self-link" href="#biblio-rfc2119"></a>[RFC2119]
-   <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a></dl>
-  <h2 class="no-num heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-  <pre class="idl">[NoInterfaceObject,
+   <dt id="biblio-rfc2119">[RFC2119]
+   <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+  </dl>
+  <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
+<pre class="idl def">[NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <a href="#navigatorstorage">NavigatorStorage</a> {
   readonly attribute <a data-link-type="idl-name" href="#storagemanager">StorageManager</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="StorageManager " href="#dom-navigatorstorage-storage">storage</a>;
@@ -691,8 +392,6 @@ dictionary <a href="#dictdef-storageinfo">StorageInfo</a> {
   unsigned long long <a data-type="unsigned long long " href="#dom-storageinfo-quota">quota</a>;
 };
 
-enum <a href="#enumdef-persistentstoragepermission">PersistentStoragePermission</a> { "default", "denied", "granted" }; // XXX merge with NotificationPermission
+enum <a href="#enumdef-persistentstoragepermission">PersistentStoragePermission</a> { <a href="#dom-persistentstoragepermission-default">"default"</a>, <a href="#dom-persistentstoragepermission-denied">"denied"</a>, <a href="#dom-persistentstoragepermission-granted">"granted"</a> }; // XXX merge with NotificationPermission
 
 </pre>
- </body>
-</html>
