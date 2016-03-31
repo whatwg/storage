@@ -132,7 +132,8 @@ agent should alert the user and offer a way to clear <a>persistent boxes</a>.
 <h2 id=api>API</h2>
 
 <pre class=idl>
-[NoInterfaceObject,
+[SecureContext,
+ NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface NavigatorStorage {
   readonly attribute StorageManager storage;
@@ -148,7 +149,8 @@ The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> attribute's g
 <a>context object</a>'s <a spec=html>relevant settings object</a>'s {{StorageManager}} object.
 
 <pre class=idl>
-[Exposed=(Window,Worker)]
+[SecureContext,
+ Exposed=(Window,Worker)]
 interface StorageManager {
   Promise&lt;boolean> persistent();
   [Exposed=Window] Promise&lt;boolean> requestPersistent();
@@ -173,8 +175,7 @@ these steps:
  <a spec=html>relevant settings object</a>.
 
  <li>
-  <p>If <var>settingsObject</var> is <a>a secure context</a>, run these substeps
-  <a spec=html>in parallel</a>: [[!POWERFUL-FEATURES]] [[!HTML]]
+  <p>Run these substeps <a spec=html>in parallel</a>: [[!HTML]]
 
   <ol>
    <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
@@ -198,12 +199,10 @@ invoked, must run these steps:
  <a spec=html>relevant settings object</a>.
 
  <li>
-  <p>If <var>settingsObject</var> is <a>a secure context</a>, run these substeps
-  <a spec=html>in parallel</a>: [[!POWERFUL-FEATURES]] [[!HTML]]
+  <p>Run these substeps <a spec=html>in parallel</a>:
 
   <ol>
    <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
-   <!-- XXX bz -->
 
    <li><p>Let <var>permission</var> be <a>permission</a> for <var>origin</var>.
 
@@ -230,8 +229,6 @@ invoked, must run these steps:
     </ol>
   </ol>
 
- <li><p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
-
  <li><p>Return <var>promise</var>.
 </ol>
 
@@ -245,19 +242,15 @@ invoked, must run these steps:
  <a spec=html>relevant settings object</a>.
 
  <li>
-  <p>If <var>settingsObject</var> is <a>a secure context</a>, run these substeps
-  <a spec=html>in parallel</a>:
+  <p>Run these substeps <a spec=html>in parallel</a>:
 
   <ol>
    <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
-   <!-- XXX bz -->
 
    <li><p>Let <var>permission</var> be <a>permission</a> for <var>origin</var>.
 
    <li><p>Resolve <var>promise</var> with <a>permission</a>.
   </ol>
-
- <li><p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
 
  <li><p>Return <var>promise</var>.
 </ol>
@@ -283,12 +276,10 @@ must run these steps:
  <a spec=html>relevant settings object</a>.
 
  <li>
-  <p>If <var>settingsObject</var> is <a>a secure context</a>, run these substeps
-  <a spec=html>in parallel</a>:
+  <p>Run these substeps <a spec=html>in parallel</a>:
 
   <ol>
    <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
-   <!-- XXX bz -->
 
    <li><p>Let <var>usage</var> be a rough estimate of the amount of bytes used within
    <var>origin</var>'s <a>origin storage unit</a>.
@@ -303,8 +294,6 @@ must run these steps:
 
    <li><p>Resolve <var>promise</var> with <var>dictionary</var>.
   </ol>
-
- <li><p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
 
  <li><p>Return <var>promise</var>.
 </ol>

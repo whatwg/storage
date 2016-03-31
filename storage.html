@@ -119,7 +119,8 @@ source.</p>
 by clearing network storage and <a data-link-type="dfn" href="#non-persistent-box">non-persistent boxes</a> within <a data-link-type="dfn" href="#site-storage">site storage</a>, the user
 agent should alert the user and offer a way to clear <a data-link-type="dfn" href="#persistent-box">persistent boxes</a>.</p>
    <h2 class="heading settled" data-level="7" id="api"><span class="secno">7. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
-<pre class="idl def">[NoInterfaceObject,
+<pre class="idl def">[SecureContext,
+ NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="navigatorstorage">NavigatorStorage<a class="self-link" href="#navigatorstorage"></a></dfn> {
   readonly attribute <a data-link-type="idl-name" href="#storagemanager">StorageManager</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="StorageManager " href="#dom-navigatorstorage-storage">storage</a>;
@@ -129,7 +130,8 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="nav
 </pre>
    <p>Each <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings object</a> has an associated <code class="idl"><a data-link-type="idl" href="#storagemanager">StorageManager</a></code> object. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
    <p>The <dfn class="idl-code" data-dfn-for="NavigatorStorage" data-dfn-type="attribute" data-export="" id="dom-navigatorstorage-storage"><code>storage</code><a class="self-link" href="#dom-navigatorstorage-storage"></a></dfn> attribute’s getter must return <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>’s <code class="idl"><a data-link-type="idl" href="#storagemanager">StorageManager</a></code> object.</p>
-<pre class="idl def">[Exposed=(Window,Worker)]
+<pre class="idl def">[SecureContext,
+ Exposed=(Window,Worker)]
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="storagemanager">StorageManager<a class="self-link" href="#storagemanager"></a></dfn> {
   Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-persistent">persistent</a>();
   [Exposed=Window] Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-requestpersistent">requestPersistent</a>();
@@ -151,7 +153,7 @@ these steps:</p>
     <li>
      <p>Let <var>settingsObject</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>. </p>
     <li>
-     <p>If <var>settingsObject</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: <a data-link-type="biblio" href="#biblio-powerful-features">[POWERFUL-FEATURES]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
+     <p>Run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
      <ol>
       <li>
        <p>Let <var>origin</var> be <var>settingsObject</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
@@ -171,7 +173,7 @@ invoked, must run these steps:</p>
     <li>
      <p>Let <var>settingsObject</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>. </p>
     <li>
-     <p>If <var>settingsObject</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: <a data-link-type="biblio" href="#biblio-powerful-features">[POWERFUL-FEATURES]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
+     <p>Run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: </p>
      <ol>
       <li>
        <p>Let <var>origin</var> be <var>settingsObject</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
@@ -197,8 +199,6 @@ invoked, must run these steps:</p>
        </ol>
      </ol>
     <li>
-     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>. </p>
-    <li>
      <p>Return <var>promise</var>. </p>
    </ol>
    <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-persistentpermission"><code>persistentPermission()</code><a class="self-link" href="#dom-storagemanager-persistentpermission"></a></dfn> method, when
@@ -209,7 +209,7 @@ invoked, must run these steps:</p>
     <li>
      <p>Let <var>settingsObject</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>. </p>
     <li>
-     <p>If <var>settingsObject</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: </p>
+     <p>Run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: </p>
      <ol>
       <li>
        <p>Let <var>origin</var> be <var>settingsObject</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
@@ -218,8 +218,6 @@ invoked, must run these steps:</p>
       <li>
        <p>Resolve <var>promise</var> with <a data-link-type="dfn" href="#permission">permission</a>. </p>
      </ol>
-    <li>
-     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>. </p>
     <li>
      <p>Return <var>promise</var>. </p>
    </ol>
@@ -239,7 +237,7 @@ must run these steps:</p>
     <li>
      <p>Let <var>settingsObject</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>. </p>
     <li>
-     <p>If <var>settingsObject</var> is <a data-link-type="dfn" href="https://w3c.github.io/webappsec/specs/powerfulfeatures/#settings-secure">a secure context</a>, run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: </p>
+     <p>Run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: </p>
      <ol>
       <li>
        <p>Let <var>origin</var> be <var>settingsObject</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
@@ -252,8 +250,6 @@ must run these steps:</p>
       <li>
        <p>Resolve <var>promise</var> with <var>dictionary</var>. </p>
      </ol>
-    <li>
-     <p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>. </p>
     <li>
      <p>Return <var>promise</var>. </p>
    </ol>
@@ -335,13 +331,12 @@ rights to this work.</p>
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-html">[HTML]
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
-   <dt id="biblio-powerful-features">[POWERFUL-FEATURES]
-   <dd>Mike West; Yan Zhu. <a href="https://w3c.github.io/webappsec/specs/powerfulfeatures/">Privileged Contexts</a>. 24 April 2015. WD. URL: <a href="https://w3c.github.io/webappsec/specs/powerfulfeatures/">https://w3c.github.io/webappsec/specs/powerfulfeatures/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-<pre class="idl def">[NoInterfaceObject,
+<pre class="idl def">[SecureContext,
+ NoInterfaceObject,
  Exposed=(Window,Worker)]
 interface <a href="#navigatorstorage">NavigatorStorage</a> {
   readonly attribute <a data-link-type="idl-name" href="#storagemanager">StorageManager</a> <a class="idl-code" data-link-type="attribute" data-readonly="" data-type="StorageManager " href="#dom-navigatorstorage-storage">storage</a>;
@@ -349,7 +344,8 @@ interface <a href="#navigatorstorage">NavigatorStorage</a> {
 <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#navigator">Navigator</a> implements <a data-link-type="idl-name" href="#navigatorstorage">NavigatorStorage</a>;
 <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/workers.html#workernavigator">WorkerNavigator</a> implements <a data-link-type="idl-name" href="#navigatorstorage">NavigatorStorage</a>;
 
-[Exposed=(Window,Worker)]
+[SecureContext,
+ Exposed=(Window,Worker)]
 interface <a href="#storagemanager">StorageManager</a> {
   Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-persistent">persistent</a>();
   [Exposed=Window] Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-requestpersistent">requestPersistent</a>();
