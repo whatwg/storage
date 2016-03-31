@@ -78,27 +78,13 @@ Whenever a <a>box</a> is cleared by the user agent, it must be cleared in its en
 
 
 
-<h2 id=persistence>Persistence</h2>
+<h2 id=persistence>Persistence permission</h2>
 
 A <a>box</a> can only be turned into a <a>persistent box</a> if the user (or user agent
-on behalf of the user) has granted <dfn>permission</dfn>. The <a>permission</a> for a
-given <a>origin</a> is one of three strings:
+on behalf of the user) has granted <dfn>permission</dfn>.
 
-<dl>
-  <dt>"<code>default</code>"
-  <dd><p>This is equivalent to "<code>denied</code>", but the user has made no explicit
-  choice thus far.
-
-  <dt>"<code>denied</code>"
-  <dd><p>This means the user does not want <a>persistent boxes</a>.
-
-  <dt>"<code>granted</code>"
-  <dd><p>This means the existing <a>box</a> becomes a <a>persistent box</a>.
-</dl>
-
-<p class=note>There is no equivalent to "<code>default</code>" meaning
-"<code>granted</code>". In that case "<code>granted</code>" is simply returned as there
-would be no reason for the application to ask for <a>permission</a>.
+<p class="XXX">To properly define this we need to integrate with the Permissions API, but that is
+not in a great shape at the moment.
 
 
 
@@ -162,14 +148,14 @@ WorkerNavigator implements NavigatorStorage;
 Each <a>environment settings object</a> has an associated {{StorageManager}} object.
 [[HTML]]
 
-The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> attribute's getter must
-return its global object's <a>environment settings object</a>'s {{StorageManager}} object.
+The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> attribute's getter must return
+<a>context object</a>'s <a spec=html>relevant settings object</a>'s {{StorageManager}} object.
 
 <pre class=idl>
 [Exposed=(Window,Worker)]
 interface StorageManager {
   [Exposed=Window] Promise&lt;boolean> requestPersistent();
-  Promise&lt;PersistentStoragePermission> persistentPermission();
+  Promise&lt;PermissionState> persistentPermission();
 
   Promise&lt;StorageInfo> estimate();
   Promise&lt;StorageInfo> persistentEstimate();
@@ -179,8 +165,6 @@ dictionary StorageInfo {
   unsigned long long usage;
   unsigned long long quota;
 };
-
-enum PersistentStoragePermission { "default", "denied", "granted" }; // XXX merge with NotificationPermission
 </pre>
 
 The <dfn method for=StorageManager><code>requestPersistent()</code></dfn> method, when
@@ -189,20 +173,20 @@ invoked, must run these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>environment</var> be <a spec=dom>context object</a>'s global object's
- <a>environment settings object</a>.
+ <li><p>Let <var>settingsObject</var> be <a spec=dom>context object</a>'s
+ <a spec=html>relevant settings object</a>.
 
  <li>
-  <p>If <var>environment</var> is <a>a secure context</a>, run these substeps
+  <p>If <var>settingsObject</var> is <a>a secure context</a>, run these substeps
   <a spec=html>in parallel</a>: [[!POWERFUL-FEATURES]] [[!HTML]]
 
   <ol>
-   <li><p>Let <var>origin</var> be <var>environment</var>'s <a>origin</a>.
+   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
    <!-- XXX bz -->
 
    <li><p>Let <var>permission</var> be <a>permission</a> for <var>origin</var>.
 
-   <li><p>If <var>permission</var> is "<code title>default</code>", ask the user whether
+   <li><p>If <var>permission</var> is "<code title>prompt</code>", ask the user whether
    turning <var>origin</var>'s <a>box</a> into a <a>persistent box</a> is acceptable.
    If it is, set <var>permission</var> to "<code title>granted</code>", and
    "<code title>denied</code>" otherwise.
@@ -357,7 +341,8 @@ Jonas Sicking,
 Joshua Bell,
 Kenji Baheux,
 Kinuko Yasuda,
-Luke Wagner, and
+Luke Wagner,
+Mounir Lamouri, and
 Shachar Zohar
 for being awesome!
 
