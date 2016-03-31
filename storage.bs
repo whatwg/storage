@@ -50,18 +50,23 @@ A <dfn>site</dfn> is eTLD+1. <span class=XXX>Needs a more formal definition.</sp
 
 <h2 id=infrastructure>Infrastructure</h2>
 
-A user agent has <dfn>network storage</dfn> and <dfn>site storage</dfn>.
-<a>Network storage</a> concerns the HTTP cache and cookies. <a>Site storage</a> concerns
-the various APIs that can be used for storing data, such as
-<code>history.pushState()</code>.
+A user agent has various kinds of storage:
 
-<a>Network storage</a> is not defined in detail for now and left as an exercise for the
-reader.
+<dl>
+ <dt>Network
+ <dd><p>HTTP cache, cookies, authentication entries, TLS client certificates
+ <dt>Credentials
+ <dd><p>End-user credentials, such as username and passwords submitted through HTML forms
+ <dt>Permissions
+ <dd><p>Permissions for various features, such as geolocation
+ <dt>Site storage
+ <dd>Indexed DB, Cache API, service worker registrations, <code>localStorage</code>,
+ <code>history.pushState()</code>
+</dl>
 
-<a>Site storage</a> consists of zero or more <dfn>site storage units</dfn>.
+This specification primarily concerns itself with <dfn>site storage</dfn>.
 
-Each <a>site storage unit</a> has an associated <a>site</a>, and zero or more
-<dfn>origin storage units</dfn>.
+<a>Site storage</a> consists of zero or more <dfn>origin storage units</dfn>.
 
 Each <a>origin storage unit</a> has an associated <a>origin</a> and a
 <dfn>box</dfn>. [[HTML]]
@@ -94,42 +99,33 @@ The <dfn>global quota</dfn> is the total available storage space as set by the u
 User agents should makes this less than the total available storage space on the hard
 drive to give users and the operating system (if any) some wiggle room.
 
-The <dfn>non-persistent site storage global quota</dfn> is a segment of the
-<a>global quota</a> available to <a>site storage</a> as determined by the user agent,
-excluding any <a>origin storage units</a> whose <a>box</a>'s <a>mode</a> is
-"<code title>persistent</code>".
+The <dfn>non-persistent storage global quota</dfn> is a segment of the <a>global quota</a>
+available to <a>site storage</a> as determined by the user agent, excluding any
+<a>origin storage units</a> whose <a>box</a>'s <a>mode</a> is "<code title>persistent</code>".
 
-The <dfn>non-persistent site storage unit quota</dfn> is a segment of the
-<a>non-persistent site storage global quota</a> available to <a>site storage units</a> as
-determined by the user agent. User agents are strongly encouraged to let factors such as
-navigation frequency, recency of visit, bookmarking, and other indications of popularity
-impact the <a>non-persistent site storage unit quota</a>.
-
-The <dfn>non-persistent origin storage unit quota</dfn> is a segment of the
-<a>non-persistent site storage unit quota</a> available to <a>origin storage units</a> as
-determined by the user agent. It is typically identical to the
-<a>non-persistent site storage unit quota</a> to avoid the risk of sites minting lots of
-subdomains to fill the available storage space, but user agents should feel free to
-experiment.
+The <dfn>non-persistent storage unit quota</dfn> is a segment of the
+<a>non-persistent storage global quota</a> available to <a>origin storage units</a> as determined by
+the user agent. User agents are strongly encouraged to let factors such as navigation frequency,
+recency of visit, bookmarking, and other indications of popularity impact the
+<a>non-persistent storage unit quota</a>.
 
 
 
 <h2 id=ui-guidelines>User Interface Guidelines</h2>
 
-User agents should not distinguish between <a>network storage</a> and <a>site storage</a>.
-Instead user agents should offer users the ability to remove all storage for a given
-<a>site</a>. This ensures that storage from one source cannot be used to revive storage
-from another source.
+User agents should not distinguish between network storage and <a>site storage</a> in their user
+interface. Instead user agents should offer users the ability to remove all storage for a given
+<a>site</a>. This ensures that storage from one source cannot be used to revive storage from another
+source.
 
 <p class=XXX>This is still a concern due to HTTP ETag...
 
 
 <h3 id=storage-pressure>Storage Pressure</h3>
 
-When the user agent notices it comes under storage pressure and it cannot free up
-sufficient space by clearing <a>network storage</a> and <a>non-persistent boxes</a> within
-<a>site storage</a>, the user agent should alert the user and offer a way to clear
-<a>persistent boxes</a>.
+When the user agent notices it comes under storage pressure and it cannot free up sufficient space
+by clearing network storage and <a>non-persistent boxes</a> within <a>site storage</a>, the user
+agent should alert the user and offer a way to clear <a>persistent boxes</a>.
 
 
 
@@ -157,11 +153,10 @@ interface StorageManager {
   [Exposed=Window] Promise&lt;boolean> requestPersistent();
   Promise&lt;PermissionState> persistentPermission();
 
-  Promise&lt;StorageInfo> estimate();
-  Promise&lt;StorageInfo> persistentEstimate();
+  Promise&lt;StorageEstimate> estimate();
 };
 
-dictionary StorageInfo {
+dictionary StorageEstimate {
   unsigned long long usage;
   unsigned long long quota;
 };
@@ -220,15 +215,15 @@ invoked, must run these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>environment</var> be <a spec=dom>context object</a>'s global object's
- <a>environment settings object</a>.
+ <li><p>Let <var>settingsObject</var> be <a spec=dom>context object</a>'s
+ <a spec=html>relevant settings object</a>.
 
  <li>
-  <p>If <var>environment</var> is <a>a secure context</a>, run these substeps
+  <p>If <var>settingsObject</var> is <a>a secure context</a>, run these substeps
   <a spec=html>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>origin</var> be <var>environment</var>'s <a>origin</a>.
+   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
    <!-- XXX bz -->
 
    <li><p>Let <var>permission</var> be <a>permission</a> for <var>origin</var>.
@@ -258,63 +253,27 @@ must run these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>environment</var> be <a spec=dom>context object</a>'s global object's
- <a>environment settings object</a>.
+ <li><p>Let <var>settingsObject</var> be <a spec=dom>context object</a>'s
+ <a spec=html>relevant settings object</a>.
 
  <li>
-  <p>If <var>environment</var> is <a>a secure context</a>, run these substeps
+  <p>If <var>settingsObject</var> is <a>a secure context</a>, run these substeps
   <a spec=html>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>origin</var> be <var>environment</var>'s <a>origin</a>.
+   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
    <!-- XXX bz -->
 
    <li><p>Let <var>usage</var> be a rough estimate of the amount of bytes used within
    <var>origin</var>'s <a>origin storage unit</a>.
 
-   <li><p>Let <var>quota</var> be a conservative estimate of the amount of bytes available
-   within <var>origin</var>'s <a>non-persistent origin storage unit quota</a>.
+   <li><p>Let <var>quota</var> be a conservative estimate of the amount of bytes available within
+   <var>origin</var>'s <a>global quota</a>, if <var>origin</var>'s <a>box</a>'s is a
+   <a>persistent box</a>, and a conservative estimate of the amount of bytes available within
+   <var>origin</var>'s <a>non-persistent storage unit quota</a> otherwise.
 
-   <li><p>Let <var>dictionary</var> be a new {{StorageInfo}} dictionary whose {{usage}}
+   <li><p>Let <var>dictionary</var> be a new {{StorageEstimate}} dictionary whose {{usage}}
    member is <var>usage</var> and {{quota}} member is <var>quota</var>.
-
-   <li><p>Resolve <var>promise</var> with <var>dictionary</var>.
-  </ol>
-
- <li><p>Otherwise, reject <var>promise</var> with a <code>TypeError</code>.
-
- <li><p>Return <var>promise</var>.
-</ol>
-
-The <dfn method for=StorageManager><code>persistentEstimate()</code></dfn> method, when
-invoked, must run these steps:
-
-<ol>
- <li><p>Let <var>promise</var> be a new promise.
-
- <li><p>Let <var>environment</var> be <a spec=dom>context object</a>'s global object's
- <a>environment settings object</a>.
-
- <li>
-  <p>If <var>environment</var> is <a>a secure context</a>, run these substeps
-  <a spec=html>in parallel</a>:
-
-  <ol>
-   <li><p>Let <var>origin</var> be <var>environment</var>'s <a>origin</a>.
-   <!-- XXX bz -->
-
-   <li><p>If <a>permission</a> for <var>origin</var> is not
-   "<code title>granted</code>", reject <var>promise</var> with a <code>TypeError</code>
-   and terminate these steps.
-
-   <li><p>Let <var>usage</var> be a rough estimate of the amount of bytes used within
-   <var>origin</var>'s <a>origin storage unit</a>.
-
-   <li><p>Let <var>quota</var> be a conservative estimate of the amount of bytes available
-   within <a>global quota</a>.
-
-   <li><p>Let <var>dictionary</var> be a new dictionary whose <code>usage</code> member is
-   <var>usage</var> and <code>quota</code> member is <var>quota</var>.
 
    <li><p>Resolve <var>promise</var> with <var>dictionary</var>.
   </ol>
