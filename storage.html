@@ -69,7 +69,7 @@
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-storage.svg"> </a> </p>
    <h1 class="p-name no-ref" id="title">Storage</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-03-31">31 March 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-04-01">1 April 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -129,13 +129,13 @@
 IndexedDB, <code>localStorage</code>, and <code>showNotification()</code>. The
 Storage Standard defines the storage box they all tie into, a way of making that box
 persistent, and a way of getting quota estimates for that box.</p>
-   <div class="example" id="example-d3fbf4bd">
-    <a class="self-link" href="#example-d3fbf4bd"></a> 
+   <div class="example" id="example-652d2134">
+    <a class="self-link" href="#example-652d2134"></a> 
     <p>A simple way to make storage persistent is through invoking the <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-requestpersistent">requestPersistent()</a></code> method.
  It simultaneously requests the end user for permission and changes the storage to be persistent
  once granted:</p>
-<pre><code class="lang-javascript highlight"><span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">requestPersistent</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">permission</span> <span class="o">=></span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="nx">permission</span> <span class="o">==</span> <span class="s2">"granted"</span><span class="p">)</span> <span class="p">{</span>
+<pre><code class="lang-javascript highlight"><span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">requestPersistent</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">persisted</span> <span class="o">=></span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">persisted</span><span class="p">)</span> <span class="p">{</span>
     <span class="cm">/* … */</span>
   <span class="p">}</span>
 <span class="p">})</span></code></pre>
@@ -143,7 +143,7 @@ persistent, and a way of getting quota estimates for that box.</p>
  can be written:</p>
 <pre><code class="lang-javascript highlight"><span class="nx">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span>
   <span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">persistent</span><span class="p">(),</span>
-  <span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">persistentPermission</span><span class="p">()</span>
+  <span class="nx">navigator</span><span class="p">.</span><span class="nx">permissions</span><span class="p">.</span><span class="nx">query</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="s2">"persistent-storage"</span><span class="p">})</span>
 <span class="p">]).</span><span class="nx">then</span><span class="p">((</span><span class="nx">isPersistent</span><span class="p">,</span> <span class="nx">permission</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">isPersistent</span> <span class="o">&amp;&amp;</span> <span class="nx">permission</span> <span class="o">==</span> <span class="s2">"granted"</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">requestPersistent</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span> <span class="cm">/* … */</span> <span class="p">)</span>
@@ -180,8 +180,9 @@ persistent, and a way of getting quota estimates for that box.</p>
    <h2 class="heading settled" data-level="4" id="persistence"><span class="secno">4. </span><span class="content">Persistence permission</span><a class="self-link" href="#persistence"></a></h2>
    <p>A <a data-link-type="dfn" href="#box">box</a> can only be turned into a <a data-link-type="dfn" href="#persistent-box">persistent box</a> if the user (or user agent
 on behalf of the user) has granted <dfn data-dfn-type="dfn" data-noexport="" id="permission">permission<a class="self-link" href="#permission"></a></dfn>.</p>
-   <p class="XXX">To properly define this we need to integrate with the Permissions API, but that is
-not in a great shape at the moment. </p>
+   <p class="XXX">We will eventually integrate with the Permissions API, with the identifier
+"<code>persistent-storage</code>", but since that specification is not in great shape at the moment
+that has not happened yet. </p>
    <h2 class="heading settled" data-level="5" id="quota"><span class="secno">5. </span><span class="content">Quota</span><a class="self-link" href="#quota"></a></h2>
    <p>The <dfn data-dfn-type="dfn" data-noexport="" id="global-quota">global quota<a class="self-link" href="#global-quota"></a></dfn> is the total available storage space as set by the user agent.
 User agents should makes this less than the total available storage space on the hard
@@ -216,7 +217,6 @@ interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="nav
 interface <dfn class="idl-code" data-dfn-type="interface" data-export="" id="storagemanager">StorageManager<a class="self-link" href="#storagemanager"></a></dfn> {
   Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-persistent">persistent</a>();
   [Exposed=Window] Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-requestpersistent">requestPersistent</a>();
-  Promise&lt;<a data-link-type="idl-name">PermissionState</a>> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-persistentpermission">persistentPermission</a>();
 
   Promise&lt;<a data-link-type="idl-name" href="#dictdef-storageestimate">StorageEstimate</a>> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-estimate">estimate</a>();
 };
@@ -282,32 +282,6 @@ invoked, must run these steps:</p>
     <li>
      <p>Return <var>promise</var>. </p>
    </ol>
-   <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-persistentpermission"><code>persistentPermission()</code><a class="self-link" href="#dom-storagemanager-persistentpermission"></a></dfn> method, when
-invoked, must run these steps:</p>
-   <ol>
-    <li>
-     <p>Let <var>promise</var> be a new promise. </p>
-    <li>
-     <p>Let <var>settingsObject</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>. </p>
-    <li>
-     <p>Run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: </p>
-     <ol>
-      <li>
-       <p>Let <var>origin</var> be <var>settingsObject</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
-      <li>
-       <p>Let <var>permission</var> be <a data-link-type="dfn" href="#permission">permission</a> for <var>origin</var>. </p>
-      <li>
-       <p>Resolve <var>promise</var> with <a data-link-type="dfn" href="#permission">permission</a>. </p>
-     </ol>
-    <li>
-     <p>Return <var>promise</var>. </p>
-   </ol>
-   <div class="example" id="example-e7d30629">
-    <a class="self-link" href="#example-e7d30629"></a> 
-    <p>To be clear, <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-persistentpermission">persistentPermission()</a></code>'s promise resolves as soon as the <a data-link-type="dfn" href="#permission">permission</a> is retrieved and does not wait for <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-requestpersistent">requestPersistent()</a></code>. In the
- following example <code>c2</code> is likely invoked before <code>c1</code>: </p>
-<pre><code class="lang-javascript highlight"><span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">requestPersistent</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">c1</span><span class="p">)</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">persistentPermission</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">c2</span><span class="p">)</span></code></pre>
-   </div>
    <p>The <dfn class="idl-code" data-dfn-for="StorageManager" data-dfn-type="method" data-export="" id="dom-storagemanager-estimate"><code>estimate()</code><a class="self-link" href="#dom-storagemanager-estimate"></a></dfn> method, when invoked,
 must run these steps:</p>
    <ol>
@@ -376,7 +350,6 @@ rights to this work.</p>
    <li><a href="#permission">permission</a><span>, in §4</span>
    <li><a href="#dom-storagemanager-persistent">persistent()</a><span>, in §7</span>
    <li><a href="#persistent-box">persistent box</a><span>, in §3.1</span>
-   <li><a href="#dom-storagemanager-persistentpermission">persistentPermission()</a><span>, in §7</span>
    <li><a href="#dom-storageestimate-quota">quota</a><span>, in §7</span>
    <li><a href="#dom-storagemanager-requestpersistent">requestPersistent()</a><span>, in §7</span>
    <li><a href="#site">site</a><span>, in §2</span>
@@ -428,7 +401,6 @@ interface <a href="#navigatorstorage">NavigatorStorage</a> {
 interface <a href="#storagemanager">StorageManager</a> {
   Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-persistent">persistent</a>();
   [Exposed=Window] Promise&lt;boolean> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-requestpersistent">requestPersistent</a>();
-  Promise&lt;<a data-link-type="idl-name">PermissionState</a>> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-persistentpermission">persistentPermission</a>();
 
   Promise&lt;<a data-link-type="idl-name" href="#dictdef-storageestimate">StorageEstimate</a>> <a class="idl-code" data-link-type="method" href="#dom-storagemanager-estimate">estimate</a>();
 };

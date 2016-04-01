@@ -44,8 +44,8 @@ persistent, and a way of getting quota estimates for that box.
  once granted:</p>
 
  <pre><code class="lang-javascript">
-navigator.storage.requestPersistent().then(permission => {
-  if(permission == "granted") {
+navigator.storage.requestPersistent().then(persisted => {
+  if(persisted) {
     /* &hellip; */
   }
 })
@@ -57,7 +57,7 @@ navigator.storage.requestPersistent().then(permission => {
  <pre><code class="lang-javascript">
 Promise.all([
   navigator.storage.persistent(),
-  navigator.storage.persistentPermission()
+  navigator.permissions.query({name: "persistent-storage"})
 ]).then((isPersistent, permission) => {
   if(!isPersistent &amp;&amp; permission == "granted") {
     navigator.storage.requestPersistent().then( /* &hellip; */ )
@@ -119,8 +119,9 @@ Whenever a <a>box</a> is cleared by the user agent, it must be cleared in its en
 A <a>box</a> can only be turned into a <a>persistent box</a> if the user (or user agent
 on behalf of the user) has granted <dfn>permission</dfn>.
 
-<p class="XXX">To properly define this we need to integrate with the Permissions API, but that is
-not in a great shape at the moment.
+<p class="XXX">We will eventually integrate with the Permissions API, with the identifier
+"<code>persistent-storage</code>", but since that specification is not in great shape at the moment
+that has not happened yet.
 
 
 
@@ -185,7 +186,6 @@ The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> attribute's g
 interface StorageManager {
   Promise&lt;boolean> persistent();
   [Exposed=Window] Promise&lt;boolean> requestPersistent();
-  Promise&lt;PermissionState> persistentPermission();
 
   Promise&lt;StorageEstimate> estimate();
 };
@@ -262,38 +262,6 @@ invoked, must run these steps:
 
  <li><p>Return <var>promise</var>.
 </ol>
-
-The <dfn method for=StorageManager><code>persistentPermission()</code></dfn> method, when
-invoked, must run these steps:
-
-<ol>
- <li><p>Let <var>promise</var> be a new promise.
-
- <li><p>Let <var>settingsObject</var> be <a spec=dom>context object</a>'s
- <a spec=html>relevant settings object</a>.
-
- <li>
-  <p>Run these substeps <a spec=html>in parallel</a>:
-
-  <ol>
-   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
-
-   <li><p>Let <var>permission</var> be <a>permission</a> for <var>origin</var>.
-
-   <li><p>Resolve <var>promise</var> with <a>permission</a>.
-  </ol>
-
- <li><p>Return <var>promise</var>.
-</ol>
-
-<div class=example>
- <p>To be clear, {{persistentPermission()}}'s promise resolves as soon as the
- <a>permission</a> is retrieved and does not wait for {{requestPersistent()}}. In the
- following example <code>c2</code> is likely invoked before <code>c1</code>:
-
- <pre><code class="lang-javascript">navigator.storage.requestPersistent().then(c1)
-navigator.storage.persistentPermission().then(c2)</code></pre>
-</div>
 
 The <dfn method for=StorageManager><code>estimate()</code></dfn> method, when invoked,
 must run these steps:
