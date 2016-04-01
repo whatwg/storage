@@ -39,12 +39,12 @@ Storage Standard defines the storage box they all tie into, a way of making that
 persistent, and a way of getting quota estimates for that box.
 
 <div class="example">
- <p>A simple way to make storage persistent is through invoking the {{requestPersistent()}} method.
- It simultaneously requests the end user for permission and changes the storage to be persistent
- once granted:</p>
+ <p>A simple way to make storage persistent is through invoking the {{persist()}} method. It
+ simultaneously requests the end user for permission and changes the storage to be persistent once
+ granted:</p>
 
  <pre><code class="lang-javascript">
-navigator.storage.requestPersistent().then(persisted => {
+navigator.storage.persist().then(persisted => {
   if(persisted) {
     /* &hellip; */
   }
@@ -56,11 +56,11 @@ navigator.storage.requestPersistent().then(persisted => {
 
  <pre><code class="lang-javascript">
 Promise.all([
-  navigator.storage.persistent(),
+  navigator.storage.persisted(),
   navigator.permissions.query({name: "persistent-storage"})
-]).then((isPersistent, permission) => {
-  if(!isPersistent &amp;&amp; permission == "granted") {
-    navigator.storage.requestPersistent().then( /* &hellip; */ )
+]).then((persisted, permission) => {
+  if(!persisted &amp;&amp; permission == "granted") {
+    navigator.storage.persist().then( /* &hellip; */ )
   } else if(!persistent &amp;&amp; permission == "default") {
     showPersistentStorageExplanation()
   }
@@ -184,8 +184,8 @@ The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> attribute's g
 [SecureContext,
  Exposed=(Window,Worker)]
 interface StorageManager {
-  Promise&lt;boolean> persistent();
-  [Exposed=Window] Promise&lt;boolean> requestPersistent();
+  Promise&lt;boolean> persisted();
+  [Exposed=Window] Promise&lt;boolean> persist();
 
   Promise&lt;StorageEstimate> estimate();
 };
@@ -196,7 +196,7 @@ dictionary StorageEstimate {
 };
 </pre>
 
-The <dfn method for=StorageManager><code>persistent()</code></dfn> method, when invoked, must run
+The <dfn method for=StorageManager><code>persisted()</code></dfn> method, when invoked, must run
 these steps:
 
 <ol>
@@ -211,17 +211,17 @@ these steps:
   <ol>
    <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
 
-   <li><p>Let <var>isPersistent</var> be true if <var>origin</var>'s <a>box</a> is a
+   <li><p>Let <var>persisted</var> be true if <var>origin</var>'s <a>box</a> is a
    <a>persistent box</a>, and false otherwise.
 
-   <li><p>Resolve <var>promise</var> with <var>isPersistent</var>.
+   <li><p>Resolve <var>promise</var> with <var>persisted</var>.
   </ol>
 
  <li><p>Return <var>promise</var>.
 </ol>
 
-The <dfn method for=StorageManager><code>requestPersistent()</code></dfn> method, when
-invoked, must run these steps:
+The <dfn method for=StorageManager><code>persist()</code></dfn> method, when invoked, must run these
+steps:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
@@ -242,7 +242,7 @@ invoked, must run these steps:
    If it is, set <var>permission</var> to "<code title>granted</code>", and
    "<code title>denied</code>" otherwise.
 
-   <li><p>Let <var>isPersistent</var> be true if <var>origin</var>'s <a>box</a> is a
+   <li><p>Let <var>persisted</var> be true if <var>origin</var>'s <a>box</a> is a
    <a>persistent box</a>, and false otherwise.
 
    <li>
@@ -252,11 +252,11 @@ invoked, must run these steps:
     <ol>
      <li><p>Set <a>permission</a> for <var>origin</var> to <var>permission</var>.
 
-     <li><p>If <var>isPersistent</var> is false and <var>permission</var> is
-     "<code>granted</code>", set <var>isPersistent</var> to true and set
-     <var>origin</var>'s <a>box</a>'s <a>mode</a> to "<code>persistent</code>".
+     <li><p>If <var>persisted</var> is false and <var>permission</var> is "<code>granted</code>",
+     set <var>persisted</var> to true and set <var>origin</var>'s <a>box</a>'s <a>mode</a> to
+     "<code>persistent</code>".
 
-     <li><p>Resolve <var>promise</var> with <var>isPersistent</var>.
+     <li><p>Resolve <var>promise</var> with <var>persisted</var>.
     </ol>
   </ol>
 
