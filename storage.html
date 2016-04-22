@@ -127,12 +127,19 @@
 <script async="" src="https://resources.whatwg.org/file-issue.js"></script>
 <script defer="" id="head" src="https://resources.whatwg.org/dfn.js"></script>
    <h2 class="heading settled" data-level="1" id="introduction"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
-   <p>Over the years the web has grown various APIs that can be used for storage, e.g.
-IndexedDB, <code>localStorage</code>, and <code>showNotification()</code>. The
-Storage Standard defines the storage box they all tie into, a way of making that box
-persistent, and a way of getting quota estimates for that box.</p>
-   <div class="example" id="example-0361fba8">
-    <a class="self-link" href="#example-0361fba8"></a> 
+   <p>Over the years the web has grown various APIs that can be used for storage, e.g., IndexedDB, <code>localStorage</code>, and <code>showNotification()</code>. The Storage Standard consolidates
+these APIs by defining:</p>
+   <ul class="brief">
+    <li>A box, the primitive these APIs store their data in 
+    <li>A way of making that box persistent 
+    <li>A way of getting usage and quota estimates for an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> 
+   </ul>
+   <p>Traditionally, as the user runs out of storage space on their device, the data stored with these
+APIs gets lost without the user being able to intervene. However, persistent boxes cannot be cleared
+without consent by the user. This thus brings data guarantees users have enjoyed on native platforms
+to the web. </p>
+   <div class="example" id="example-3a7051a8">
+    <a class="self-link" href="#example-3a7051a8"></a> 
     <p>A simple way to make storage persistent is through invoking the <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-persist">persist()</a></code> method. It
  simultaneously requests the end user for permission and changes the storage to be persistent once
  granted:</p>
@@ -153,6 +160,13 @@ persistent, and a way of getting quota estimates for that box.</p>
     <span class="nx">showPersistentStorageExplanation</span><span class="p">()</span>
   <span class="p">}</span>
 <span class="p">})</span></code></pre>
+    <p>The <code class="idl"><a data-link-type="idl" href="#dom-storagemanager-estimate">estimate()</a></code> method can be used to determine whether there is enough space left to
+ download another Metriod Prime level: </p>
+<pre><code class="lang-javascript highlight"><span class="nx">navigator</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">estimate</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">info</span> <span class="o">=></span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">info</span><span class="p">.</span><span class="nx">quota</span> <span class="o">-</span> <span class="nx">info</span><span class="p">.</span><span class="nx">usage</span> <span class="o">></span> <span class="nx">metroidPrimeLevel</span><span class="p">.</span><span class="nx">size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">metroidPrimeLevel</span><span class="p">.</span><span class="nx">url</span><span class="p">)</span>
+  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">"no space"</span><span class="p">)</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span> <span class="cm">/* … */</span> <span class="p">)</span></code></pre>
    </div>
    <h2 class="heading settled" data-level="2" id="terminology"><span class="secno">2. </span><span class="content">Terminology</span><a class="self-link" href="#terminology"></a></h2>
    <p>This specification uses terminology from the DOM and HTML Standards. <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>

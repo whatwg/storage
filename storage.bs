@@ -33,10 +33,20 @@ urlPrefix: https://w3c.github.io/webappsec/specs/powerfulfeatures/#
 
 <h2 id=introduction>Introduction</h2>
 
-Over the years the web has grown various APIs that can be used for storage, e.g.
-IndexedDB, <code>localStorage</code>, and <code>showNotification()</code>. The
-Storage Standard defines the storage box they all tie into, a way of making that box
-persistent, and a way of getting quota estimates for that box.
+Over the years the web has grown various APIs that can be used for storage, e.g., IndexedDB,
+<code>localStorage</code>, and <code>showNotification()</code>. The Storage Standard consolidates
+these APIs by defining:
+
+<ul class=brief>
+ <li>A box, the primitive these APIs store their data in
+ <li>A way of making that box persistent
+ <li>A way of getting usage and quota estimates for an <a>origin</a>
+</ul>
+
+<p>Traditionally, as the user runs out of storage space on their device, the data stored with these
+APIs gets lost without the user being able to intervene. However, persistent boxes cannot be cleared
+without consent by the user. This thus brings data guarantees users have enjoyed on native platforms
+to the web.
 
 <div class="example">
  <p>A simple way to make storage persistent is through invoking the {{persist()}} method. It
@@ -65,6 +75,17 @@ Promise.all([
     showPersistentStorageExplanation()
   }
 })
+</code></pre>
+
+ <p>The {{estimate()}} method can be used to determine whether there is enough space left to
+ download another Metriod Prime level:
+
+ <pre><code class="lang-javascript">
+navigator.storage.estimate().then(info => {
+  if(info.quota - info.usage > metroidPrimeLevel.size)
+    return fetch(metroidPrimeLevel.url)
+  throw new Error("no space")
+}).then( /* &hellip; */ )
 </code></pre>
 
 </div>
