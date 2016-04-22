@@ -2,6 +2,7 @@
  <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  <meta content="#3c790a" name="theme-color">
   <title>Storage Standard</title>
   <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
@@ -68,8 +69,10 @@
  <body class="h-entry status-LS">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-storage.svg"> </a> </p>
-   <h1 class="p-name no-ref" id="title">Storage</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-04-01">1 April 2016</time></span></h2>
+   <hgroup>
+    <h1 class="p-name no-ref" id="title">Storage</h1>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-04-22">22 April 2016</time></span></h2>
+   </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Participate:
@@ -86,7 +89,6 @@
   <div class="p-summary" data-fill-with="abstract">
    <p>The Storage Standard defines an API for persistent storage and quota estimates, as well as the platform storage architecture.</p>
   </div>
-  <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
@@ -174,9 +176,10 @@ persistent, and a way of getting quota estimates for that box.</p>
    <p><a data-link-type="dfn" href="#site-storage">Site storage</a> consists of zero or more <dfn data-dfn-type="dfn" data-noexport="" id="origin-storage-units">origin storage units<a class="self-link" href="#origin-storage-units"></a></dfn>.</p>
    <p>Each <a data-link-type="dfn" href="#origin-storage-units">origin storage unit</a> has an associated <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> and a <dfn data-dfn-type="dfn" data-noexport="" id="box">box<a class="self-link" href="#box"></a></dfn>. <a data-link-type="biblio" href="#biblio-html">[HTML]</a></p>
    <h3 class="heading settled" data-level="3.1" id="boxes"><span class="secno">3.1. </span><span class="content">Boxes</span><a class="self-link" href="#boxes"></a></h3>
-   <p>A <a data-link-type="dfn" href="#box">box</a> has <dfn data-dfn-type="dfn" data-noexport="" id="mode">mode<a class="self-link" href="#mode"></a></dfn> which is either "<code title="">atomic</code>" or
+   <p>A <a data-link-type="dfn" href="#box">box</a> has <dfn data-dfn-type="dfn" data-noexport="" id="mode">mode<a class="self-link" href="#mode"></a></dfn> which is either "<code title="">best-effort</code>" or
 "<code title="">persistent</code>". A <dfn data-dfn-type="dfn" data-noexport="" id="persistent-box">persistent box<a class="self-link" href="#persistent-box"></a></dfn> is a <a data-link-type="dfn" href="#box">box</a> whose <a data-link-type="dfn" href="#mode">mode</a> is "<code title="">persistent</code>". A <dfn data-dfn-type="dfn" data-noexport="" id="non-persistent-box">non-persistent box<a class="self-link" href="#non-persistent-box"></a></dfn> is a <a data-link-type="dfn" href="#box">box</a> whose <a data-link-type="dfn" href="#mode">mode</a> is <em>not</em> "<code title="">persistent</code>".</p>
-   <p>Whenever a <a data-link-type="dfn" href="#box">box</a> is cleared by the user agent, it must be cleared in its entirety.</p>
+   <p>A box is considered to be an atomic unit. Whenever a <a data-link-type="dfn" href="#box">box</a> is cleared by the user agent, it
+must be cleared in its entirety.</p>
    <h2 class="heading settled" data-level="4" id="persistence"><span class="secno">4. </span><span class="content">Persistence permission</span><a class="self-link" href="#persistence"></a></h2>
    <p>A <a data-link-type="dfn" href="#box">box</a> can only be turned into a <a data-link-type="dfn" href="#persistent-box">persistent box</a> if the user (or user agent
 on behalf of the user) has granted <dfn data-dfn-type="dfn" data-noexport="" id="permission">permission<a class="self-link" href="#permission"></a></dfn>.</p>

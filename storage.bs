@@ -105,12 +105,13 @@ Each <a>origin storage unit</a> has an associated <a>origin</a> and a
 
 <h3 id=boxes>Boxes</h3>
 
-A <a>box</a> has <dfn>mode</dfn> which is either "<code title>atomic</code>" or
+A <a>box</a> has <dfn>mode</dfn> which is either "<code title>best-effort</code>" or
 "<code title>persistent</code>". A <dfn>persistent box</dfn> is a <a>box</a> whose
 <a>mode</a> is "<code title>persistent</code>". A <dfn>non-persistent box</dfn> is a
 <a>box</a> whose <a>mode</a> is <em>not</em> "<code title>persistent</code>".
 
-Whenever a <a>box</a> is cleared by the user agent, it must be cleared in its entirety.
+A box is considered to be an atomic unit. Whenever a <a>box</a> is cleared by the user agent, it
+must be cleared in its entirety.
 
 
 
