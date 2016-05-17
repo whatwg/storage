@@ -157,7 +157,7 @@ of the amount of bytes used in <var>origin</var>'s <a>site storage unit</a>.
 deduplication, compression, and other techniques that obscure exactly how much bytes an
 <a>origin</a> uses.
 
-The <dfn export>site storage quota</dfn> of an <a>origin</a> <var>origin</var> is a conserviate
+The <dfn export>site storage quota</dfn> of an <a>origin</a> <var>origin</var> is a conservative
 estimate of the amount of bytes available to <var>origin</var>'s <a>site storage unit</a>. This
 amount should be less than the total available storage space on the device to give users some wiggle
 room.
@@ -333,6 +333,7 @@ Aislinn Grigas,
 Ali Alabbas,
 Ben Kelly,
 Ben Turner,
+Dale Harvey,
 David Grogan,
 Jake Archibald<!-- technically B.J. Archibald -->,
 Jonas Sicking,
