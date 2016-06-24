@@ -268,27 +268,27 @@ steps:
 
    <li><p>Let <var>permission</var> be <a>permission</a> for <var>origin</var>.
 
-   <li><p>If <var>permission</var> is "<code title>prompt</code>", then ask the user whether
-   turning <var>origin</var>'s <a>site storage unit</a>'s <a>box</a> into a <a>persistent box</a> is
-   acceptable. If it is, then set <var>permission</var> to "<code title>granted</code>", and
-   "<code title>denied</code>" otherwise.
+   <li>
+    <p>If <var>permission</var> is "<code title>prompt</code>", then determine through asking the
+    user or using heuristics whether <var>origin</var> is allowed to use persistent storage. If that
+    returns a positive answer, then set <var>permission</var> to "<code title>granted</code>". If
+    that returns a negative answer, then set <var>permission</var> to "<code title>denied</code>".
+    If that returns no answer, then do not alter <var>permission</var>.
 
-   <li><p>Let <var>persisted</var> be true if <var>origin</var>'s <a>site storage unit</a>'s
+    <p class="note">User agents are encouraged to not let the user answer this question twice for
+    the same <a>origin</a> around the same time and this algorithm is not equipped to handle such a
+    scenario.
+
+   <li><p>Set <a>permission</a> for <var>origin</var> to <var>permission</var>.
+
+   <li><p>Let <var>persisted</var> be true, if <var>origin</var>'s <a>site storage unit</a>'s
    <a>box</a> is a <a>persistent box</a>, and false otherwise.
 
-   <li>
-    <p><a spec=html>Queue a task</a> to run these subsubsteps:
-    <!-- XXX not 100% clear whether the changes below should be in a task -->
+   <li><p>If <var>persisted</var> is false and <var>permission</var> is "<code>granted</code>", then
+   set <var>persisted</var> to true and set <var>origin</var>'s <a>site storage unit</a>'s
+   <a>box</a>'s <a>mode</a> to "<code>persistent</code>".
 
-    <ol>
-     <li><p>Set <a>permission</a> for <var>origin</var> to <var>permission</var>.
-
-     <li><p>If <var>persisted</var> is false and <var>permission</var> is "<code>granted</code>",
-     set <var>persisted</var> to true and set <var>origin</var>'s <a>site storage unit</a>'s
-     <a>box</a>'s <a>mode</a> to "<code>persistent</code>".
-
-     <li><p>Resolve <var>promise</var> with <var>persisted</var>.
-    </ol>
+   <li><p><a spec=html>Queue a task</a> to resolve <var>promise</var> with <var>persisted</var>.
   </ol>
 
  <li><p>Return <var>promise</var>.
@@ -341,6 +341,7 @@ Joshua Bell,
 Kenji Baheux,
 Kinuko Yasuda,
 Luke Wagner,
+Michael Nordman,
 Mounir Lamouri, and
 Shachar Zohar
 for being awesome!
