@@ -105,15 +105,15 @@ A <dfn>site</dfn> is eTLD+1. <span class=XXX>Needs a more formal definition.</sp
 A user agent has various kinds of storage:
 
 <dl>
- <dt>Network
- <dd><p>HTTP cache, cookies, authentication entries, TLS client certificates
  <dt>Credentials
  <dd><p>End-user credentials, such as username and passwords submitted through HTML forms
  <dt>Permissions
  <dd><p>Permissions for various features, such as geolocation
+ <dt>Network
+ <dd><p>HTTP cache, cookies, authentication entries, TLS client certificates
  <dt>Site
  <dd>Indexed DB, Cache API, service worker registrations, <code>localStorage</code>,
- <code>history.pushState()</code>
+ <code>history.pushState()</code>, application caches, notifications, etc.
 </dl>
 
 This specification primarily concerns itself with <dfn export id=site-storage>site storage</dfn>.
@@ -342,8 +342,9 @@ Kenji Baheux,
 Kinuko Yasuda,
 Luke Wagner,
 Michael Nordman,
-Mounir Lamouri, and
-Shachar Zohar
+Mounir Lamouri,
+Shachar Zohar, and
+黃強 (Shawn Huang),
 for being awesome!
 
 This standard is written by

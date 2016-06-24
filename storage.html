@@ -177,17 +177,17 @@ to the web. </p>
    <h2 class="heading settled" data-level="3" id="infrastructure"><span class="secno">3. </span><span class="content">Infrastructure</span><a class="self-link" href="#infrastructure"></a></h2>
    <p>A user agent has various kinds of storage:</p>
    <dl>
-    <dt>Network 
-    <dd>
-     <p>HTTP cache, cookies, authentication entries, TLS client certificates </p>
     <dt>Credentials 
     <dd>
      <p>End-user credentials, such as username and passwords submitted through HTML forms </p>
     <dt>Permissions 
     <dd>
      <p>Permissions for various features, such as geolocation </p>
+    <dt>Network 
+    <dd>
+     <p>HTTP cache, cookies, authentication entries, TLS client certificates </p>
     <dt>Site 
-    <dd>Indexed DB, Cache API, service worker registrations, <code>localStorage</code>, <code>history.pushState()</code> 
+    <dd>Indexed DB, Cache API, service worker registrations, <code>localStorage</code>, <code>history.pushState()</code>, application caches, notifications, etc. 
    </dl>
    <p>This specification primarily concerns itself with <dfn data-dfn-type="dfn" data-export="" id="site-storage">site storage<a class="self-link" href="#site-storage"></a></dfn>.</p>
    <p><a data-link-type="dfn" href="#site-storage">Site storage</a> consists of zero or more <dfn data-dfn-type="dfn" data-export="" id="site-storage-unit">site storage units<a class="self-link" href="#site-storage-unit"></a></dfn>.</p>
@@ -352,8 +352,9 @@ Kenji Baheux,
 Kinuko Yasuda,
 Luke Wagner,
 Michael Nordman,
-Mounir Lamouri, and
-Shachar Zohar
+Mounir Lamouri,
+Shachar Zohar, and
+黃強 (Shawn Huang),
 for being awesome!</p>
    <p>This standard is written by <a href="https://annevankesteren.nl/" lang="nl">Anne van Kesteren</a> (<a href="https://www.mozilla.org/">Mozilla</a>, <a href="mailto:annevk@annevk.nl">annevk@annevk.nl</a>).</p>
    <p>Per <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0</a>, to the
