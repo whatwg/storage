@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-storage.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Storage</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-06-24">24 June 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-06-25">25 June 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -208,6 +208,10 @@ must be cleared in its entirety.</p>
    <h2 class="heading settled" data-level="4" id="persistence"><span class="secno">4. </span><span class="content">Persistence permission</span><a class="self-link" href="#persistence"></a></h2>
    <p>A <a data-link-type="dfn" href="#box">box</a> can only be turned into a <a data-link-type="dfn" href="#persistent-box">persistent box</a> if the user (or user agent
 on behalf of the user) has granted <dfn data-dfn-type="dfn" data-noexport="" id="permission">permission<a class="self-link" href="#permission"></a></dfn>.</p>
+   <p class="note" role="note">When granted to an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>, the persistence permission can be used to protect
+storage from the user agent’s clearing policies. The user agent cannot clear storage marked as
+persistent without involvement from the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> or user. This makes it particularly useful for
+resources the user needs to have available while offline or resources the user creates locally. </p>
    <p class="XXX">We will eventually integrate with the Permissions API, with the identifier
 "<code>persistent-storage</code>", but since that specification is not in great shape at the moment
 that has not happened yet. </p>

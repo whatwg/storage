@@ -153,6 +153,11 @@ must be cleared in its entirety.
 A <a>box</a> can only be turned into a <a>persistent box</a> if the user (or user agent
 on behalf of the user) has granted <dfn>permission</dfn>.
 
+<p class="note">When granted to an <a>origin</a>, the persistence permission can be used to protect
+storage from the user agent's clearing policies. The user agent cannot clear storage marked as
+persistent without involvement from the <a>origin</a> or user. This makes it particularly useful for
+resources the user needs to have available while offline or resources the user creates locally.
+
 <p class="XXX">We will eventually integrate with the Permissions API, with the identifier
 "<code>persistent-storage</code>", but since that specification is not in great shape at the moment
 that has not happened yet.
