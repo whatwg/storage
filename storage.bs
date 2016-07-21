@@ -66,7 +66,7 @@ Promise.all([
 ]).then((persisted, permission) => {
   if(!persisted &amp;&amp; permission == "granted") {
     navigator.storage.persist().then( /* &hellip; */ )
-  } else if(!persistent &amp;&amp; permission == "default") {
+  } else if(!persistent &amp;&amp; permission == "prompt") {
     showPersistentStorageExplanation()
   }
 })
@@ -148,16 +148,30 @@ must be cleared in its entirety.
 <h2 id=persistence>Persistence permission</h2>
 
 A <a>box</a> can only be turned into a <a>persistent box</a> if the user (or user agent
-on behalf of the user) has granted <dfn>permission</dfn>.
+on behalf of the user) has granted permission to use the {{"persistent-storage"}} feature.
 
 <p class="note">When granted to an <a>origin</a>, the persistence permission can be used to protect
 storage from the user agent's clearing policies. The user agent cannot clear storage marked as
 persistent without involvement from the <a>origin</a> or user. This makes it particularly useful for
 resources the user needs to have available while offline or resources the user creates locally.
 
-<p class="XXX">We will eventually integrate with the Permissions API, with the identifier
-"<dfn export for=PermissionName type=enum-value><code>persistent-storage</code></dfn>", but since
-that specification is not in great shape at the moment that has not happened yet.
+The <dfn for="PermissionName" enum-value>"persistent-storage"</dfn> <a>powerful feature</a>'s
+permission-related flags, algorithms, and types are defaulted except for:
+
+<dl>
+  <dt><a>permission state</a></dt>
+  <dd>
+    <code>{name: {{"persistent-storage"}}}</code>'s <a>permission state</a> must
+    have the same value for all <a>environment settings objects</a> with a given <a>origin</a>.
+  </dd>
+
+  <dt><a>permission revocation algorithm</a></dt>
+  <dd algorithm="permission-revocation">
+    If <code>{name: {{"persistent-storage"}}}</code>'s <a>permission state</a> is not {{"granted"}},
+    set the current <a>origin</a>’s <a>site storage unit</a>'s
+   <a>box</a>'s <a>mode</a> to "<code>best-effort</code>".
+  </dd>
+</dl>
 
 
 
@@ -177,7 +191,7 @@ room.
 
 <p class=note>User agents are strongly encouraged to provide "popular" <a>origins</a> with a larger
 <a>site storage quota</a>. Factors such as navigation frequency, recency of visits, bookmarking,
-and <a>permission</a> for "<code>persistent-storage</code>" can be used as indications of
+and <a href="#persistence">permission</a> for {{"persistent-storage"}} can be used as indications of
 "popularity".
 
 
@@ -280,25 +294,18 @@ steps:
   <ol>
    <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
 
-   <li><p>Let <var>permission</var> be <a>permission</a> for <var>origin</var>.
-
    <li>
-    <p>If <var>permission</var> is "<code title>prompt</code>", then determine through asking the
-    user or using heuristics whether <var>origin</var> is allowed to use persistent storage. If that
-    returns a positive answer, then set <var>permission</var> to "<code title>granted</code>". If
-    that returns a negative answer, then set <var>permission</var> to "<code title>denied</code>".
-    If that returns no answer, then do not alter <var>permission</var>.
+    <p><a>Request permission to use</a> <code>{name: {{"persistent-storage"}}}</code>,
+    and let |permission| be the result.
 
     <p class="note">User agents are encouraged to not let the user answer this question twice for
     the same <a>origin</a> around the same time and this algorithm is not equipped to handle such a
     scenario.
 
-   <li><p>Set <a>permission</a> for <var>origin</var> to <var>permission</var>.
-
    <li><p>Let <var>persisted</var> be true, if <var>origin</var>'s <a>site storage unit</a>'s
    <a>box</a> is a <a>persistent box</a>, and false otherwise.
 
-   <li><p>If <var>persisted</var> is false and <var>permission</var> is "<code>granted</code>", then
+   <li><p>If <var>persisted</var> is false and <var>permission</var> is {{"granted"}}, then
    set <var>persisted</var> to true and set <var>origin</var>'s <a>site storage unit</a>'s
    <a>box</a>'s <a>mode</a> to "<code>persistent</code>".
 
