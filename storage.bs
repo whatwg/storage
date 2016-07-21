@@ -159,8 +159,8 @@ persistent without involvement from the <a>origin</a> or user. This makes it par
 resources the user needs to have available while offline or resources the user creates locally.
 
 <p class="XXX">We will eventually integrate with the Permissions API, with the identifier
-"<code>persistent-storage</code>", but since that specification is not in great shape at the moment
-that has not happened yet.
+"<dfn export for=PermissionName type=enum-value><code>persistent-storage</code></dfn>", but since
+that specification is not in great shape at the moment that has not happened yet.
 
 
 
