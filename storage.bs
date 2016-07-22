@@ -155,7 +155,7 @@ storage from the user agent's clearing policies. The user agent cannot clear sto
 persistent without involvement from the <a>origin</a> or user. This makes it particularly useful for
 resources the user needs to have available while offline or resources the user creates locally.
 
-The <dfn for="PermissionName" enum-value>"persistent-storage"</dfn> <a>powerful feature</a>'s
+The <dfn for="PermissionName" enum-value>"<code>persistent-storage</code>"</dfn> <a>powerful feature</a>'s
 permission-related flags, algorithms, and types are defaulted except for:
 
 <dl>
