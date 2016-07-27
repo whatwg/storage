@@ -307,8 +307,7 @@ steps:</p>
       <li>
        <p>Let <var>origin</var> be <var>settingsObject</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
       <li>
-       <p><a data-link-type="dfn" href="https://w3c.github.io/permissions/#request-permission-to-use">Request permission to use</a> <code>{name: <code class="idl"><a data-link-type="idl" href="#dom-permissionname-persistent-storage">"persistent-storage"</a></code>}</code>,
-    and let <var>permission</var> be the result. </p>
+       <p>Let <var>permission</var> be the result of <a data-link-type="dfn" href="https://w3c.github.io/permissions/#request-permission-to-use">requesting permission to use</a> <code>{name: <code class="idl"><a data-link-type="idl" href="#dom-permissionname-persistent-storage">"persistent-storage"</a></code>}</code>. </p>
        <p class="note" role="note">User agents are encouraged to not let the user answer this question twice for
     the same <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> around the same time and this algorithm is not equipped to handle such a
     scenario. </p>
@@ -431,7 +430,7 @@ rights to this work.</p>
      <li><a href="https://w3c.github.io/permissions/#permission-revocation-algorithm">permission revocation algorithm</a>
      <li><a href="https://w3c.github.io/permissions/#permission-state">permission state</a>
      <li><a href="https://w3c.github.io/permissions/#powerful-feature">powerful feature</a>
-     <li><a href="https://w3c.github.io/permissions/#request-permission-to-use">request permission to use</a>
+     <li><a href="https://w3c.github.io/permissions/#request-permission-to-use">requesting permission to use</a>
     </ul>
    <li>
     <a data-link-type="biblio">[URL]</a> defines the following terms:

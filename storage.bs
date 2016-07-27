@@ -295,8 +295,8 @@ steps:
    <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
 
    <li>
-    <p><a>Request permission to use</a> <code>{name: {{"persistent-storage"}}}</code>,
-    and let |permission| be the result.
+    <p>Let |permission| be the result of
+    <a>requesting permission to use</a> <code>{name: {{"persistent-storage"}}}</code>.
 
     <p class="note">User agents are encouraged to not let the user answer this question twice for
     the same <a>origin</a> around the same time and this algorithm is not equipped to handle such a
