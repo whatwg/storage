@@ -156,21 +156,17 @@ persistent without involvement from the <a>origin</a> or user. This makes it par
 resources the user needs to have available while offline or resources the user creates locally.
 
 The <dfn for="PermissionName" enum-value>"<code>persistent-storage</code>"</dfn> <a>powerful feature</a>'s
-permission-related flags, algorithms, and types are defaulted except for:
+permission-related flags, algorithms, and types are defaulted, except for:
 
 <dl>
-  <dt><a>permission state</a></dt>
-  <dd>
-    <code>{name: {{"persistent-storage"}}}</code>'s <a>permission state</a> must
-    have the same value for all <a>environment settings objects</a> with a given <a>origin</a>.
-  </dd>
+ <dt><a>permission state</a></dt>
+ <dd><code>{name: {{"persistent-storage"}}}</code>'s <a>permission state</a> must have the same
+ value for all <a>environment settings objects</a> with a given <a>origin</a>.</dd>
 
-  <dt><a>permission revocation algorithm</a></dt>
-  <dd algorithm="permission-revocation">
-    If <code>{name: {{"persistent-storage"}}}</code>'s <a>permission state</a> is not {{"granted"}},
-    set the current <a>origin</a>’s <a>site storage unit</a>'s
-   <a>box</a>'s <a>mode</a> to "<code>best-effort</code>".
-  </dd>
+ <dt><a>permission revocation algorithm</a></dt>
+ <dd algorithm="permission-revocation">If <code>{name: {{"persistent-storage"}}}</code>'s
+ <a>permission state</a> is not {{"granted"}}, then set the current <a>origin</a>’s <a>site storage
+ unit</a>'s <a>box</a>'s <a>mode</a> to "<code>best-effort</code>".</dd>
 </dl>
 
 
@@ -295,8 +291,8 @@ steps:
    <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
 
    <li>
-    <p>Let |permission| be the result of
-    <a>requesting permission to use</a> <code>{name: {{"persistent-storage"}}}</code>.
+    <p>Let |permission| be the result of <a>requesting permission to use</a> <code>{name:
+    {{"persistent-storage"}}}</code>.
 
     <p class="note">User agents are encouraged to not let the user answer this question twice for
     the same <a>origin</a> around the same time and this algorithm is not equipped to handle such a
@@ -357,6 +353,7 @@ Ben Turner,
 Dale Harvey,
 David Grogan,
 Jake Archibald<!-- technically B.J. Archibald -->,
+Jeffrey Yasskin,
 Jonas Sicking,
 Joshua Bell,
 Kenji Baheux,
