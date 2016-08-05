@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-storage.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Storage</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-10-05">5 October 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-10-10">10 October 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -217,11 +217,9 @@ resources the user needs to have available while offline or resources the user c
 permission-related flags, algorithms, and types are defaulted, except for:</p>
    <dl>
     <dt><a data-link-type="dfn" href="https://w3c.github.io/permissions/#permission-state">permission state</a>
-    <dd><code>{name: <code class="idl"><a data-link-type="idl" href="#dom-permissionname-persistent-storage">"persistent-storage"</a></code>}</code>’s <a data-link-type="dfn" href="https://w3c.github.io/permissions/#permission-state">permission state</a> must have the same
- value for all <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings objects</a> with a given <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
+    <dd><code class="idl"><a data-link-type="idl" href="#dom-permissionname-persistent-storage">"persistent-storage"</a></code>'s <a data-link-type="dfn" href="https://w3c.github.io/permissions/#permission-state">permission state</a> must have the same value for all <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">environment settings objects</a> with a given <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>.
     <dt><a data-link-type="dfn" href="https://w3c.github.io/permissions/#permission-revocation-algorithm">permission revocation algorithm</a>
-    <dd class="algorithm" data-algorithm="permission-revocation">If <code>{name: <code class="idl"><a data-link-type="idl" href="#dom-permissionname-persistent-storage">"persistent-storage"</a></code>}</code>’s <a data-link-type="dfn" href="https://w3c.github.io/permissions/#permission-state">permission state</a> is not <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/permissions/#dom-permissionstate-granted">"granted"</a></code>, then set the current <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>’s <a data-link-type="dfn" href="#site-storage-unit">site storage
- unit</a>’s <a data-link-type="dfn" href="#box">box</a>’s <a data-link-type="dfn" href="#box-mode">mode</a> to "<code>best-effort</code>".
+    <dd class="algorithm" data-algorithm="permission-revocation">If <code class="idl"><a data-link-type="idl" href="#dom-permissionname-persistent-storage">"persistent-storage"</a></code>'s <a data-link-type="dfn" href="https://w3c.github.io/permissions/#permission-state">permission state</a> is not <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/permissions/#dom-permissionstate-granted">"granted"</a></code>, then set the current <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>’s <a data-link-type="dfn" href="#site-storage-unit">site storage unit</a>’s <a data-link-type="dfn" href="#box">box</a>’s <a data-link-type="dfn" href="#box-mode">mode</a> to "<code>best-effort</code>".
    </dl>
    <h2 class="heading settled" data-level="5" id="usage-and-quota"><span class="secno">5. </span><span class="content">Usage and quota</span><a class="self-link" href="#usage-and-quota"></a></h2>
    <p>The <dfn data-dfn-type="dfn" data-export="" id="site-storage-usage">site storage usage<a class="self-link" href="#site-storage-usage"></a></dfn> of an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> <var>origin</var> is a rough estimate
@@ -307,7 +305,7 @@ steps:</p>
       <li>
        <p>Let <var>origin</var> be <var>settingsObject</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a>. </p>
       <li>
-       <p>Let <var>permission</var> be the result of <a data-link-type="dfn" href="https://w3c.github.io/permissions/#request-permission-to-use">requesting permission to use</a> <code>{name: <code class="idl"><a data-link-type="idl" href="#dom-permissionname-persistent-storage">"persistent-storage"</a></code>}</code>. </p>
+       <p>Let <var>permission</var> be the result of <a data-link-type="dfn" href="https://w3c.github.io/permissions/#request-permission-to-use">requesting permission to use</a> <code class="idl"><a data-link-type="idl" href="#dom-permissionname-persistent-storage">"persistent-storage"</a></code>. </p>
        <p class="note" role="note">User agents are encouraged to not let the user answer this question twice for
     the same <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#origin">origin</a> around the same time and this algorithm is not equipped to handle such a
     scenario. </p>
