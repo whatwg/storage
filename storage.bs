@@ -79,14 +79,16 @@ Promise.all([
 </code></pre>
 
  <p>The {{estimate()}} method can be used to determine whether there is enough space left to
- download another Metriod Prime level:
+ store content for an application:
 
  <pre><code class="lang-javascript">
-navigator.storage.estimate().then(info => {
-  if(info.quota - info.usage > metroidPrimeLevel.size)
-    return fetch(metroidPrimeLevel.url)
-  throw new Error("no space")
-}).then( /* &hellip; */ )
+ function retrieveNextChunk(nextChunkInfo) {
+   return navigator.storage.estimate().then(info => {
+     if(info.quota - info.usage > nextChunkInfo.size)
+       return fetch(nextChunkInfo.url)
+     else throw new Error("insufficient space to store next chunk")
+   }).then( /* &hellip; */ )
+ }
 </code></pre>
 
 </div>
