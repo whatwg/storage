@@ -22,12 +22,6 @@ urlPrefix: https://html.spec.whatwg.org/multipage/
     type: dfn
         urlPrefix: browsers.html
             text: origin
-            text: host; url: concept-origin-host
-        urlPrefix: webappapis.html
-            text: environment settings object
-urlPrefix: https://w3c.github.io/webappsec/specs/powerfulfeatures/#
-    type: dfn
-        text: a secure context; url: settings-secure
 </pre>
 
 
@@ -49,7 +43,7 @@ APIs gets lost without the user being able to intervene. However, persistent box
 without consent by the user. This thus brings data guarantees users have enjoyed on native platforms
 to the web.
 
-<div class="example">
+<div class="example" id=example-3a7051a8>
  <p>A simple way to make storage persistent is through invoking the {{persist()}} method. It
  simultaneously requests the end user for permission and changes the storage to be persistent once
  granted:</p>
@@ -97,16 +91,17 @@ Promise.all([
 
 <h2 id=terminology>Terminology</h2>
 
-This specification uses terminology from the DOM and HTML Standards. [[DOM]] [[HTML]]
+This specification uses terminology from the DOM, HTML, IDL, and URL Standards. [[DOM]] [[HTML]]
+[[WEBIDL]] [[URL]]
 
 A <dfn>schemeless origin group</dfn> is a group of one of the following:
 
 <ul>
  <li>Identical <a lt="opaque origin">opaque origins</a>.
- <li><a lt="tuple origin">Tuple origins</a> whose <a>host</a> is identical and not a
+ <li><a lt="tuple origin">Tuple origins</a> whose <a for=origin>host</a> is identical and not a
  <a for=host>domain</a>.
- <li><a lt="tuple origin">Tuple origins</a> whose <a>host</a> is a <a for=host>domain</a> of
- which the <a href="https://publicsuffix.org/list/">registrable domain</a> is identical.</li>
+ <li><a lt="tuple origin">Tuple origins</a> whose <a for=origin>host</a> is a <a for=host>domain</a>
+ of which the <a href="https://publicsuffix.org/list/">registrable domain</a> is identical.</li>
 </ul>
 
 <p class="note">This definition will move to a more suitable location eventually.
