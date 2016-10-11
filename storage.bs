@@ -17,13 +17,6 @@ Boilerplate: omit feedback-header
 <script src=https://resources.whatwg.org/file-issue.js async></script>
 <script id=head src=https://resources.whatwg.org/dfn.js defer></script>
 
-<pre class=anchors>
-urlPrefix: https://html.spec.whatwg.org/multipage/
-    type: dfn
-        urlPrefix: browsers.html
-            text: origin
-</pre>
-
 
 
 <h2 id=introduction>Introduction</h2>
@@ -35,7 +28,7 @@ these APIs by defining:
 <ul class=brief>
  <li>A box, the primitive these APIs store their data in
  <li>A way of making that box persistent
- <li>A way of getting usage and quota estimates for an <a>origin</a>
+ <li>A way of getting usage and quota estimates for an <a for=/>origin</a>
 </ul>
 
 <p>Traditionally, as the user runs out of storage space on their device, the data stored with these
@@ -129,8 +122,8 @@ This specification primarily concerns itself with <dfn export id=site-storage>si
 <a>Site storage</a> consists of zero or more
 <dfn export id=site-storage-unit>site storage units</dfn>.
 
-Each <a>origin</a> has an associated <a>site storage unit</a>. A <a>site storage unit</a> contains
-a single <dfn export id=box>box</dfn>. [[HTML]]
+Each <a for=/>origin</a> has an associated <a>site storage unit</a>. A <a>site storage unit</a>
+contains a single <dfn export id=box>box</dfn>. [[HTML]]
 
 
 <h3 id=boxes>Boxes</h3>
@@ -150,10 +143,11 @@ must be cleared in its entirety.
 A <a>box</a> can only be turned into a <a>persistent box</a> if the user (or user agent
 on behalf of the user) has granted permission to use the {{"persistent-storage"}} feature.
 
-<p class="note">When granted to an <a>origin</a>, the persistence permission can be used to protect
-storage from the user agent's clearing policies. The user agent cannot clear storage marked as
-persistent without involvement from the <a>origin</a> or user. This makes it particularly useful for
-resources the user needs to have available while offline or resources the user creates locally.
+<p class="note">When granted to an <a for=/>origin</a>, the persistence permission can be used to
+protect storage from the user agent's clearing policies. The user agent cannot clear storage marked
+as persistent without involvement from the <a for=/>origin</a> or user. This makes it particularly
+useful for resources the user needs to have available while offline or resources the user creates
+locally.
 
 The <dfn for="PermissionName" enum-value>"<code>persistent-storage</code>"</dfn>
 <a>powerful feature</a>'s permission-related flags, algorithms, and types are defaulted, except for:
@@ -161,11 +155,11 @@ The <dfn for="PermissionName" enum-value>"<code>persistent-storage</code>"</dfn>
 <dl>
  <dt><a>permission state</a></dt>
  <dd>{{"persistent-storage"}}'s <a>permission state</a> must have the same value for all
- <a>environment settings objects</a> with a given <a>origin</a>.</dd>
+ <a>environment settings objects</a> with a given <a for=/>origin</a>.</dd>
 
  <dt><a>permission revocation algorithm</a></dt>
  <dd algorithm="permission-revocation">If {{"persistent-storage"}}'s <a>permission state</a> is not
- {{"granted"}}, then set the current <a>origin</a>’s <a>site storage unit</a>'s <a>box</a>'s
+ {{"granted"}}, then set the current <a for=/>origin</a>’s <a>site storage unit</a>'s <a>box</a>'s
  <a>mode</a> to "<code>best-effort</code>".</dd>
 </dl>
 
@@ -173,22 +167,22 @@ The <dfn for="PermissionName" enum-value>"<code>persistent-storage</code>"</dfn>
 
 <h2 id=usage-and-quota>Usage and quota</h2>
 
-The <dfn export>site storage usage</dfn> of an <a>origin</a> <var>origin</var> is a rough estimate
-of the amount of bytes used in <var>origin</var>'s <a>site storage unit</a>.
+The <dfn export>site storage usage</dfn> of an <a for=/>origin</a> <var>origin</var> is a rough
+estimate of the amount of bytes used in <var>origin</var>'s <a>site storage unit</a>.
 
 <p class=note>This cannot be an exact amount as user agents might, and are encouraged to, use
 deduplication, compression, and other techniques that obscure exactly how much bytes an
-<a>origin</a> uses.
+<a for=/>origin</a> uses.
 
-The <dfn export>site storage quota</dfn> of an <a>origin</a> <var>origin</var> is a conservative
-estimate of the amount of bytes available to <var>origin</var>'s <a>site storage unit</a>. This
-amount should be less than the total available storage space on the device to give users some wiggle
-room.
+The <dfn export>site storage quota</dfn> of an <a for=/>origin</a> <var>origin</var> is a
+conservative estimate of the amount of bytes available to <var>origin</var>'s
+<a>site storage unit</a>. This amount should be less than the total available storage space on the
+device to give users some wiggle room.
 
-<p class=note>User agents are strongly encouraged to provide "popular" <a>origins</a> with a larger
-<a>site storage quota</a>. Factors such as navigation frequency, recency of visits, bookmarking,
-and <a href="#persistence">permission</a> for {{"persistent-storage"}} can be used as indications of
-"popularity".
+<p class=note>User agents are strongly encouraged to provide "popular" <a for=/>origins</a> with a
+larger <a>site storage quota</a>. Factors such as navigation frequency, recency of visits,
+bookmarking, and <a href="#persistence">permission</a> for {{"persistent-storage"}} can be used as
+indications of "popularity".
 
 
 
@@ -264,7 +258,8 @@ these steps:
   <p>Run these substeps <a spec=html>in parallel</a>: [[!HTML]]
 
   <ol>
-   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
+   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s
+   <a for="environment settings object">origin</a>.
 
    <li><p>Let <var>persisted</var> be true if <var>origin</var>'s <a>site storage unit</a>'s
    <a>box</a> is a <a>persistent box</a>, and false otherwise.
@@ -288,15 +283,16 @@ steps:
   <p>Run these substeps <a spec=html>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
+   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s
+   <a for="environment settings object">origin</a>.
 
    <li>
     <p>Let <var>permission</var> be the result of <a>requesting permission to use</a>
     {{"persistent-storage"}}.
 
     <p class="note">User agents are encouraged to not let the user answer this question twice for
-    the same <a>origin</a> around the same time and this algorithm is not equipped to handle such a
-    scenario.
+    the same <a for=/>origin</a> around the same time and this algorithm is not equipped to handle
+    such a scenario.
 
    <li><p>Let <var>persisted</var> be true, if <var>origin</var>'s <a>site storage unit</a>'s
    <a>box</a> is a <a>persistent box</a>, and false otherwise.
@@ -324,7 +320,8 @@ must run these steps:
   <p>Run these substeps <a spec=html>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s <a>origin</a>.
+   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s
+   <a for="environment settings object">origin</a>.
 
    <li><p>Let <var>usage</var> be <a>site storage usage</a> for <var>origin</var>.
 
