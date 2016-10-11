@@ -84,8 +84,8 @@ Promise.all([
 
 <h2 id=terminology>Terminology</h2>
 
-This specification uses terminology from the DOM, HTML, IDL, and URL Standards. [[DOM]] [[HTML]]
-[[WEBIDL]] [[URL]]
+This specification uses terminology from the DOM, HTML, IDL, Permissions API, and URL Standards.
+[[DOM]] [[HTML]] [[WEBIDL]] [[PERMISSIONS]] [[URL]]
 
 A <dfn>schemeless origin group</dfn> is a group of one of the following:
 
