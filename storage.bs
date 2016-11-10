@@ -92,9 +92,9 @@ A <dfn>schemeless origin group</dfn> is a group of one of the following:
 <ul>
  <li>Identical <a lt="opaque origin">opaque origins</a>.
  <li><a lt="tuple origin">Tuple origins</a> whose <a for=origin>host</a> is identical and not a
- <a for=host>domain</a>.
- <li><a lt="tuple origin">Tuple origins</a> whose <a for=origin>host</a> is a <a for=host>domain</a>
- of which the <a href="https://publicsuffix.org/list/">registrable domain</a> is identical.</li>
+ <a for=/>domain</a>.
+ <li><a lt="tuple origin">Tuple origins</a> whose <a for=origin>host</a> is a <a for=/>domain</a> of
+ which the <a href="https://publicsuffix.org/list/">registrable domain</a> is identical.</li>
 </ul>
 
 <p class="note">This definition will move to a more suitable location eventually.
