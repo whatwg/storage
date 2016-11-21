@@ -11,7 +11,7 @@ No Editor: true
 !Commits: <a href=https://twitter.com/storagestandard>@storagestandard</a>
 Logo: https://resources.whatwg.org/logo-storage.svg
 Abstract: The Storage Standard defines an API for persistent storage and quota estimates, as well as the platform storage architecture.
-Boilerplate: omit feedback-header
+Boilerplate: omit feedback-header, omit conformance
 </pre>
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
@@ -84,7 +84,9 @@ Promise.all([
 
 <h2 id=terminology>Terminology</h2>
 
-This specification uses terminology from the DOM, HTML, IDL, Permissions API, and URL Standards.
+<p>This specification depends on the Infra Standard. [[!INFRA]]
+
+<p>This specification uses terminology from the DOM, HTML, IDL, Permissions API, and URL Standards.
 [[DOM]] [[HTML]] [[WEBIDL]] [[PERMISSIONS]] [[URL]]
 
 A <dfn>schemeless origin group</dfn> is a group of one of the following:
@@ -227,7 +229,7 @@ Each <a>environment settings object</a> has an associated {{StorageManager}} obj
 [[HTML]]
 
 The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> attribute's getter must return
-<a>context object</a>'s <a spec=html>relevant settings object</a>'s {{StorageManager}} object.
+<a>context object</a>'s <a>relevant settings object</a>'s {{StorageManager}} object.
 
 <pre class=idl>
 [SecureContext,
@@ -251,11 +253,10 @@ these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>settingsObject</var> be <a spec=dom>context object</a>'s
- <a spec=html>relevant settings object</a>.
+ <li><p>Let <var>settingsObject</var> be <a>context object</a>'s <a>relevant settings object</a>.
 
  <li>
-  <p>Run these substeps <a spec=html>in parallel</a>: [[!HTML]]
+  <p>Run these substeps <a>in parallel</a>:
 
   <ol>
    <li><p>Let <var>origin</var> be <var>settingsObject</var>'s
@@ -276,11 +277,10 @@ steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>settingsObject</var> be <a spec=dom>context object</a>'s
- <a spec=html>relevant settings object</a>.
+ <li><p>Let <var>settingsObject</var> be <a>context object</a>'s <a>relevant settings object</a>.
 
  <li>
-  <p>Run these substeps <a spec=html>in parallel</a>:
+  <p>Run these substeps <a>in parallel</a>:
 
   <ol>
    <li><p>Let <var>origin</var> be <var>settingsObject</var>'s
@@ -301,7 +301,7 @@ steps:
    set <var>persisted</var> to true and set <var>origin</var>'s <a>site storage unit</a>'s
    <a>box</a>'s <a>mode</a> to "<code>persistent</code>".
 
-   <li><p><a spec=html>Queue a task</a> to resolve <var>promise</var> with <var>persisted</var>.
+   <li><p><a>Queue a task</a> to resolve <var>promise</var> with <var>persisted</var>.
   </ol>
 
  <li><p>Return <var>promise</var>.
@@ -313,11 +313,10 @@ must run these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>settingsObject</var> be <a spec=dom>context object</a>'s
- <a spec=html>relevant settings object</a>.
+ <li><p>Let <var>settingsObject</var> be <a>context object</a>'s <a>relevant settings object</a>.
 
  <li>
-  <p>Run these substeps <a spec=html>in parallel</a>:
+  <p>Run these substeps <a>in parallel</a>:
 
   <ol>
    <li><p>Let <var>origin</var> be <var>settingsObject</var>'s

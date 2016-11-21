@@ -7,7 +7,7 @@
   <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/logo-storage.svg" rel="icon">
-  <meta content="Bikeshed 1.0.0" name="generator">
+  <meta content="Bikeshed version 645534c1532bca4fdb4f3859efc66268a218d7c8" name="generator">
 <style>/* style-syntax-highlighting */
 pre.idl.highlight { color: #708090; }
         .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-storage.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Storage</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-11-10">10 November 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-11-21">21 November 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -108,7 +108,6 @@ pre.idl.highlight { color: #708090; }
      </ol>
     <li><a href="#api"><span class="secno">7</span> <span class="content">API</span></a>
     <li><a href="#acks"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
-    <li><a href="#conformance"><span class="secno"></span> <span class="content">Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ol class="toc">
@@ -174,7 +173,8 @@ to the web. </p>
 </code></pre>
    </div>
    <h2 class="heading settled" data-level="2" id="terminology"><span class="secno">2. </span><span class="content">Terminology</span><a class="self-link" href="#terminology"></a></h2>
-   <p>This specification uses terminology from the DOM, HTML, IDL, Permissions API, and URL Standards. <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a> <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a> <a data-link-type="biblio" href="#biblio-permissions">[PERMISSIONS]</a> <a data-link-type="biblio" href="#biblio-url">[URL]</a></p>
+   <p>This specification depends on the Infra Standard. <a data-link-type="biblio" href="#biblio-infra">[INFRA]</a> </p>
+   <p>This specification uses terminology from the DOM, HTML, IDL, Permissions API, and URL Standards. <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a> <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a> <a data-link-type="biblio" href="#biblio-permissions">[PERMISSIONS]</a> <a data-link-type="biblio" href="#biblio-url">[URL]</a> </p>
    <p>A <dfn data-dfn-type="dfn" data-noexport="" id="schemeless-origin-group">schemeless origin group<a class="self-link" href="#schemeless-origin-group"></a></dfn> is a group of one of the following:</p>
    <ul>
     <li>Identical <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin-opaque">opaque origins</a>. 
@@ -280,7 +280,7 @@ these steps:</p>
     <li>
      <p>Let <var>settingsObject</var> be <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object">context object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">relevant settings object</a>. </p>
     <li>
-     <p>Run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
+     <p>Run these substeps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">in parallel</a>: </p>
      <ol>
       <li>
        <p>Let <var>origin</var> be <var>settingsObject</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">origin</a>. </p>
@@ -373,12 +373,6 @@ for being awesome!</p>
 extent possible under law, the editor has waived all copyright and related or neighboring
 rights to this work.</p>
   </main>
-  <div data-fill-with="conformance">
-   <h2 class="no-num no-ref heading settled" id="conformance"><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
-   <p>All diagrams, examples, and notes in this specification are non-normative, as are all sections explicitly marked non-normative. Everything else in this specification is normative. </p>
-   <p>The key words “MUST”, “MUST NOT”, “REQUIRED”,  “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in the normative parts of this specification are to be interpreted as described in RFC2119. For readability, these words do not appear in all uppercase letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a> </p>
-   <p>Conformance requirements phrased as algorithms or specific steps may be implemented in any manner, so long as the end result is equivalent. (In particular, the algorithms defined in this specification are intended to be easy to follow, and not intended to be performant.) </p>
-  </div>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
@@ -452,11 +446,11 @@ rights to this work.</p>
    <dt id="biblio-dom">[DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-html">[HTML]
-   <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+   <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+   <dt id="biblio-infra">[INFRA]
+   <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/">Infra Standard</a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-permissions">[PERMISSIONS]
    <dd>Mounir Lamouri; Marcos Caceres. <a href="https://w3c.github.io/permissions/">The Permissions API</a>. URL: <a href="https://w3c.github.io/permissions/">https://w3c.github.io/permissions/</a>
-   <dt id="biblio-rfc2119">[RFC2119]
-   <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-url">[URL]
    <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/">URL Standard</a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
    <dt id="biblio-webidl">[WEBIDL]
