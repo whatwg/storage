@@ -15,7 +15,7 @@ Boilerplate: omit feedback-header, omit conformance
 </pre>
 
 <script src=https://resources.whatwg.org/file-issue.js async></script>
-<script id=head src=https://resources.whatwg.org/dfn.js defer></script>
+<script src=https://resources.whatwg.org/dfn.js defer></script>
 
 
 
