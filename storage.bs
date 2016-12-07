@@ -329,7 +329,14 @@ must run these steps:
    <li><p>Let <var>dictionary</var> be a new {{StorageEstimate}} dictionary whose {{usage}} member
    is <var>usage</var> and {{quota}} member is <var>quota</var>.
 
-   <li><p>Resolve <var>promise</var> with <var>dictionary</var>.
+   <li>
+    <p>If there was an internal error of some kind while obtaining <var>usage</var> and
+    <var>quota</var>, or when allocating <var>dictionary</var>, then reject <var>promise</var> with
+    a {{TypeError}}.
+
+    <p class=note>This is not expected to happen normally.
+
+   <li><p>Otherwise, resolve <var>promise</var> with <var>dictionary</var>.
   </ol>
 
  <li><p>Return <var>promise</var>.

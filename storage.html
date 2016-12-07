@@ -7,7 +7,7 @@
   <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/logo-storage.svg" rel="icon">
-  <meta content="Bikeshed version 645534c1532bca4fdb4f3859efc66268a218d7c8" name="generator">
+  <meta content="Bikeshed version 18bde035bc0169bb31c49099bf3e6ec57ff9ec7f" name="generator">
 <style>/* style-syntax-highlighting */
 pre.idl.highlight { color: #708090; }
         .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-storage.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Storage</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-11-21">21 November 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-12-07">7 December 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -340,7 +340,11 @@ must run these steps:</p>
        <p>Let <var>dictionary</var> be a new <code class="idl"><a data-link-type="idl" href="#dictdef-storageestimate">StorageEstimate</a></code> dictionary whose <code class="idl"><a data-link-type="idl" href="#dom-storageestimate-usage">usage</a></code> member
    is <var>usage</var> and <code class="idl"><a data-link-type="idl" href="#dom-storageestimate-quota">quota</a></code> member is <var>quota</var>. </p>
       <li>
-       <p>Resolve <var>promise</var> with <var>dictionary</var>. </p>
+       <p>If there was an internal error of some kind while obtaining <var>usage</var> and <var>quota</var>, or when allocating <var>dictionary</var>, then reject <var>promise</var> with
+    a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a></code>. </p>
+       <p class="note" role="note">This is not expected to happen normally. </p>
+      <li>
+       <p>Otherwise, resolve <var>promise</var> with <var>dictionary</var>. </p>
      </ol>
     <li>
      <p>Return <var>promise</var>. </p>
@@ -438,6 +442,7 @@ rights to this work.</p>
      <li><a href="https://heycam.github.io/webidl/#Exposed">Exposed</a>
      <li><a href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>
      <li><a href="https://heycam.github.io/webidl/#SecureContext">SecureContext</a>
+     <li><a href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
