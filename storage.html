@@ -7,7 +7,7 @@
   <link href="https://resources.whatwg.org/standard.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/bikeshed.css" rel="stylesheet">
   <link href="https://resources.whatwg.org/logo-storage.svg" rel="icon">
-  <meta content="Bikeshed version 18bde035bc0169bb31c49099bf3e6ec57ff9ec7f" name="generator">
+  <meta content="Bikeshed version ef1890cdd543bf72ba03a0fa16211e40619adc83" name="generator">
 <style>/* style-syntax-highlighting */
 pre.idl.highlight { color: #708090; }
         .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
@@ -71,7 +71,7 @@ pre.idl.highlight { color: #708090; }
    <p data-fill-with="logo"><a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" height="100" src="https://resources.whatwg.org/logo-storage.svg"> </a> </p>
    <hgroup>
     <h1 class="p-name no-ref" id="title">Storage</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-12-07">7 December 2016</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2016-12-16">16 December 2016</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -154,9 +154,9 @@ to the web. </p>
   navigator<span class="p">.</span>storage<span class="p">.</span>persisted<span class="p">(</span><span class="p">)</span><span class="p">,</span>
   navigator<span class="p">.</span>permissions<span class="p">.</span>query<span class="p">(</span><span class="p">{</span>name<span class="o">:</span> <span class="s2">"persistent-storage"</span><span class="p">}</span><span class="p">)</span>
 <span class="p">]</span><span class="p">)</span><span class="p">.</span>then<span class="p">(</span><span class="p">(</span>persisted<span class="p">,</span> permission<span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="o">!</span>persisted <span class="o">&amp;&amp;</span> permission <span class="o">==</span> <span class="s2">"granted"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span>persisted <span class="o">&amp;&amp;</span> permission<span class="p">.</span>status <span class="o">==</span> <span class="s2">"granted"</span><span class="p">)</span> <span class="p">{</span>
     navigator<span class="p">.</span>storage<span class="p">.</span>persist<span class="p">(</span><span class="p">)</span><span class="p">.</span>then<span class="p">(</span> <span class="cm">/* … */</span> <span class="p">)</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="o">!</span>persistent <span class="o">&amp;&amp;</span> permission <span class="o">==</span> <span class="s2">"prompt"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="o">!</span>persistent <span class="o">&amp;&amp;</span> permission<span class="p">.</span>status <span class="o">==</span> <span class="s2">"prompt"</span><span class="p">)</span> <span class="p">{</span>
     showPersistentStorageExplanation<span class="p">(</span><span class="p">)</span>
   <span class="p">}</span>
 <span class="p">}</span><span class="p">)</span>
