@@ -1,5 +1,5 @@
 local: storage.bs
-	bikeshed
+	bikeshed spec storage.bs storage.html --md-Text-Macro="SNAPSHOT-LINK LOCAL COPY"
 
 remote: storage.bs
-	curl https://api.csswg.org/bikeshed/ -f -F file=@storage.bs > storage.html
+	curl https://api.csswg.org/bikeshed/ -f -F file=@storage.bs > storage.html -F md-Text-Macro="SNAPSHOT-LINK LOCAL COPY"
