@@ -10,6 +10,7 @@ No Editor: true
 !Commits: <a href=https://github.com/whatwg/storage/commits>GitHub whatwg/storage/commits</a>
 !Commits: [SNAPSHOT-LINK]
 !Commits: <a href=https://twitter.com/storagestandard>@storagestandard</a>
+!Translation (non-normative): <span title=Japanese><a href=https://triple-underscore.github.io/storage-ja.html lang=ja hreflang=ja rel=alternate>日本語</a></span>
 Logo: https://resources.whatwg.org/logo-storage.svg
 Abstract: The Storage Standard defines an API for persistent storage and quota estimates, as well as the platform storage architecture.
 Boilerplate: omit feedback-header, omit conformance
