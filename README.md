@@ -36,4 +36,5 @@ If you can commit to this repository, see the
 
 ### Tests
 
-Tests have not yet been created.
+Tests can be found in the `storage/` directory of
+[`web-platform-tests`](https://github.com/w3c/web-platform-tests).
