@@ -257,19 +257,20 @@ these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>settingsObject</var> be <a>context object</a>'s <a>relevant settings object</a>.
+ <li><p>Let <var>origin</var> be <a>context object</a>'s <a>relevant settings object</a>'s
+ <a for="environment settings object">origin</a>.
+
+ <li><p>If <var>origin</var> is an <a>opaque origin</a>, then reject <var>promise</var> with a
+ {{TypeError}}.
 
  <li>
-  <p>Run these substeps <a>in parallel</a>:
+  <p>Otherwise, run these substeps <a>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s
-   <a for="environment settings object">origin</a>.
-
    <li><p>Let <var>persisted</var> be true if <var>origin</var>'s <a>site storage unit</a>'s
    <a>box</a> is a <a>persistent box</a>, and false otherwise.
 
-   <li><p>Resolve <var>promise</var> with <var>persisted</var>.
+   <li><p><a>Queue a task</a> to resolve <var>promise</var> with <var>persisted</var>.
   </ol>
 
  <li><p>Return <var>promise</var>.
@@ -281,15 +282,16 @@ steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>settingsObject</var> be <a>context object</a>'s <a>relevant settings object</a>.
+ <li><p>Let <var>origin</var> be <a>context object</a>'s <a>relevant settings object</a>'s
+ <a for="environment settings object">origin</a>.
+
+ <li><p>If <var>origin</var> is an <a>opaque origin</a>, then reject <var>promise</var> with a
+ {{TypeError}}.
 
  <li>
-  <p>Run these substeps <a>in parallel</a>:
+  <p>Otherwise, run these substeps <a>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s
-   <a for="environment settings object">origin</a>.
-
    <li>
     <p>Let <var>permission</var> be the result of <a>requesting permission to use</a>
     {{"persistent-storage"}}.
@@ -317,15 +319,16 @@ must run these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>settingsObject</var> be <a>context object</a>'s <a>relevant settings object</a>.
+ <li><p>Let <var>origin</var> be <a>context object</a>'s <a>relevant settings object</a>'s
+ <a for="environment settings object">origin</a>.
+
+ <li><p>If <var>origin</var> is an <a>opaque origin</a>, then reject <var>promise</var> with a
+ {{TypeError}}.
 
  <li>
   <p>Run these substeps <a>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>origin</var> be <var>settingsObject</var>'s
-   <a for="environment settings object">origin</a>.
-
    <li><p>Let <var>usage</var> be <a>site storage usage</a> for <var>origin</var>.
 
    <li><p>Let <var>quota</var> be <a>site storage quota</a> for <var>origin</var>.
@@ -335,12 +338,12 @@ must run these steps:
 
    <li>
     <p>If there was an internal error of some kind while obtaining <var>usage</var> and
-    <var>quota</var>, or when allocating <var>dictionary</var>, then reject <var>promise</var> with
-    a {{TypeError}}.
+    <var>quota</var>, or when allocating <var>dictionary</var>, then <a>queue a task</a> to reject
+    <var>promise</var> with a {{TypeError}}.
 
     <p class=note>This is not expected to happen normally.
 
-   <li><p>Otherwise, resolve <var>promise</var> with <var>dictionary</var>.
+   <li><p>Otherwise, <a>queue a task</a> to resolve <var>promise</var> with <var>dictionary</var>.
   </ol>
 
  <li><p>Return <var>promise</var>.
