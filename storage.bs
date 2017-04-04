@@ -267,8 +267,11 @@ these steps:
   <p>Otherwise, run these substeps <a>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>persisted</var> be true if <var>origin</var>'s <a>site storage unit</a>'s
-   <a>box</a> is a <a>persistent box</a>, and false otherwise.
+   <li>
+    <p>Let <var>persisted</var> be true if <var>origin</var>'s <a>site storage unit</a>'s <a>box</a>
+    is a <a>persistent box</a>, and false otherwise.
+
+    <p class=note>It will be false when there's an internal error.
 
    <li><p><a>Queue a task</a> to resolve <var>promise</var> with <var>persisted</var>.
   </ol>
@@ -300,12 +303,21 @@ steps:
     the same <a for=/>origin</a> around the same time and this algorithm is not equipped to handle
     such a scenario.
 
-   <li><p>Let <var>persisted</var> be true, if <var>origin</var>'s <a>site storage unit</a>'s
-   <a>box</a> is a <a>persistent box</a>, and false otherwise.
+   <li>
+    <p>Let <var>persisted</var> be true, if <var>origin</var>'s <a>site storage unit</a>'s
+    <a>box</a> is a <a>persistent box</a>, and false otherwise.
 
-   <li><p>If <var>persisted</var> is false and <var>permission</var> is {{"granted"}}, then
-   set <var>persisted</var> to true and set <var>origin</var>'s <a>site storage unit</a>'s
-   <a>box</a>'s <a>mode</a> to "<code>persistent</code>".
+    <p class=note>It will be false when there's an internal error.
+
+   <li>
+    <p>If <var>persisted</var> is false and <var>permission</var> is {{"granted"}}, then:
+
+    <ol>
+     <li><p>Set <var>origin</var>'s <a>site storage unit</a>'s <a>box</a>'s <a>mode</a> to
+     "<code>persistent</code>".
+
+     <li><p>If there was no internal error, then set <var>persisted</var> to true.
+    </ol>
 
    <li><p><a>Queue a task</a> to resolve <var>promise</var> with <var>persisted</var>.
   </ol>
@@ -337,11 +349,11 @@ must run these steps:
    is <var>usage</var> and {{quota}} member is <var>quota</var>.
 
    <li>
-    <p>If there was an internal error of some kind while obtaining <var>usage</var> and
-    <var>quota</var>, or when allocating <var>dictionary</var>, then <a>queue a task</a> to reject
-    <var>promise</var> with a {{TypeError}}.
+    <p>If there was an internal error while obtaining <var>usage</var> and <var>quota</var>, then
+    <a>queue a task</a> to reject <var>promise</var> with a {{TypeError}}.
 
-    <p class=note>This is not expected to happen normally.
+    <p class=note>Internal errors are supposed to be extremely rare and indicate some kind of
+    low-level platform or hardware fault.
 
    <li><p>Otherwise, <a>queue a task</a> to resolve <var>promise</var> with <var>dictionary</var>.
   </ol>
