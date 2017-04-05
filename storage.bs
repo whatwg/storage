@@ -353,7 +353,8 @@ must run these steps:
     <a>queue a task</a> to reject <var>promise</var> with a {{TypeError}}.
 
     <p class=note>Internal errors are supposed to be extremely rare and indicate some kind of
-    low-level platform or hardware fault.
+    low-level platform or hardware fault. However, at the scale of the web with the diversity of
+    implementation and platforms, the unexpected does occur.
 
    <li><p>Otherwise, <a>queue a task</a> to resolve <var>promise</var> with <var>dictionary</var>.
   </ol>
