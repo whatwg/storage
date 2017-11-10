@@ -30,15 +30,15 @@ Over the years the web has grown various APIs that can be used for storage, e.g.
 these APIs by defining:
 
 <ul class=brief>
- <li>A bin, the primitive these APIs store their data in
- <li>A way of making that bin persistent
+ <li>A bucket, the primitive these APIs store their data in
+ <li>A way of making that bucket persistent
  <li>A way of getting usage and quota estimates for an <a for=/>origin</a>
 </ul>
 
 <p>Traditionally, as the user runs out of storage space on their device, the data stored with these
-APIs gets lost without the user being able to intervene. However, persistent bins cannot be cleared
-without consent by the user. This thus brings data guarantees users have enjoyed on native platforms
-to the web.
+APIs gets lost without the user being able to intervene. However, persistent buckets cannot be
+cleared without consent by the user. This thus brings data guarantees users have enjoyed on native
+platforms to the web.
 
 <div class="example" id=example-3a7051a8>
  <p>A simple way to make storage persistent is through invoking the {{persist()}} method. It
@@ -129,25 +129,26 @@ This specification primarily concerns itself with <dfn export id=site-storage>si
 <dfn export id=site-storage-unit>site storage units</dfn>.
 
 Each <a for=/>origin</a> has an associated <a>site storage unit</a>. A <a>site storage unit</a>
-contains a single <dfn export id=bin oldids=box>bin</dfn>. [[HTML]]
+contains a single <dfn export id=bucket oldids=box>bucket</dfn>. [[HTML]]
 
 
-<h3 id=bins oldids=boxes>Bins</h3>
+<h3 id=buckets oldids=boxes>Buckets</h3>
 
-A <a>bin</a> has <dfn export for=bin oldids=box-mode>mode</dfn> which is either
+A <a>bucket</a> has <dfn export for=bucket oldids=box-mode>mode</dfn> which is either
 "<code title>best-effort</code>" or "<code title>persistent</code>". A
-<dfn export oldids=persistent-box>persistent bin</dfn> is a <a>bin</a> whose <a for=bin>mode</a> is
-"<code title>persistent</code>". A <dfn export oldids=non-persistent-box>non-persistent bin</dfn> is
-a <a>bin</a> whose <a for=bin>mode</a> is <em>not</em> "<code title>persistent</code>".
+<dfn export oldids=persistent-box>persistent bucket</dfn> is a <a>bucket</a> whose
+<a for=bucket>mode</a> is "<code title>persistent</code>". A
+<dfn export oldids=non-persistent-box>non-persistent bucket</dfn> is a <a>bucket</a> whose
+<a for=bucket>mode</a> is <em>not</em> "<code title>persistent</code>".
 
-A bin is considered to be an atomic unit. Whenever a <a>bin</a> is cleared by the user agent, it
-must be cleared in its entirety.
+A bucket is considered to be an atomic unit. Whenever a <a>bucket</a> is cleared by the user agent,
+it must be cleared in its entirety.
 
 
 
 <h2 id=persistence>Persistence permission</h2>
 
-A <a>bin</a> can only be turned into a <a>persistent bin</a> if the user (or user agent
+A <a>bucket</a> can only be turned into a <a>persistent bucket</a> if the user (or user agent
 on behalf of the user) has granted permission to use the {{"persistent-storage"}} feature.
 
 <p class="note">When granted to an <a for=/>origin</a>, the persistence permission can be used to
@@ -166,8 +167,8 @@ The <dfn for="PermissionName" enum-value>"<code>persistent-storage</code>"</dfn>
 
  <dt><a>permission revocation algorithm</a></dt>
  <dd algorithm="permission-revocation">If {{"persistent-storage"}}'s <a>permission state</a> is not
- {{"granted"}}, then set the current <a for=/>origin</a>’s <a>site storage unit</a>'s <a>bin</a>'s
- <a for=bin>mode</a> to "<code>best-effort</code>".</dd>
+ {{"granted"}}, then set the current <a for=/>origin</a>’s <a>site storage unit</a>'s
+ <a>bucket</a>'s <a for=bucket>mode</a> to "<code>best-effort</code>".</dd>
 </dl>
 
 
@@ -212,8 +213,8 @@ somewhat easier to understand and differentiate for users from network storage a
 <h3 id=storage-pressure>Storage Pressure</h3>
 
 When the user agent notices it comes under storage pressure and it cannot free up sufficient space
-by clearing network storage and <a>non-persistent bins</a> within <a>site storage</a>, then the user
-agent should alert the user and offer a way to clear <a>persistent bins</a>.
+by clearing network storage and <a>non-persistent buckets</a> within <a>site storage</a>, then the
+user agent should alert the user and offer a way to clear <a>persistent buckets</a>.
 
 
 
@@ -269,8 +270,8 @@ these steps:
 
   <ol>
    <li>
-    <p>Let <var>persisted</var> be true if <var>origin</var>'s <a>site storage unit</a>'s <a>bin</a>
-    is a <a>persistent bin</a>, and false otherwise.
+    <p>Let <var>persisted</var> be true if <var>origin</var>'s <a>site storage unit</a>'s
+    <a>bucket</a> is a <a>persistent bucket</a>, and false otherwise.
 
     <p class=note>It will be false when there's an internal error.
 
@@ -306,7 +307,7 @@ steps:
 
    <li>
     <p>Let <var>persisted</var> be true, if <var>origin</var>'s <a>site storage unit</a>'s
-    <a>bin</a> is a <a>persistent bin</a>, and false otherwise.
+    <a>bucket</a> is a <a>persistent bucket</a>, and false otherwise.
 
     <p class=note>It will be false when there's an internal error.
 
@@ -314,7 +315,7 @@ steps:
     <p>If <var>persisted</var> is false and <var>permission</var> is {{"granted"}}, then:
 
     <ol>
-     <li><p>Set <var>origin</var>'s <a>site storage unit</a>'s <a>bin</a>'s <a>mode</a> to
+     <li><p>Set <var>origin</var>'s <a>site storage unit</a>'s <a>bucket</a>'s <a>mode</a> to
      "<code>persistent</code>".
 
      <li><p>If there was no internal error, then set <var>persisted</var> to true.
