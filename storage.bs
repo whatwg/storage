@@ -221,14 +221,12 @@ user agent should alert the user and offer a way to clear <a>persistent buckets<
 <h2 id=api>API</h2>
 
 <pre class=idl>
-[SecureContext,
- NoInterfaceObject,
- Exposed=(Window,Worker)]
-interface NavigatorStorage {
+[SecureContext]
+interface mixin NavigatorStorage {
   readonly attribute StorageManager storage;
 };
-Navigator implements NavigatorStorage;
-WorkerNavigator implements NavigatorStorage;
+Navigator includes NavigatorStorage;
+WorkerNavigator includes NavigatorStorage;
 </pre>
 
 Each <a>environment settings object</a> has an associated {{StorageManager}} object.
@@ -380,6 +378,7 @@ David Grogan,
 fantasai,
 Jake Archibald<!-- technically B.J. Archibald -->,
 Jeffrey Yasskin,
+Jinho Bang,
 Jonas Sicking,
 Joshua Bell,
 Kenji Baheux,
