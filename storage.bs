@@ -1,25 +1,11 @@
 <pre class=metadata>
-Title: Storage Standard
+Group: WHATWG
 H1: Storage
 Shortname: storage
-Status: LS
-Group: WHATWG
-No Editor: true
-!Participate: <a href=https://github.com/whatwg/storage>GitHub whatwg/storage</a> (<a href=https://github.com/whatwg/storage/issues/new>new issue</a>, <a href=https://github.com/whatwg/storage/issues>open issues</a>)
-!Participate: <a href=https://wiki.whatwg.org/wiki/IRC>IRC: #whatwg on Freenode</a>
-!Commits: <a href=https://github.com/whatwg/storage/commits>GitHub whatwg/storage/commits</a>
-!Commits: [SNAPSHOT-LINK]
-!Commits: <a href=https://twitter.com/storagestandard>@storagestandard</a>
-!Tests: <a href=https://github.com/w3c/web-platform-tests/tree/master/storage>web-platform-tests storage/</a> (<a href=https://github.com/w3c/web-platform-tests/labels/storage>ongoing work</a>)
-!Translation (non-normative): <span title=Japanese><a href=https://triple-underscore.github.io/storage-ja.html lang=ja hreflang=ja rel=alternate>日本語</a></span>
-Logo: https://resources.whatwg.org/logo-storage.svg
+Text Macro: TWITTER storagestandard
 Abstract: The Storage Standard defines an API for persistent storage and quota estimates, as well as the platform storage architecture.
-Boilerplate: omit feedback-header, omit conformance
+Translation: ja https://triple-underscore.github.io/storage-ja.html
 </pre>
-
-<script src=https://resources.whatwg.org/file-issue.js async></script>
-<script src=https://resources.whatwg.org/commit-snapshot-shortcut-key.js async></script>
-<script src=https://resources.whatwg.org/dfn.js defer></script>
 
 
 
@@ -395,7 +381,3 @@ This standard is written by
 <a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
 (<a href=https://www.mozilla.org/>Mozilla</a>,
 <a href=mailto:annevk@annevk.nl>annevk@annevk.nl</a>).
-
-Per <a rel=license href=https://creativecommons.org/publicdomain/zero/1.0/>CC0</a>, to the
-extent possible under law, the editor has waived all copyright and related or neighboring
-rights to this work.
