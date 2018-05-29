@@ -2,4 +2,5 @@
 deploy_key
 deploy_key.pub
 deploy.sh
+review.sh
 storage.html
