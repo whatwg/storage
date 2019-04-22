@@ -18,7 +18,7 @@ these APIs by defining:
 <ul class=brief>
  <li>A bucket, the primitive these APIs store their data in
  <li>A way of making that bucket persistent
- <li>A way of getting usage and quota estimates for an <a for=/>origin</a>
+ <li>A way of getting usage, quota, and per-system usage estimates for an <a for=/>origin</a>
 </ul>
 
 <p>Traditionally, as the user runs out of storage space on their device, the data stored with these
@@ -178,7 +178,27 @@ larger <a>site storage quota</a>. Factors such as navigation frequency, recency 
 bookmarking, and <a href="#persistence">permission</a> for {{"persistent-storage"}} can be used as
 indications of "popularity".
 
+The <dfn export>application cache site storage usage</dfn> for an <a for=/>origin</a>
+<var>origin</var> is a rough estimate of the amount of bytes used in <a>Application Cache</a>
+in <var>origin</var>'s <a>site storage unit</a>. <a>Application Cache</a> can contain cross-origin
+opaque responses, thus it is important to obfuscate the size for security reasons. The
+solution for this is to artificially pad the size of cross-origin responses (see [[#padding]]).
+[[!HTML]]
 
+The <dfn export>caches site storage usage</dfn> for an <a for=/>origin</a>
+<var>origin</var> is a rough estimate of the amount of bytes used in {{CacheStorage}} API
+in <var>origin</var>'s <a>site storage unit</a>. <a>Caches</a> can contain cross-origin
+opaque responses, thus it is important to obfuscate the size for security reasons. The
+solution for this is to artificially pad the size of cross-origin responses (see [[#padding]]).
+[[!SERVICE-WORKERS]]
+
+The <dfn export>indexedDB site storage usage</dfn> for an <a for=/>origin</a>
+<var>origin</var> is a rough estimate of the amount of bytes used in IndexedDB
+in <var>origin</var>'s <a>site storage unit</a>. [[!IndexedDB]]
+
+The <dfn export>service worker registration site storage usage</dfn> for an
+<a for=/>origin</a> <var>origin</var> is a rough estimate of the amount of bytes
+used in service worker registrations in <var>origin</var>'s <a>site storage unit</a>. [[!SERVICE-WORKERS]]
 
 <h2 id=ui-guidelines>User Interface Guidelines</h2>
 
@@ -234,7 +254,16 @@ interface StorageManager {
 dictionary StorageEstimate {
   unsigned long long usage;
   unsigned long long quota;
+  StorageUsageDetails usageDetails;
 };
+
+dictionary StorageUsageDetails {
+  unsigned long long applicationCache;
+  unsigned long long caches;
+  unsigned long long indexedDB;
+  unsigned long long serviceWorkerRegistrations;
+};
+
 </pre>
 
 The <dfn method for=StorageManager><code>persisted()</code></dfn> method, when invoked, must run
@@ -331,11 +360,40 @@ must run these steps:
 
    <li><p>Let <var>quota</var> be <a>site storage quota</a> for <var>origin</var>.
 
-   <li><p>Let <var>dictionary</var> be a new {{StorageEstimate}} dictionary whose {{usage}} member
-   is <var>usage</var> and {{quota}} member is <var>quota</var>.
+   <li><p>Let <var>applicationCache</var> be <a>application cache site storage usage</a>
+   for <var>origin</var>.
+
+   <li><p>Let <var>indexedDB</var> be <a>indexedDB site storage usage</a> for <var>origin</var>.
+
+   <li><p>Let <var>caches</var> be <a>caches site storage usage</a> for <var>origin</var>.
+
+   <li><p>Let <var>serviceWorkerRegistrations</var> be <a>service worker registration
+   site storage usage</a> for <var>origin</var>.
+
+   <li><p>Let <var>usageDetails</var> be a new {{StorageUsageDetails}} dictionary.
+
+   <li><p>If <var>applicationCache</var> is greater than 0, set the
+   {{StorageUsageDetails/applicationCache}} member of <var>usageDetails</var> to
+   <var>applicationCache</var>.
+
+   <li><p>If <var>indexedDB</var> is greater than 0, set the
+   {{StorageUsageDetails/indexedDB}} member of <var>usageDetails</var> to
+   <var>indexedDB</var>.
+
+   <li><p>If <var>caches</var> is greater than 0, set the
+   {{StorageUsageDetails/caches}} member of <var>usageDetails</var> to
+   <var>caches</var>.
+
+   <li><p>If <var>serviceWorkerRegistrations</var> is greater than 0, set the
+   {{StorageUsageDetails/serviceWorkerRegistrations}} member of <var>usageDetails</var> to
+   <var>serviceWorkerRegistrations</var>.
+
+   <li><p>Let <var>dictionary</var> be a new {{StorageEstimate}} dictionary whose {{StorageEstimate/usage}} member
+   is <var>usage</var>, {{StorageEstimate/quota}} member is <var>quota</var> and {{StorageEstimate/usageDetails}}
+   member is <var>usageDetails</var>.
 
    <li>
-    <p>If there was an internal error while obtaining <var>usage</var> and <var>quota</var>, then
+    <p>If there was an internal error while obtaining any of the above, then
     <a>queue a task</a> to reject <var>promise</var> with a {{TypeError}}.
 
     <p class=note>Internal errors are supposed to be extremely rare and indicate some kind of
@@ -348,7 +406,21 @@ must run these steps:
  <li><p>Return <var>promise</var>.
 </ol>
 
+<h2 id="padding">Padding Opaque Responses</h2>
+Exposing the size of opaque responses can expose sensitive information. Because of this, it is
+recommended that implementers obfuscate this size by artificially padding the size of opaque responses
+when stored. An example set of steps might look like:
 
+<ol>
+ <li><p>Let <var>response</var> be a new {{Response}} from an <a lt="opaque origin">opaque origin</a> to
+ be stored in <a>Application Cache</a> or {{CacheStorage}}.
+ <li><p>Let <var>size</var> be the size, in bytes, of <var>response</var>.
+ <li><p>Let <var>padding size</var> be a randomly generated padding size, in bytes.
+ size.
+ <li><p>Store <var>padding size</var> along with the <var>size</var> as metadata alongside
+ <var>response</var> in <a>Application Cache</a> or {{CacheStorage}}.
+ <li><p>When queried about size, return the sum of <var>size</var> and <var>padding size</var>
+ </ol>
 
 <h2 class=no-num id="acks">Acknowledgments</h2>
 
