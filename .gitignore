@@ -1,6 +1,6 @@
 /storage.spec.whatwg.org/
+/deploy.sh
 /deploy_key
 /deploy_key.pub
-/deploy.sh
-/review.sh
 /storage.html
+/review.sh
