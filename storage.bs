@@ -327,15 +327,22 @@ locally.
 <a>powerful feature</a>'s permission-related flags, algorithms, and types are defaulted, except for:
 
 <dl>
- <dt><a>permission state</a></dt>
- <dd>{{"persistent-storage"}}'s <a>permission state</a> must have the same value for all
- <a>environment settings objects</a> with a given <a for=/>origin</a>.</dd>
+ <dt><a>permission state</a>
+ <dd><p>{{"persistent-storage"}}'s <a>permission state</a> must have the same value for all
+ <a>environment settings objects</a> with a given <a for="environment settings object">origin</a>.
 
- <dt><a>permission revocation algorithm</a></dt>
- <dd algorithm="permission-revocation">If {{"persistent-storage"}}'s <a>permission state</a> is not
- {{"granted"}}, then set the current <a for=/>origin</a>’s <a>storage unit</a>'s
- <a>storage bucket</a>'s <a for="storage bucket">mode</a> to "<code>best-effort</code>".</dd>
- <!-- XXX -->
+ <dt><a>permission revocation algorithm</a>
+ <dd algorithm="permission-revocation">
+  <ol>
+   <li><p>If {{"persistent-storage"}}'s <a>permission state</a> is {{"granted"}}, then return.
+
+   <li><p>Let <var>unit</var> be the result of running <a>obtain a storage unit</a> with the user
+   agent's <a for="user agent">storage map</a>, <a>current settings object</a>, and
+   "<code>storage</code>".
+
+   <li><p>Set <var>unit</var>'s <a for="storage unit">map</a>["<code>default</code>"]'s
+   <a for="storage bucket">mode</a> to "<code>best-effort</code>".
+  </ol>
 </dl>
 
 
