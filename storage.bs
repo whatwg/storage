@@ -7,6 +7,12 @@ Abstract: The Storage Standard defines an API for persistent storage and quota e
 Translation: ja https://triple-underscore.github.io/storage-ja.html
 </pre>
 
+<pre class=anchors>
+urlPrefix: https://tc39.github.io/ecma262/; spec: ECMASCRIPT
+    text: agent; url: #sec-agents; type: dfn
+    text: agent cluster; url: #sec-agent-clusters; type: dfn
+</pre>
+
 
 
 <h2 id=introduction>Introduction</h2>
@@ -114,7 +120,6 @@ function retrieveNextChunk(nextChunkInfo) {
 <p>A <dfn id=site-storage-unit>storage unit</dfn> is the least granular unit of storage, other than
 the user agent. It holds a <dfn for="storage unit">map</dfn>, which is a <a for=/>map</a> of
 <a for=/>ASCII strings</a> to <a>abstract storage buckets</a>.
-<!-- Not sure if this needs to be exported, but it was already. -->
 
 <p>A <dfn>storage map</dfn> is a <a for=/>map</a> of <a>storage keys</a> to <a>storage units</a>. It
 is initially empty.
@@ -189,6 +194,10 @@ data. Whenever an <a>abstract storage bucket</a> is cleared by the user agent, i
 its entirety.
 <!-- This is probably better defined in some kind of storage lifetime section. -->
 
+<p>An <a>abstract storage bucket</a> has a
+<dfn for="abstract storage bucket,storage bucket,session storage bucket">map</dfn> of
+<a>abstract storage identifiers</a> to <a for="abstract storage bucket">areas</a>.
+
 <p>An <dfn for="abstract storage bucket,storage bucket,session storage bucket">area</dfn> is a part
 of an <a>abstract storage bucket</a> carved out for a particular storage API or session storage API.
 An <a for="abstract storage bucket">area</a> has a
@@ -197,14 +206,11 @@ which is an initially empty <a for=/>map</a>. An <a for="abstract storage bucket
 a
 <dfn for="abstract storage bucket/area,storage bucket/area,session storage bucket/area">proxy map reference set</dfn>,
 which is an initially empty <a for=/>set</a>.
-<!-- The idea is that storage area's map holds the actual storage. It's in a map because those are
-     easy to work with. How the map is persisted is implementation-defined. How to make it
-     available across process boundaries is implementation-defined. This note also applies to
-     session buckets below. -->
 
-<p>An <a>abstract storage bucket</a> has a
-<dfn for="abstract storage bucket,storage bucket,session storage bucket">map</dfn> of
-<a>abstract storage identifiers</a> to <a for="abstract storage bucket">areas</a>.
+<p>How an <a>abstract storage bucket</a>'s <a for="abstract storage bucket">area</a>'s
+<a for="abstract storage bucket/area">map</a> is stored is <a>implementation-defined</a>. How it is
+made available across <a>agent</a> or even <a>agent cluster</a> boundaries is
+<a>implementation-defined</a>.
 
 <hr>
 
