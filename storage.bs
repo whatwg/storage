@@ -202,10 +202,10 @@ its entirety.
 of an <a>abstract storage bucket</a> carved out for a particular storage API or session storage API.
 An <a for="abstract storage bucket">area</a> has a
 <dfn for="abstract storage bucket/area,storage bucket/area,session storage bucket/area">map</dfn>,
-which is an initially empty <a for=/>map</a>. An <a for="abstract storage bucket">area</a> also has
+which is initially an empty <a for=/>map</a>. An <a for="abstract storage bucket">area</a> also has
 a
 <dfn for="abstract storage bucket/area,storage bucket/area,session storage bucket/area">proxy map reference set</dfn>,
-which is an initially empty <a for=/>set</a>.
+which is initially an empty <a for=/>set</a>.
 
 <p>How an <a>abstract storage bucket</a>'s <a for="abstract storage bucket">area</a>'s
 <a for="abstract storage bucket/area">map</a> is stored is <a>implementation-defined</a>. How it is
@@ -271,9 +271,9 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
 
 <hr>
 
-<p>To <dfn export>obtain a storage bucket area map</dfn>, given an
-<a for=/>environment settings object</a> <var>environment</var>, <a>storage type</a>
-<var>type</var>, and <a>abstract storage identifier</a> <var>identifier</var>, run these steps:</p>
+<p>To <dfn>obtain an abstract storage bucket area map</dfn>, given a <a>storage type</a>
+<var>type</var>, <a for=/>environment settings object</a> <var>environment</var>, and
+<a>abstract storage identifier</a> <var>identifier</var>, run these steps:</p>
 
 <ol>
  <li><p>Let <var>map</var> be null.
@@ -314,6 +314,18 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
 
  <li><p>Return <var>proxyMap</var>.
 </ol>
+
+<p>To <dfn export>obtain a storage bucket area map</dfn>, given an
+<a for=/>environment settings object</a> <var>environment</var> and <a>storage identifier</a>
+<var>identifier</var>, return the result of running
+<a>obtain an abstract storage bucket area map</a> with "<code>storage</code>",
+<var>environment</var>, and <var>identifier</var>.
+
+<p>To <dfn export>obtain a session storage bucket area map</dfn>, given an
+<a for=/>environment settings object</a> <var>environment</var> and
+<a>session storage identifier</a> <var>identifier</var>, return the result of running
+<a>obtain an abstract storage bucket area map</a> with "<code>session-storage</code>",
+<var>environment</var>, and <var>identifier</var>.
 
 
 
