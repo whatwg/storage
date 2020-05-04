@@ -168,39 +168,61 @@ is initially empty.
 being replaced due to a cross-origin opener policy.
 
 
-<h3 id=storage-identifiers>Storage identifiers</h3>
+<h3 id=storage-endpoints>Storage endpoints</h3>
 
-<p>An <dfn>abstract storage identifier</dfn> is an <a for=/>ASCII string</a>.
+<p>A <dfn export>storage endpoint</dfn> is a storage or session storage API that uses the
+infrastructure defined by this standard to keep track of its storage needs.
 
-<p>Each storage API has a <dfn export>storage identifier</dfn>, which is an
-<a>abstract storage identifier</a>. The <dfn>registered storage identifiers</dfn> are:
+<p>A <a>storage endpoint</a> has an <dfn for="storage endpoint">identifier</dfn>, which is a
+<a>storage identifier</a>.
 
-<ol>
- <li>"<code>caches</code>"
- <li>"<code>indexedDB</code>"
- <li>"<code>localStorage</code>"
- <li>"<code>serviceWorkerRegistrations</code>"
-</ol>
+<p>A <a>storage endpoint</a> also has <dfn for="storage endpoint">types</dfn>, which is a
+<a for=/>set</a> of <a>storage types</a>.
 
-<p>Each session storage API has a <dfn export>session storage identifier</dfn>, which is an
-<a>abstract storage identifier</a>. The <dfn>registered session storage identifiers</dfn> are
-"<code>sessionStorage</code>".
+<p>A <dfn>storage identifier</dfn> is an <a for=/>ASCII string</a>.
+
+<hr>
+
+<p>The <dfn>registered storage endpoints</dfn> are a <a for=/>set</a> of <a>storage endpoints</a>
+defined by the following table:
+
+<table>
+ <tr>
+  <th><a>Storage identifier</a>
+  <th><a>Storage types</a>
+ <tr>
+  <td>"<code>caches</code>"
+  <td>« "<code>storage</code>" »
+ <tr>
+  <td>"<code>indexedDB</code>"
+  <td>« "<code>storage</code>" »
+ <tr>
+  <td>"<code>localStorage</code>"
+  <td>« "<code>storage</code>" »
+ <tr>
+  <td>"<code>serviceWorkerRegistrations</code>"
+  <td>« "<code>storage</code>" »
+ <tr>
+  <td>"<code>sessionStorage</code>"
+  <td>« "<code>session-storage</code>" »
+</table>
+
 
 
 <h3 id=buckets oldids=boxes>Storage buckets</h3>
 
-<p>An <dfn>abstract storage bucket</dfn> is a place for storage and session storage APIs to store
-data. Whenever an <a>abstract storage bucket</a> is cleared by the user agent, it must be cleared in
-its entirety.
+<p>An <dfn>abstract storage bucket</dfn> is a place for <a>storage endpoints</a> to store data.
+Whenever an <a>abstract storage bucket</a> is cleared by the user agent, it must be cleared in its
+entirety.
 <!-- This is probably better defined in some kind of storage lifetime section. -->
 
 <p>An <a>abstract storage bucket</a> has a
 <dfn for="abstract storage bucket,storage bucket,session storage bucket">map</dfn> of
-<a>abstract storage identifiers</a> to <a for="abstract storage bucket">areas</a>.
+<a>storage identifiers</a> to <a for="abstract storage bucket">areas</a>.
 
 <p>An <dfn for="abstract storage bucket,storage bucket,session storage bucket">area</dfn> is a part
-of an <a>abstract storage bucket</a> carved out for a particular storage API or session storage API.
-An <a for="abstract storage bucket">area</a> has a
+of an <a>abstract storage bucket</a> carved out for a <a>storage endpoint</a>. An
+<a for="abstract storage bucket">area</a> has a
 <dfn for="abstract storage bucket/area,storage bucket/area,session storage bucket/area">map</dfn>,
 which is initially an empty <a for=/>map</a>. An <a for="abstract storage bucket">area</a> also has
 a
@@ -234,29 +256,18 @@ steps:
 <ol>
  <li><p>Let <var>bucket</var> be null.
 
- <li>
-  <p>If <var>type</var> is "<code>storage</code>", then:
+ <li><p>If <var>type</var> is "<code>storage</code>", then set <var>bucket</var> to a new
+ <a>storage bucket</a>.
 
-  <ol>
-   <li><p>Set <var>bucket</var> to a new <a>storage bucket</a>.
-
-   <li><p>For each <var>identifier</var> of <a>registered storage identifiers</a>, set
-   <var>bucket</var>'s <a for="storage bucket">map</a>[<var>identifier</var>] to a new
-   <a for="storage bucket">area</a>.
-  </ol>
-
- <li>
-  <p>Otherwise, if <var>type</var> is "<code>session-storage</code>":
-
-  <ol>
-   <li><p>Set <var>bucket</var> to a new <a>session storage bucket</a>.
-
-   <li><p>For each <var>identifier</var> of <a>registered session storage identifiers</a>, set
-   <var>bucket</var>'s <a for="session storage bucket">map</a>[<var>identifier</var>] to a new
-   <a for="session storage bucket">area</a>.
-  </ol>
+ <li><p>Otherwise, if <var>type</var> is "<code>session-storage</code>", set <var>bucket</var> to a
+ new <a>session storage bucket</a>.
 
  <li><p>Assert: <var>bucket</var> is an <a>abstract storage bucket</a>.
+
+ <li><p><a for=set>For each</a> <var>endpoint</var> of <a>registered storage endpoints</a> whose
+ <a for="storage endpoint">types</a> <a for=set>contain</a> <var>type</var>, set <var>bucket</var>'s
+ <a for="storage bucket">map</a>[<var>endpoint</var>'s <a for="storage endpoint">identifier</a>] to
+ a new <a for="storage bucket">area</a>.
 
  <li><p>Return <var>bucket</var>.
 </ol>
@@ -273,7 +284,7 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
 
 <p>To <dfn>obtain an abstract storage bucket area map</dfn>, given a <a>storage type</a>
 <var>type</var>, <a for=/>environment settings object</a> <var>environment</var>, and
-<a>abstract storage identifier</a> <var>identifier</var>, run these steps:</p>
+<a>storage identifier</a> <var>identifier</var>, run these steps:</p>
 
 <ol>
  <li><p>Let <var>map</var> be null.
@@ -322,8 +333,8 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
 <var>environment</var>, and <var>identifier</var>.
 
 <p>To <dfn export>obtain a session storage bucket area map</dfn>, given an
-<a for=/>environment settings object</a> <var>environment</var> and
-<a>session storage identifier</a> <var>identifier</var>, return the result of running
+<a for=/>environment settings object</a> <var>environment</var> and <a>storage identifier</a>
+<var>identifier</var>, return the result of running
 <a>obtain an abstract storage bucket area map</a> with "<code>session-storage</code>",
 <var>environment</var>, and <var>identifier</var>.
 
