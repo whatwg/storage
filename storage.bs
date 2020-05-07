@@ -89,7 +89,7 @@ function retrieveNextChunk(nextChunkInfo) {
 
 
 
-<h2 id=infrastructure>Infrastructure</h2>
+<h2 id=infrastructure>Lay of the land</h2>
 
 <p>A <a for=/>user agent</a> has various kinds of semi-persistent state:
 
@@ -106,6 +106,10 @@ function retrieveNextChunk(nextChunkInfo) {
 </dl>
 
 <p>This standard primarily concerns itself with storage.
+
+
+
+<h2 id=model>Model</h2>
 
 
 <h3 id=storage-units>Storage units</h3>
@@ -216,23 +220,19 @@ Whenever an <a>abstract storage bucket</a> is cleared by the user agent, it must
 entirety.
 <!-- This is probably better defined in some kind of storage lifetime section. -->
 
-<p>An <a>abstract storage bucket</a> has a
-<dfn for="abstract storage bucket,storage bucket,session storage bucket">map</dfn> of
-<a>storage identifiers</a> to <a for="abstract storage bucket">areas</a>.
+<p>An <a>abstract storage bucket</a> has a <dfn>bottle map</dfn> of <a>storage identifiers</a> to
+<a>storage bottles</a>.
 
-<p>An <dfn for="abstract storage bucket,storage bucket,session storage bucket">area</dfn> is a part
-of an <a>abstract storage bucket</a> carved out for a <a>storage endpoint</a>. An
-<a for="abstract storage bucket">area</a> has a
-<dfn for="abstract storage bucket/area,storage bucket/area,session storage bucket/area">map</dfn>,
-which is initially an empty <a for=/>map</a>. An <a for="abstract storage bucket">area</a> also has
-a
-<dfn for="abstract storage bucket/area,storage bucket/area,session storage bucket/area">proxy map reference set</dfn>,
-which is initially an empty <a for=/>set</a>.
+<p>A <dfn>storage bottle</dfn> is a part of an <a>abstract storage bucket</a> carved out for a
+single <a>storage endpoint</a>. A <a>storage bottle</a> has a <dfn for="storage bottle">map</dfn>,
+which is initially an empty <a for=/>map</a>. A <a>storage bottle</a> also has a
+<dfn for="storage bottle">proxy map reference set</dfn>, which is initially an empty
+<a for=/>set</a>.
 
-<p>How an <a>abstract storage bucket</a>'s <a for="abstract storage bucket">area</a>'s
-<a for="abstract storage bucket/area">map</a> is stored is <a>implementation-defined</a>. How it is
-made available across <a>agent</a> or even <a>agent cluster</a> boundaries is
-<a>implementation-defined</a>.
+<p>A <a>storage bottle</a>'s <a for="storage bottle">map</a> is where the actual data meant to be
+stored lives. User agents are expected to store this data, and make it available across <a>agent</a>
+and even <a>agent cluster</a> boundaries, in an <a>implementation-defined</a> manner, so that this
+standard and standards using this standard can access the contents.
 
 <hr>
 
@@ -266,8 +266,8 @@ steps:
 
  <li><p><a for=set>For each</a> <var>endpoint</var> of <a>registered storage endpoints</a> whose
  <a for="storage endpoint">types</a> <a for=set>contain</a> <var>type</var>, set <var>bucket</var>'s
- <a for="storage bucket">map</a>[<var>endpoint</var>'s <a for="storage endpoint">identifier</a>] to
- a new <a for="storage bucket">area</a>.
+ <a>bottle map</a>[<var>endpoint</var>'s <a for="storage endpoint">identifier</a>] to a new
+ <a>storage bottle</a>.
 
  <li><p>Return <var>bucket</var>.
 </ol>
@@ -282,9 +282,9 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
 
 <hr>
 
-<p>To <dfn>obtain an abstract storage bucket area map</dfn>, given a <a>storage type</a>
-<var>type</var>, <a for=/>environment settings object</a> <var>environment</var>, and
-<a>storage identifier</a> <var>identifier</var>, run these steps:</p>
+<p>To <dfn>obtain an abstract storage bottle map</dfn>, given a <a>storage type</a> <var>type</var>,
+<a for=/>environment settings object</a> <var>environment</var>, and <a>storage identifier</a>
+<var>identifier</var>, run these steps:</p>
 
 <ol>
  <li><p>Let <var>map</var> be null.
@@ -313,30 +313,26 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
  <li><p>Let <var>bucket</var> be <var>unit</var>'s
  <a for="storage unit">map</a>["<code>default</code>"].
 
- <li><p>Let <var>area</var> be <var>bucket</var>'s
- <a for="storage bucket">map</a>[<var>identifier</var>].
+ <li><p>Let <var>bottle</var> be <var>bucket</var>'s <a>bottle map</a>[<var>identifier</var>].
 
  <li><p>Let <var>proxyMap</var> be a new <a>storage proxy map</a> whose
- <a for="storage proxy map">backing map</a> is <var>area</var>'s
- <a for="storage bucket/area">map</a>.
+ <a for="storage proxy map">backing map</a> is <var>bottle</var>'s <a for="storage bottle">map</a>.
 
- <li><p>Append a reference to <var>proxyMap</var> to <var>area</var>'s
- <a for="storage bucket/area">proxy map reference set</a>.
+ <li><p><a for=set>Append</a> <var>proxyMap</var> to <var>bottle</var>'s
+ <a for="storage bottle">proxy map reference set</a>.
 
  <li><p>Return <var>proxyMap</var>.
 </ol>
 
-<p>To <dfn export>obtain a storage bucket area map</dfn>, given an
+<p>To <dfn export>obtain a storage bottle map</dfn>, given an
 <a for=/>environment settings object</a> <var>environment</var> and <a>storage identifier</a>
-<var>identifier</var>, return the result of running
-<a>obtain an abstract storage bucket area map</a> with "<code>storage</code>",
-<var>environment</var>, and <var>identifier</var>.
+<var>identifier</var>, return the result of running <a>obtain an abstract storage bottle map</a>
+with "<code>storage</code>", <var>environment</var>, and <var>identifier</var>.
 
-<p>To <dfn export>obtain a session storage bucket area map</dfn>, given an
+<p>To <dfn export>obtain a session storage bottle map</dfn>, given an
 <a for=/>environment settings object</a> <var>environment</var> and <a>storage identifier</a>
-<var>identifier</var>, return the result of running
-<a>obtain an abstract storage bucket area map</a> with "<code>session-storage</code>",
-<var>environment</var>, and <var>identifier</var>.
+<var>identifier</var>, return the result of running <a>obtain an abstract storage bottle map</a>
+with "<code>session-storage</code>", <var>environment</var>, and <var>identifier</var>.
 
 
 
