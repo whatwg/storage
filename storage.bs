@@ -182,6 +182,8 @@ infrastructure defined by this standard to keep track of its storage needs.
 
 <p>A <a>storage endpoint</a> also has <dfn for="storage endpoint">types</dfn>, which is a
 <a for=/>set</a> of <a>storage types</a>.
+<!-- If in 2024 we have no overlap in APIs between more-durable and session storage APIs as
+     anticipated we ought to simplify this. -->
 
 <p>A <dfn>storage identifier</dfn> is an <a for=/>ASCII string</a>.
 
