@@ -122,8 +122,13 @@ function retrieveNextChunk(nextChunkInfo) {
 <a href="https://privacycg.github.io/storage-partitioning/">Client-Side Storage Partitioning</a>.
 
 <p>A <dfn id=site-storage-unit>storage unit</dfn> is the least granular unit of storage, other than
-the user agent. It holds a <dfn for="storage unit">map</dfn>, which is a <a for=/>map</a> of
-<a for=/>ASCII strings</a> to <a>storage buckets</a>.
+the user agent. It holds a <dfn>bucket map</dfn>, which is a <a for=/>map</a> of
+<a for=/>strings</a> to <a>storage buckets</a>.
+
+<p class="note">For now "<code>default</code>" is the only <a for=map>key</a> that exists. See
+<a href="https://github.com/whatwg/storage/issues/2">issue #2</a>. It is given a
+<a for=map>value</a> when a <a>storage unit</a> is <a lt="obtain a storage unit">obtained</a> for
+the first time.
 
 <p>A <dfn>storage map</dfn> is a <a for=/>map</a> of <a>storage keys</a> to <a>storage units</a>. It
 is initially empty.
@@ -146,12 +151,8 @@ is initially empty.
   <ol>
    <li><p>Let <var>unit</var> be a new <a>storage unit</a>.
 
-   <li>
-    <p>Set <var>unit</var>'s <a for="storage unit">map</a>["<code>default</code>"] to the result of
-    <a>create a storage bucket</a> with <var>type</var>.
-
-    <p class="note">For now "<code>default</code>" is all that exists. See
-    <a href="https://github.com/whatwg/storage/issues/2">issue #2</a>.
+   <li><p>Set <var>unit</var>'s <a>bucket map</a>["<code>default</code>"] to the result of
+   <a>create a storage bucket</a> with <var>type</var>.
 
    <li><p>Set <var>map</var>[<var>key</var>] to <var>unit</var>.
   </ol>
@@ -314,8 +315,7 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
 
  <li><p>If <var>unit</var> is failure, then return failure.
 
- <li><p>Let <var>bucket</var> be <var>unit</var>'s
- <a for="storage unit">map</a>["<code>default</code>"].
+ <li><p>Let <var>bucket</var> be <var>unit</var>'s <a>bucket map</a>["<code>default</code>"].
 
  <li><p>Let <var>bottle</var> be <var>bucket</var>'s <a>bottle map</a>[<var>identifier</var>].
 
@@ -370,7 +370,7 @@ locally.
    agent's <a for="user agent">storage map</a>, <a>current settings object</a>, and
    "<code>more-durable</code>".
 
-   <li><p>Set <var>unit</var>'s <a for="storage unit">map</a>["<code>default</code>"]'s
+   <li><p>Set <var>unit</var>'s <a>bucket map</a>["<code>default</code>"]'s
    <a for="more-durable storage bucket">mode</a> to "<code>best-effort</code>".
   </ol>
 </dl>
@@ -469,7 +469,7 @@ these steps:
   <ol>
    <li>
     <p>Let <var>persisted</var> be true if <var>unit</var>'s
-    <a for="storage unit">map</a>["<code>default</code>"]'s
+    <a>bucket map</a>["<code>default</code>"]'s
     <a for="more-durable storage bucket">mode</a> is "<code>persistent</code>"; otherwise false.
 
     <p class=note>It will be false when there's an internal error.
@@ -504,8 +504,7 @@ these steps:
     the same <a for=/>origin</a> around the same time and this algorithm is not equipped to handle
     such a scenario.
 
-   <li><p>Let <var>bucket</var> be <var>unit</var>'s
-   <a for="storage unit">map</a>["<code>default</code>"].
+   <li><p>Let <var>bucket</var> be <var>unit</var>'s <a>bucket map</a>["<code>default</code>"].
 
    <li>
     <p>Let <var>persisted</var> be true if <var>bucket</var>'s
