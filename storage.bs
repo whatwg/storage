@@ -189,6 +189,8 @@ infrastructure defined by this standard to keep track of its storage needs.
 
 <p>The <dfn>registered storage endpoints</dfn> are a <a for=/>set</a> of <a>storage endpoints</a>
 defined by the following table:
+<!-- Note, these will be exposed more generally through https://github.com/whatwg/storage/pull/69 so
+     please keep https://w3ctag.github.io/design-principles/#casing-rules in mind. -->
 
 <table>
  <tr>
@@ -211,6 +213,8 @@ defined by the following table:
   <td>« "<code>session</code>" »
 </table>
 
+<p class="note no-backref">Standards can use these <a>storage identifiers</a> with
+<a>obtain a more-durable storage bottle map</a> and <a>obtain a session storage bottle map</a>.
 
 
 <h3 id=buckets oldids=boxes>Storage buckets</h3>
