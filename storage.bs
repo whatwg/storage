@@ -114,7 +114,7 @@ function retrieveNextChunk(nextChunkInfo) {
 
 <h3 id=storage-units>Storage units</h3>
 
-<p>A <dfn>storage type</dfn> is "<code>more-durable</code>" or "<code>session</code>".
+<p>A <dfn>storage type</dfn> is "<code>local</code>" or "<code>session</code>".
 
 <p>A <dfn>storage key</dfn> is an <a for=/>origin</a>. [[HTML]]
 
@@ -175,7 +175,7 @@ being replaced due to a cross-origin opener policy.
 
 <h3 id=storage-endpoints>Storage endpoints</h3>
 
-<p>A <dfn export>storage endpoint</dfn> is a more-durable or session storage API that uses the
+<p>A <dfn export>storage endpoint</dfn> is a local or session storage API that uses the
 infrastructure defined by this standard to keep track of its storage needs.
 
 <p>A <a>storage endpoint</a> has an <dfn for="storage endpoint">identifier</dfn>, which is a
@@ -183,8 +183,8 @@ infrastructure defined by this standard to keep track of its storage needs.
 
 <p>A <a>storage endpoint</a> also has <dfn for="storage endpoint">types</dfn>, which is a
 <a for=/>set</a> of <a>storage types</a>.
-<!-- If in 2024 we have no overlap in APIs between more-durable and session storage APIs as
-     anticipated we ought to simplify this. -->
+<!-- If in 2024 we have no overlap in APIs between local and session storage APIs as anticipated we
+     ought to simplify this. -->
 
 <p>A <dfn>storage identifier</dfn> is an <a for=/>ASCII string</a>.
 
@@ -201,23 +201,23 @@ defined by the following table:
   <th><a>Storage types</a>
  <tr>
   <td>"<code>caches</code>"
-  <td>« "<code>more-durable</code>" »
+  <td>« "<code>local</code>" »
  <tr>
   <td>"<code>indexedDB</code>"
-  <td>« "<code>more-durable</code>" »
+  <td>« "<code>local</code>" »
  <tr>
   <td>"<code>localStorage</code>"
-  <td>« "<code>more-durable</code>" »
+  <td>« "<code>local</code>" »
  <tr>
   <td>"<code>serviceWorkerRegistrations</code>"
-  <td>« "<code>more-durable</code>" »
+  <td>« "<code>local</code>" »
  <tr>
   <td>"<code>sessionStorage</code>"
   <td>« "<code>session</code>" »
 </table>
 
 <p class="note no-backref">Standards can use these <a>storage identifiers</a> with
-<a>obtain a more-durable storage bottle map</a> and <a>obtain a session storage bottle map</a>.
+<a>obtain a local storage bottle map</a> and <a>obtain a session storage bottle map</a>.
 
 
 <h3 id=buckets oldids=boxes>Storage buckets</h3>
@@ -242,11 +242,11 @@ standard and standards using this standard can access the contents.
 
 <hr>
 
-<p>A <dfn id=bucket oldids=box>more-durable storage bucket</dfn> is a <a>storage bucket</a> for
-more-durable storage APIs.
+<p>A <dfn id=bucket oldids=box>local storage bucket</dfn> is a <a>storage bucket</a> for local
+storage APIs.
 
-<p>A <a>more-durable storage bucket</a> has a
-<dfn for="more-durable storage bucket" id=bucket-mode oldids=box-mode>mode</dfn>, which is
+<p>A <a>local storage bucket</a> has a
+<dfn for="local storage bucket" id=bucket-mode oldids=box-mode>mode</dfn>, which is
 "<code>best-effort</code>" or "<code>persistent</code>". It is initially "<code>best-effort</code>".
 
 <hr>
@@ -261,8 +261,8 @@ steps:
 <ol>
  <li><p>Let <var>bucket</var> be null.
 
- <li><p>If <var>type</var> is "<code>more-durable</code>", then set <var>bucket</var> to a new
- <a>more-durable storage bucket</a>.
+ <li><p>If <var>type</var> is "<code>local</code>", then set <var>bucket</var> to a new
+ <a>local storage bucket</a>.
 
  <li><p>Otherwise, if <var>type</var> is "<code>session</code>", set <var>bucket</var> to a new
  <a>session storage bucket</a>.
@@ -294,8 +294,8 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
 <ol>
  <li><p>Let <var>map</var> be null.
 
- <li><p>If <var>type</var> is "<code>more-durable</code>", then set <var>map</var> to the user
- agent's <a for="user agent">storage map</a>.
+ <li><p>If <var>type</var> is "<code>local</code>", then set <var>map</var> to the user agent's
+ <a for="user agent">storage map</a>.
 
  <li>
   <p>Otherwise, if <var>type</var> is "<code>session</code>", then set <var>map</var> to
@@ -328,10 +328,10 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
  <li><p>Return <var>proxyMap</var>.
 </ol>
 
-<p>To <dfn export>obtain a more-durable storage bottle map</dfn>, given an
+<p>To <dfn export>obtain a local storage bottle map</dfn>, given an
 <a for=/>environment settings object</a> <var>environment</var> and <a>storage identifier</a>
 <var>identifier</var>, return the result of running <a>obtain a storage bottle map</a> with
-"<code>more-durable</code>", <var>environment</var>, and <var>identifier</var>.
+"<code>local</code>", <var>environment</var>, and <var>identifier</var>.
 
 <p>To <dfn export>obtain a session storage bottle map</dfn>, given an
 <a for=/>environment settings object</a> <var>environment</var> and <a>storage identifier</a>
@@ -342,10 +342,9 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
 
 <h2 id=persistence>Persistence permission</h2>
 
-<p>A <a>more-durable storage bucket</a> can only have its
-<a for="more-durable storage bucket">mode</a> change to "<code>persistent</code>" if the user (or
-user agent on behalf of the user) has granted permission to use the {{"persistent-storage"}}
-feature.
+<p>A <a>local storage bucket</a> can only have its <a for="local storage bucket">mode</a> change to
+"<code>persistent</code>" if the user (or user agent on behalf of the user) has granted permission
+to use the {{"persistent-storage"}} feature.
 
 <p class="note">When granted to an <a for=/>origin</a>, the persistence permission can be used to
 protect storage from the user agent's clearing policies. The user agent cannot clear storage marked
@@ -368,10 +367,10 @@ locally.
 
    <li><p>Let <var>unit</var> be the result of running <a>obtain a storage unit</a> with the user
    agent's <a for="user agent">storage map</a>, <a>current settings object</a>, and
-   "<code>more-durable</code>".
+   "<code>local</code>".
 
    <li><p>Set <var>unit</var>'s <a>bucket map</a>["<code>default</code>"]'s
-   <a for="more-durable storage bucket">mode</a> to "<code>best-effort</code>".
+   <a for="local storage bucket">mode</a> to "<code>best-effort</code>".
   </ol>
 </dl>
 
@@ -459,7 +458,7 @@ these steps:
 
  <li><p>Let <var>unit</var> be the result of running <a>obtain a storage unit</a> with the user
  agent's <a for="user agent">storage map</a>, <a>this</a>'s <a>relevant settings object</a>, and
- "<code>more-durable</code>".
+ "<code>local</code>".
 
  <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
 
@@ -469,8 +468,8 @@ these steps:
   <ol>
    <li>
     <p>Let <var>persisted</var> be true if <var>unit</var>'s
-    <a>bucket map</a>["<code>default</code>"]'s
-    <a for="more-durable storage bucket">mode</a> is "<code>persistent</code>"; otherwise false.
+    <a>bucket map</a>["<code>default</code>"]'s <a for="local storage bucket">mode</a> is
+    "<code>persistent</code>"; otherwise false.
 
     <p class=note>It will be false when there's an internal error.
 
@@ -488,7 +487,7 @@ these steps:
 
  <li><p>Let <var>unit</var> be the result of running <a>obtain a storage unit</a> with the user
  agent's <a for="user agent">storage map</a>, <a>this</a>'s <a>relevant settings object</a>, and
- "<code>more-durable</code>".
+ "<code>local</code>".
 
  <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
 
@@ -508,7 +507,7 @@ these steps:
 
    <li>
     <p>Let <var>persisted</var> be true if <var>bucket</var>'s
-    <a for="more-durable storage bucket">mode</a> is "<code>persistent</code>"; otherwise false.
+    <a for="local storage bucket">mode</a> is "<code>persistent</code>"; otherwise false.
 
     <p class=note>It will be false when there's an internal error.
 
@@ -516,7 +515,7 @@ these steps:
     <p>If <var>persisted</var> is false and <var>permission</var> is {{"granted"}}, then:
 
     <ol>
-     <li><p>Set <var>bucket</var>'s <a for="more-durable storage bucket">mode</a> to
+     <li><p>Set <var>bucket</var>'s <a for="local storage bucket">mode</a> to
      "<code>persistent</code>".
 
      <li><p>If there was no internal error, then set <var>persisted</var> to true.
@@ -536,7 +535,7 @@ these steps:
 
  <li><p>Let <var>unit</var> be the result of running <a>obtain a storage unit</a> with the user
  agent's <a for="user agent">storage map</a>, <a>this</a>'s <a>relevant settings object</a>, and
- "<code>more-durable</code>".
+ "<code>local</code>".
 
  <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
 
