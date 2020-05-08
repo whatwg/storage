@@ -121,19 +121,20 @@ function retrieveNextChunk(nextChunkInfo) {
 <p class=XXX>This is expected to change, see
 <a href="https://privacycg.github.io/storage-partitioning/">Client-Side Storage Partitioning</a>.
 
-<p>A <dfn id=site-storage-unit>storage unit</dfn> is the least granular unit of storage, other than
-the user agent. It holds a <dfn>bucket map</dfn>, which is a <a for=/>map</a> of
-<a for=/>strings</a> to <a>storage buckets</a>.
+<p>A <dfn oldids=site-storage-unit lt="storage shelf|storage shelves">storage shelf</dfn> is the
+biggest storage container, apart from the user agent itself. It holds a <dfn>bucket map</dfn>, which
+is a <a for=/>map</a> of <a for=/>strings</a> to <a>storage buckets</a>.
 
-<p class="note">For now "<code>default</code>" is the only <a for=map>key</a> that exists. See
+<p class="note no-backref">For now "<code>default</code>" is the only <a for=map>key</a> that
+exists in a <a>bucket map</a>. See
 <a href="https://github.com/whatwg/storage/issues/2">issue #2</a>. It is given a
-<a for=map>value</a> when a <a>storage unit</a> is <a lt="obtain a storage unit">obtained</a> for
+<a for=map>value</a> when a <a>storage shelf</a> is <a lt="obtain a storage shelf">obtained</a> for
 the first time.
 
-<p>A <dfn>storage map</dfn> is a <a for=/>map</a> of <a>storage keys</a> to <a>storage units</a>. It
-is initially empty.
+<p>A <dfn>storage shed</dfn> is a <a for=/>map</a> of <a>storage keys</a> to <a>storage shelves</a>.
+It is initially empty.
 
-<p>To <dfn>obtain a storage unit</dfn>, given a <a for=/>storage map</a> <var>map</var>, an
+<p>To <dfn>obtain a storage shelf</dfn>, given a <a for=/>storage shed</a> <var>map</var>, an
 <a>environment settings object</a> <var>environment</var>, and a <a>storage type</a>
 <var>type</var>, run these steps:
 
@@ -149,7 +150,7 @@ is initially empty.
   <p>If <var>map</var>[<var>key</var>] does not <a for=map>exist</a>, then:
 
   <ol>
-   <li><p>Let <var>unit</var> be a new <a>storage unit</a>.
+   <li><p>Let <var>unit</var> be a new <a>storage shelf</a>.
 
    <li><p>Set <var>unit</var>'s <a>bucket map</a>["<code>default</code>"] to the result of
    <a>create a storage bucket</a> with <var>type</var>.
@@ -162,11 +163,11 @@ is initially empty.
 
 <hr>
 
-<p>A <a for=/>user agent</a> holds a <dfn for="user agent">storage map</dfn>, which is a
-<a for=/>storage map</a>.
+<p>A <a for=/>user agent</a> holds a <dfn for="user agent">storage shed</dfn>, which is a
+<a for=/>storage shed</a>.
 
-<p>A browsing session holds a <dfn for="browsing session">storage map</dfn>, which is a
-<a for=/>storage map</a>.
+<p>A browsing session holds a <dfn for="browsing session">storage shed</dfn>, which is a
+<a for=/>storage shed</a>.
 
 <p class=XXX>Browsing session is yet to be formally defined. For all intents and purposes it is a
 <a>top-level browsing context</a>, except that it survives the <a>top-level browsing context</a>
@@ -295,12 +296,12 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
  <li><p>Let <var>map</var> be null.
 
  <li><p>If <var>type</var> is "<code>local</code>", then set <var>map</var> to the user agent's
- <a for="user agent">storage map</a>.
+ <a for="user agent">storage shed</a>.
 
  <li>
   <p>Otherwise, if <var>type</var> is "<code>session</code>", then set <var>map</var> to
   <var>environment</var>'s <span class=XXX>browsing session</span>'s
-  <a for="browsing session">storage map</a>.
+  <a for="browsing session">storage shed</a>.
 
   <p class="XXX">See
   <a href="https://github.com/whatwg/html/issues/4782">whatwg/html issue #4782</a> and
@@ -308,9 +309,9 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
   browsing session. It is roughly analogous to <a>top-level browsing context</a> except that it
   cannot be replaced due to <code>Cross-Origin-Opener-Policy</code> or navigation.
 
- <li><p>Assert: <var>map</var> is a <a for=/>storage map</a>.
+ <li><p>Assert: <var>map</var> is a <a for=/>storage shed</a>.
 
- <li><p>Let <var>unit</var> be the result of running <a>obtain a storage unit</a>, with
+ <li><p>Let <var>unit</var> be the result of running <a>obtain a storage shelf</a>, with
  <var>map</var>, <var>environment</var>, and <var>type</var>.
 
  <li><p>If <var>unit</var> is failure, then return failure.
@@ -365,8 +366,8 @@ locally.
   <ol>
    <li><p>If {{"persistent-storage"}}'s <a>permission state</a> is {{"granted"}}, then return.
 
-   <li><p>Let <var>unit</var> be the result of running <a>obtain a storage unit</a> with the user
-   agent's <a for="user agent">storage map</a>, <a>current settings object</a>, and
+   <li><p>Let <var>unit</var> be the result of running <a>obtain a storage shelf</a> with the user
+   agent's <a for="user agent">storage shed</a>, <a>current settings object</a>, and
    "<code>local</code>".
 
    <li><p>Set <var>unit</var>'s <a>bucket map</a>["<code>default</code>"]'s
@@ -378,14 +379,14 @@ locally.
 
 <h2 id=usage-and-quota>Usage and quota</h2>
 
-<p>The <dfn export>storage usage</dfn> of a <a>storage unit</a> is a rough estimate of the amount
+<p>The <dfn export>storage usage</dfn> of a <a>storage shelf</a> is a rough estimate of the amount
 of bytes used by it.
 
 <p class=note>This cannot be an exact amount as user agents might, and are encouraged to, use
 deduplication, compression, and other techniques that obscure exactly how much bytes a
-<a>storage unit</a> uses.
+<a>storage shelf</a> uses.
 
-<p>The <dfn export>storage quota</dfn> of a <a>storage unit</a> is a conservative estimate of the
+<p>The <dfn export>storage quota</dfn> of a <a>storage shelf</a> is a conservative estimate of the
 amount of bytes available to it. This amount should be less than the total available storage space
 on the device to give users some wiggle room.
 
@@ -456,8 +457,8 @@ these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>unit</var> be the result of running <a>obtain a storage unit</a> with the user
- agent's <a for="user agent">storage map</a>, <a>this</a>'s <a>relevant settings object</a>, and
+ <li><p>Let <var>unit</var> be the result of running <a>obtain a storage shelf</a> with the user
+ agent's <a for="user agent">storage shed</a>, <a>this</a>'s <a>relevant settings object</a>, and
  "<code>local</code>".
 
  <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
@@ -485,8 +486,8 @@ these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>unit</var> be the result of running <a>obtain a storage unit</a> with the user
- agent's <a for="user agent">storage map</a>, <a>this</a>'s <a>relevant settings object</a>, and
+ <li><p>Let <var>unit</var> be the result of running <a>obtain a storage shelf</a> with the user
+ agent's <a for="user agent">storage shed</a>, <a>this</a>'s <a>relevant settings object</a>, and
  "<code>local</code>".
 
  <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
@@ -533,8 +534,8 @@ these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>unit</var> be the result of running <a>obtain a storage unit</a> with the user
- agent's <a for="user agent">storage map</a>, <a>this</a>'s <a>relevant settings object</a>, and
+ <li><p>Let <var>unit</var> be the result of running <a>obtain a storage shelf</a> with the user
+ agent's <a for="user agent">storage shed</a>, <a>this</a>'s <a>relevant settings object</a>, and
  "<code>local</code>".
 
  <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
