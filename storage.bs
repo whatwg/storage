@@ -114,15 +114,22 @@ function retrieveNextChunk(nextChunkInfo) {
 <p>Standards defining local or session storage APIs will define a <a>storage endpoint</a> and
 <a lt="registered storage endpoints">register</a> it by changing this standard. They will use either
 <a>obtain a local storage bottle map</a> or <a>obtain a session storage bottle map</a>, which
-will give them a <a>storage proxy map</a> that operates analogously to a <a for=/>map</a>, and use
-that to store data in a manner that suits the API. This standard takes care of isolating that data
-appropriately within a user agent or browsing session. Both from other <a for=/>origins</a> as well
-as other APIs.
+will give them:
+
+<ul>
+ <li><p>Failure, which might mean the API has to throw or otherwise indicate there is no storage
+ available for that <a for=/>environment settings object</a>.
+
+ <li><p>A <a>storage proxy map</a> that operates analogously to a <a for=/>map</a>, which can be
+ used to store data in a manner that suits the API. This standard takes care of isolating that data
+ appropriately within a user agent or browsing session. Isolating it from other <a for=/>origins</a>
+ as well as other APIs.
+</ul>
 
 <p class=note>If you are defining a standard for such an API consider filing an issue agains this
 standard for assistence and review.
 
-<p>To isolate this data this standard defines a <a>storage shed</a> which segments
+<p>To isolate this data this standard defines a <a for=/>storage shed</a> which segments
 <a>storage shelves</a> by a <a>storage key</a>. A <a>storage shelf</a> in turn consists of a
 <a>storage bucket</a> and will likely consist of multiple <a>storage buckets</a> in the future to
 allow for different storage policies. And lastly, a <a>storage bucket</a> consists of
@@ -196,9 +203,11 @@ It is initially empty.
 <p>A browsing session holds a <dfn for="browsing session">storage shed</dfn>, which is a
 <a for=/>storage shed</a>.
 
-<p class=XXX>Browsing session is yet to be formally defined. For all intents and purposes it is a
-<a>top-level browsing context</a>, except that it survives the <a>top-level browsing context</a>
-being replaced due to a cross-origin opener policy.
+<p class="XXX" id=lack-of-browsing-session>See
+<a href="https://github.com/whatwg/html/issues/4782">whatwg/html issue #4782</a> and
+<a href="https://github.com/whatwg/html/issues/5350">whatwg/html issue #5350</a> for defining
+browsing session. It is roughly analogous to <a>top-level browsing context</a> except that it cannot
+be replaced due to <code>Cross-Origin-Opener-Policy</code> or navigation.
 
 
 <h3 id=storage-shelves>Storage shelves</h3>
@@ -317,16 +326,9 @@ standard and standards using this standard can access the contents.
  <li><p>If <var>type</var> is "<code>local</code>", then set <var>shed</var> to the user agent's
  <a for="user agent">storage shed</a>.
 
- <li>
-  <p>Otherwise, if <var>type</var> is "<code>session</code>", then set <var>shed</var> to
-  <var>environment</var>'s <span class=XXX>browsing session</span>'s
-  <a for="browsing session">storage shed</a>.
-
-  <p class="XXX">See
-  <a href="https://github.com/whatwg/html/issues/4782">whatwg/html issue #4782</a> and
-  <a href="https://github.com/whatwg/html/issues/5350">whatwg/html issue #5350</a> for defining
-  browsing session. It is roughly analogous to <a>top-level browsing context</a> except that it
-  cannot be replaced due to <code>Cross-Origin-Opener-Policy</code> or navigation.
+ <li><p>Otherwise, if <var>type</var> is "<code>session</code>", then set <var>shed</var> to
+ <var>environment</var>'s <a class=XXX href=#lack-of-browsing-session>browsing session</a>'s
+ <a for="browsing session">storage shed</a>.
 
  <li><p>Assert: <var>shed</var> is a <a for=/>storage shed</a>.
 
@@ -364,7 +366,9 @@ standard and standards using this standard can access the contents.
 <p>A <dfn>storage proxy map</dfn> is equivalent to a <a for=/>map</a>, except that all operations
 are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
 
-<p class="note">This allows for the <a for="storage proxy map">backing map</a> to be replaced.
+<p class="XXX">This allows for the <a for="storage proxy map">backing map</a> to be replaced. This
+is needed for <a href="https://github.com/whatwg/storage/issues/4">issue #4</a> and potentially the
+<a href="https://privacycg.github.io/storage-access/">Storage Access API</a>.
 
 
 
