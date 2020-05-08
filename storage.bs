@@ -287,10 +287,14 @@ steps:
  <li><p>If <var>type</var> is "<code>local</code>", then set <var>bucket</var> to a new
  <a>local storage bucket</a>.
 
- <li><p>Otherwise, if <var>type</var> is "<code>session</code>", set <var>bucket</var> to a new
- <a>session storage bucket</a>.
+ <li>
+  <p>Otherwise:
 
- <li><p>Assert: <var>bucket</var> is a <a>storage bucket</a>.
+  <ol>
+   <li><p>Assert: <var>type</var> is "<code>session</code>".
+
+   <li><p>Set <var>bucket</var> to a new <a>session storage bucket</a>.
+  </ol>
 
  <li><p><a for=set>For each</a> <var>endpoint</var> of <a>registered storage endpoints</a> whose
  <a for="storage endpoint">types</a> <a for=set>contain</a> <var>type</var>, set <var>bucket</var>'s
@@ -326,11 +330,16 @@ standard and standards using this standard can access the contents.
  <li><p>If <var>type</var> is "<code>local</code>", then set <var>shed</var> to the user agent's
  <a for="user agent">storage shed</a>.
 
- <li><p>Otherwise, if <var>type</var> is "<code>session</code>", then set <var>shed</var> to
- <var>environment</var>'s <a class=XXX href=#lack-of-browsing-session>browsing session</a>'s
- <a for="browsing session">storage shed</a>.
+ <li>
+  <p>Otherwise:
 
- <li><p>Assert: <var>shed</var> is a <a for=/>storage shed</a>.
+  <ol>
+   <li><p>Assert: <var>type</var> is "<code>session</code>".
+
+   <li><p>Set <var>shed</var> to <var>environment</var>'s
+   <a class=XXX href=#lack-of-browsing-session>browsing session</a>'s
+   <a for="browsing session">storage shed</a>.
+  </ol>
 
  <li><p>Let <var>shelf</var> be the result of running <a>obtain a storage shelf</a>, with
  <var>shed</var>, <var>environment</var>, and <var>type</var>.
