@@ -213,7 +213,7 @@ exists in a <a>bucket map</a>. See
 <a for=map>value</a> when a <a>storage shelf</a> is <a lt="obtain a storage shelf">obtained</a> for
 the first time.
 
-<p>To <dfn>obtain a storage shelf</dfn>, given a <a for=/>storage shed</a> <var>map</var>, an
+<p>To <dfn>obtain a storage shelf</dfn>, given a <a for=/>storage shed</a> <var>shed</var>, an
 <a>environment settings object</a> <var>environment</var>, and a <a>storage type</a>
 <var>type</var>, run these steps:
 
@@ -226,18 +226,18 @@ the first time.
  <li><p>If the user has disabled storage, then return failure.
 
  <li>
-  <p>If <var>map</var>[<var>key</var>] does not <a for=map>exist</a>, then:
+  <p>If <var>shed</var>[<var>key</var>] does not <a for=map>exist</a>, then:
 
   <ol>
-   <li><p>Let <var>unit</var> be a new <a>storage shelf</a>.
+   <li><p>Let <var>shelf</var> be a new <a>storage shelf</a>.
 
-   <li><p>Set <var>unit</var>'s <a>bucket map</a>["<code>default</code>"] to the result of
+   <li><p>Set <var>shelf</var>'s <a>bucket map</a>["<code>default</code>"] to the result of
    <a>create a storage bucket</a> with <var>type</var>.
 
-   <li><p>Set <var>map</var>[<var>key</var>] to <var>unit</var>.
+   <li><p>Set <var>shed</var>[<var>key</var>] to <var>shelf</var>.
   </ol>
 
- <li><p>Return <var>map</var>[<var>key</var>].
+ <li><p>Return <var>shed</var>[<var>key</var>].
 </ol>
 
 <p>To <dfn>obtain a local storage shelf</dfn>, given an <a>environment settings object</a>
@@ -253,17 +253,6 @@ agent's <a for="user agent">storage shed</a>, <var>environment</var>, and "<code
 
 <p>A <a>storage bucket</a> has a <dfn>bottle map</dfn> of <a>storage identifiers</a> to
 <a>storage bottles</a>.
-
-<p>A <dfn>storage bottle</dfn> is a part of a <a>storage bucket</a> carved out for a single
-<a>storage endpoint</a>. A <a>storage bottle</a> has a <dfn for="storage bottle">map</dfn>, which is
-initially an empty <a for=/>map</a>. A <a>storage bottle</a> also has a
-<dfn for="storage bottle">proxy map reference set</dfn>, which is initially an empty
-<a for=/>set</a>.
-
-<p>A <a>storage bottle</a>'s <a for="storage bottle">map</a> is where the actual data meant to be
-stored lives. User agents are expected to store this data, and make it available across <a>agent</a>
-and even <a>agent cluster</a> boundaries, in an <a>implementation-defined</a> manner, so that this
-standard and standards using this standard can access the contents.
 
 <hr>
 
@@ -303,12 +292,18 @@ steps:
 </ol>
 
 
-<h3 id=storage-proxy-maps>Storage proxy maps</h3>
+<h3 id=storage-bottles>Storage bottles</h3>
 
-<p>A <dfn>storage proxy map</dfn> is equivalent to a <a for=/>map</a>, except that all operations
-are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
+<p>A <dfn>storage bottle</dfn> is a part of a <a>storage bucket</a> carved out for a single
+<a>storage endpoint</a>. A <a>storage bottle</a> has a <dfn for="storage bottle">map</dfn>, which is
+initially an empty <a for=/>map</a>. A <a>storage bottle</a> also has a
+<dfn for="storage bottle">proxy map reference set</dfn>, which is initially an empty
+<a for=/>set</a>.
 
-<p class="note">This allows for the <a for="storage proxy map">backing map</a> to be replaced.
+<p>A <a>storage bottle</a>'s <a for="storage bottle">map</a> is where the actual data meant to be
+stored lives. User agents are expected to store this data, and make it available across <a>agent</a>
+and even <a>agent cluster</a> boundaries, in an <a>implementation-defined</a> manner, so that this
+standard and standards using this standard can access the contents.
 
 <hr>
 
@@ -317,13 +312,13 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
 <var>identifier</var>, run these steps:</p>
 
 <ol>
- <li><p>Let <var>map</var> be null.
+ <li><p>Let <var>shed</var> be null.
 
- <li><p>If <var>type</var> is "<code>local</code>", then set <var>map</var> to the user agent's
+ <li><p>If <var>type</var> is "<code>local</code>", then set <var>shed</var> to the user agent's
  <a for="user agent">storage shed</a>.
 
  <li>
-  <p>Otherwise, if <var>type</var> is "<code>session</code>", then set <var>map</var> to
+  <p>Otherwise, if <var>type</var> is "<code>session</code>", then set <var>shed</var> to
   <var>environment</var>'s <span class=XXX>browsing session</span>'s
   <a for="browsing session">storage shed</a>.
 
@@ -333,14 +328,14 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
   browsing session. It is roughly analogous to <a>top-level browsing context</a> except that it
   cannot be replaced due to <code>Cross-Origin-Opener-Policy</code> or navigation.
 
- <li><p>Assert: <var>map</var> is a <a for=/>storage shed</a>.
+ <li><p>Assert: <var>shed</var> is a <a for=/>storage shed</a>.
 
- <li><p>Let <var>unit</var> be the result of running <a>obtain a storage shelf</a>, with
- <var>map</var>, <var>environment</var>, and <var>type</var>.
+ <li><p>Let <var>shelf</var> be the result of running <a>obtain a storage shelf</a>, with
+ <var>shed</var>, <var>environment</var>, and <var>type</var>.
 
- <li><p>If <var>unit</var> is failure, then return failure.
+ <li><p>If <var>shelf</var> is failure, then return failure.
 
- <li><p>Let <var>bucket</var> be <var>unit</var>'s <a>bucket map</a>["<code>default</code>"].
+ <li><p>Let <var>bucket</var> be <var>shelf</var>'s <a>bucket map</a>["<code>default</code>"].
 
  <li><p>Let <var>bottle</var> be <var>bucket</var>'s <a>bottle map</a>[<var>identifier</var>].
 
@@ -362,6 +357,14 @@ are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
 <a for=/>environment settings object</a> <var>environment</var> and <a>storage identifier</a>
 <var>identifier</var>, return the result of running <a>obtain a storage bottle map</a> with
 "<code>session</code>", <var>environment</var>, and <var>identifier</var>.
+
+
+<h3 id=storage-proxy-maps>Storage proxy maps</h3>
+
+<p>A <dfn>storage proxy map</dfn> is equivalent to a <a for=/>map</a>, except that all operations
+are instead performed on its <dfn for="storage proxy map">backing map</dfn>.
+
+<p class="note">This allows for the <a for="storage proxy map">backing map</a> to be replaced.
 
 
 
@@ -390,10 +393,10 @@ locally.
   <ol>
    <li><p>If {{"persistent-storage"}}'s <a>permission state</a> is {{"granted"}}, then return.
 
-   <li><p>Let <var>unit</var> be the result of running <a>obtain a local storage shelf</a> with
+   <li><p>Let <var>shelf</var> be the result of running <a>obtain a local storage shelf</a> with
    <a>current settings object</a>.
 
-   <li><p>Set <var>unit</var>'s <a>bucket map</a>["<code>default</code>"]'s
+   <li><p>Set <var>shelf</var>'s <a>bucket map</a>["<code>default</code>"]'s
    <a for="local storage bucket">mode</a> to "<code>best-effort</code>".
   </ol>
 </dl>
@@ -480,17 +483,17 @@ these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>unit</var> be the result of running <a>obtain a local storage shelf</a> with
+ <li><p>Let <var>shelf</var> be the result of running <a>obtain a local storage shelf</a> with
  <a>this</a>'s <a>relevant settings object</a>.
 
- <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
+ <li><p>If <var>shelf</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
 
  <li>
   <p>Otherwise, run these steps <a>in parallel</a>:
 
   <ol>
    <li>
-    <p>Let <var>persisted</var> be true if <var>unit</var>'s
+    <p>Let <var>persisted</var> be true if <var>shelf</var>'s
     <a>bucket map</a>["<code>default</code>"]'s <a for="local storage bucket">mode</a> is
     "<code>persistent</code>"; otherwise false.
 
@@ -508,10 +511,10 @@ these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>unit</var> be the result of running <a>obtain a local storage shelf</a> with
+ <li><p>Let <var>shelf</var> be the result of running <a>obtain a local storage shelf</a> with
  <a>this</a>'s <a>relevant settings object</a>.
 
- <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
+ <li><p>If <var>shelf</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
 
  <li>
   <p>Otherwise, run these steps <a>in parallel</a>:
@@ -525,7 +528,7 @@ these steps:
     the same <a for=/>origin</a> around the same time and this algorithm is not equipped to handle
     such a scenario.
 
-   <li><p>Let <var>bucket</var> be <var>unit</var>'s <a>bucket map</a>["<code>default</code>"].
+   <li><p>Let <var>bucket</var> be <var>shelf</var>'s <a>bucket map</a>["<code>default</code>"].
 
    <li>
     <p>Let <var>persisted</var> be true if <var>bucket</var>'s
@@ -555,18 +558,18 @@ these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>unit</var> be the result of running <a>obtain a local storage shelf</a> with
+ <li><p>Let <var>shelf</var> be the result of running <a>obtain a local storage shelf</a> with
  <a>this</a>'s <a>relevant settings object</a>.
 
- <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
+ <li><p>If <var>shelf</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
 
  <li>
   <p>Otherwise, run these steps <a>in parallel</a>:
 
   <ol>
-   <li><p>Let <var>usage</var> be <a>storage usage</a> for <var>unit</var>.
+   <li><p>Let <var>usage</var> be <a>storage usage</a> for <var>shelf</var>.
 
-   <li><p>Let <var>quota</var> be <a>storage quota</a> for <var>unit</var>.
+   <li><p>Let <var>quota</var> be <a>storage quota</a> for <var>shelf</var>.
 
    <li><p>Let <var>dictionary</var> be a new {{StorageEstimate}} dictionary whose {{usage}} member
    is <var>usage</var> and {{quota}} member is <var>quota</var>.
