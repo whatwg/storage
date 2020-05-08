@@ -161,6 +161,10 @@ It is initially empty.
  <li><p>Return <var>map</var>[<var>key</var>].
 </ol>
 
+<p>To <dfn>obtain a local storage shelf</dfn>, given an <a>environment settings object</a>
+<var>environment</var>, return the result of running <a>obtain a storage shelf</a> with the user
+agent's <a for="user agent">storage shed</a>, <var>environment</var>, and "<code>local</code>".
+
 <hr>
 
 <p>A <a for=/>user agent</a> holds a <dfn for="user agent">storage shed</dfn>, which is a
@@ -366,9 +370,8 @@ locally.
   <ol>
    <li><p>If {{"persistent-storage"}}'s <a>permission state</a> is {{"granted"}}, then return.
 
-   <li><p>Let <var>unit</var> be the result of running <a>obtain a storage shelf</a> with the user
-   agent's <a for="user agent">storage shed</a>, <a>current settings object</a>, and
-   "<code>local</code>".
+   <li><p>Let <var>unit</var> be the result of running <a>obtain a local storage shelf</a> with
+   <a>current settings object</a>.
 
    <li><p>Set <var>unit</var>'s <a>bucket map</a>["<code>default</code>"]'s
    <a for="local storage bucket">mode</a> to "<code>best-effort</code>".
@@ -457,9 +460,8 @@ these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>unit</var> be the result of running <a>obtain a storage shelf</a> with the user
- agent's <a for="user agent">storage shed</a>, <a>this</a>'s <a>relevant settings object</a>, and
- "<code>local</code>".
+ <li><p>Let <var>unit</var> be the result of running <a>obtain a local storage shelf</a> with
+ <a>this</a>'s <a>relevant settings object</a>.
 
  <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
 
@@ -486,9 +488,8 @@ these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>unit</var> be the result of running <a>obtain a storage shelf</a> with the user
- agent's <a for="user agent">storage shed</a>, <a>this</a>'s <a>relevant settings object</a>, and
- "<code>local</code>".
+ <li><p>Let <var>unit</var> be the result of running <a>obtain a local storage shelf</a> with
+ <a>this</a>'s <a>relevant settings object</a>.
 
  <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
 
@@ -534,9 +535,8 @@ these steps:
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
 
- <li><p>Let <var>unit</var> be the result of running <a>obtain a storage shelf</a> with the user
- agent's <a for="user agent">storage shed</a>, <a>this</a>'s <a>relevant settings object</a>, and
- "<code>local</code>".
+ <li><p>Let <var>unit</var> be the result of running <a>obtain a local storage shelf</a> with
+ <a>this</a>'s <a>relevant settings object</a>.
 
  <li><p>If <var>unit</var> is a failure, then reject <var>promise</var> with a {{TypeError}}.
 
