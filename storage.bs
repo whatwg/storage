@@ -129,6 +129,55 @@ allow for different storage policies. And lastly, a <a>storage bucket</a> consis
 <a>storage bottles</a>, one for each <a>storage endpoint</a>.
 
 
+<h3 id=storage-endpoints>Storage endpoints</h3>
+
+<p>A <dfn export>storage endpoint</dfn> is a local or session storage API that uses the
+infrastructure defined by this standard to keep track of its storage needs.
+
+<p>A <a>storage endpoint</a> has an <dfn for="storage endpoint">identifier</dfn>, which is a
+<a>storage identifier</a>.
+
+<p>A <a>storage endpoint</a> also has <dfn for="storage endpoint">types</dfn>, which is a
+<a for=/>set</a> of <a>storage types</a>.
+
+<p>A <dfn>storage identifier</dfn> is an <a for=/>ASCII string</a>.
+
+<p>A <dfn>storage type</dfn> is "<code>local</code>" or "<code>session</code>".
+
+<hr>
+
+<p>The <dfn>registered storage endpoints</dfn> are a <a for=/>set</a> of <a>storage endpoints</a>
+defined by the following table:
+<!-- Note, these will be exposed more generally through https://github.com/whatwg/storage/pull/69 so
+     please keep https://w3ctag.github.io/design-principles/#casing-rules in mind. -->
+
+<table>
+ <tr>
+  <th><a>Storage identifier</a>
+  <th><a>Storage types</a>
+ <tr>
+  <td>"<code>caches</code>"
+  <td>« "<code>local</code>" »
+ <tr>
+  <td>"<code>indexedDB</code>"
+  <td>« "<code>local</code>" »
+ <tr>
+  <td>"<code>localStorage</code>"
+  <td>« "<code>local</code>" »
+ <tr>
+  <td>"<code>serviceWorkerRegistrations</code>"
+  <td>« "<code>local</code>" »
+ <tr>
+  <td>"<code>sessionStorage</code>"
+  <td>« "<code>session</code>" »
+</table>
+
+<p class="note no-backref">As mentioned, standards can use these <a>storage identifiers</a> with
+<a>obtain a local storage bottle map</a> and <a>obtain a session storage bottle map</a>. It is
+anticipated that some APIs will be applicable to both <a>storage types</a> going forward.
+<!-- If that does not happen by 2024 we probably ought to admit defeat and simplify this a bit. -->
+
+
 <h3 id=storage-sheds>Storage sheds</h3>
 
 <p>A <dfn>storage key</dfn> is an <a for=/>origin</a>. [[HTML]]
@@ -153,8 +202,6 @@ being replaced due to a cross-origin opener policy.
 
 
 <h3 id=storage-shelves>Storage shelves</h3>
-
-<p>A <dfn>storage type</dfn> is "<code>local</code>" or "<code>session</code>".
 
 <p>A <dfn oldids=site-storage-unit lt="storage shelf|storage shelves">storage shelf</dfn> is the
 biggest storage container, apart from the user agent itself. It holds a <dfn>bucket map</dfn>, which
@@ -196,56 +243,6 @@ the first time.
 <p>To <dfn>obtain a local storage shelf</dfn>, given an <a>environment settings object</a>
 <var>environment</var>, return the result of running <a>obtain a storage shelf</a> with the user
 agent's <a for="user agent">storage shed</a>, <var>environment</var>, and "<code>local</code>".
-
-<hr>
-
-
-
-<h3 id=storage-endpoints>Storage endpoints</h3>
-
-<p>A <dfn export>storage endpoint</dfn> is a local or session storage API that uses the
-infrastructure defined by this standard to keep track of its storage needs.
-
-<p>A <a>storage endpoint</a> has an <dfn for="storage endpoint">identifier</dfn>, which is a
-<a>storage identifier</a>.
-
-<p>A <a>storage endpoint</a> also has <dfn for="storage endpoint">types</dfn>, which is a
-<a for=/>set</a> of <a>storage types</a>.
-<!-- If in 2024 we have no overlap in APIs between local and session storage APIs as anticipated we
-     ought to simplify this. -->
-
-<p>A <dfn>storage identifier</dfn> is an <a for=/>ASCII string</a>.
-
-<hr>
-
-<p>The <dfn>registered storage endpoints</dfn> are a <a for=/>set</a> of <a>storage endpoints</a>
-defined by the following table:
-<!-- Note, these will be exposed more generally through https://github.com/whatwg/storage/pull/69 so
-     please keep https://w3ctag.github.io/design-principles/#casing-rules in mind. -->
-
-<table>
- <tr>
-  <th><a>Storage identifier</a>
-  <th><a>Storage types</a>
- <tr>
-  <td>"<code>caches</code>"
-  <td>« "<code>local</code>" »
- <tr>
-  <td>"<code>indexedDB</code>"
-  <td>« "<code>local</code>" »
- <tr>
-  <td>"<code>localStorage</code>"
-  <td>« "<code>local</code>" »
- <tr>
-  <td>"<code>serviceWorkerRegistrations</code>"
-  <td>« "<code>local</code>" »
- <tr>
-  <td>"<code>sessionStorage</code>"
-  <td>« "<code>session</code>" »
-</table>
-
-<p class="note no-backref">Standards can use these <a>storage identifiers</a> with
-<a>obtain a local storage bottle map</a> and <a>obtain a session storage bottle map</a>.
 
 
 <h3 id=buckets oldids=boxes>Storage buckets</h3>
