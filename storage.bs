@@ -126,7 +126,7 @@ will give them:
  as well as other APIs.
 </ul>
 
-<p class=note>If you are defining a standard for such an API consider filing an issue agains this
+<p class=note>If you are defining a standard for such an API, consider filing an issue agains this
 standard for assistence and review.
 
 <p>To isolate this data this standard defines a <a for=/>storage shed</a> which segments
