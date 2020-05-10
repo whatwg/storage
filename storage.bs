@@ -471,8 +471,8 @@ WorkerNavigator includes NavigatorStorage;
 
 <p>Each <a>environment settings object</a> has an associated {{StorageManager}} object. [[HTML]]
 
-<p>The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> attribute's getter must return
-<a>context object</a>'s <a>relevant settings object</a>'s {{StorageManager}} object.
+<p>The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> attribute's getter steps are
+to return <a>this</a>'s <a>relevant settings object</a>'s {{StorageManager}} object.
 
 <pre class=idl>
 [SecureContext,
@@ -490,8 +490,7 @@ dictionary StorageEstimate {
 };
 </pre>
 
-<p>The <dfn method for=StorageManager><code>persisted()</code></dfn> method, when invoked, must run
-these steps:
+<p>The <dfn method for=StorageManager><code>persisted()</code></dfn> method steps are:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
@@ -518,8 +517,7 @@ these steps:
  <li><p>Return <var>promise</var>.
 </ol>
 
-<p>The <dfn method for=StorageManager><code>persist()</code></dfn> method, when invoked, must run
-these steps:
+<p>The <dfn method for=StorageManager><code>persist()</code></dfn> method steps are:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
@@ -565,8 +563,7 @@ these steps:
  <li><p>Return <var>promise</var>.
 </ol>
 
-<p>The <dfn method for=StorageManager><code>estimate()</code></dfn> method, when invoked, must run
-these steps:
+<p>The <dfn method for=StorageManager><code>estimate()</code></dfn> method steps are:
 
 <ol>
  <li><p>Let <var>promise</var> be a new promise.
