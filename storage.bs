@@ -471,8 +471,8 @@ WorkerNavigator includes NavigatorStorage;
 
 <p>Each <a>environment settings object</a> has an associated {{StorageManager}} object. [[HTML]]
 
-<p>The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> attribute's getter steps are
-to return <a>this</a>'s <a>relevant settings object</a>'s {{StorageManager}} object.
+<p>The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> getter steps are to return
+<a>this</a>'s <a>relevant settings object</a>'s {{StorageManager}} object.
 
 <pre class=idl>
 [SecureContext,
