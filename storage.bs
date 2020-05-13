@@ -122,12 +122,11 @@ will give them:
 
  <li><p>A <a>storage proxy map</a> that operates analogously to a <a for=/>map</a>, which can be
  used to store data in a manner that suits the API. This standard takes care of isolating that data
- appropriately within a user agent or browsing session. Isolating it from other <a for=/>origins</a>
- as well as other APIs.
+ from other APIs, <a>storage keys</a>, and <a>storage types</a>.
 </ul>
 
 <p class=note>If you are defining a standard for such an API, consider filing an issue agains this
-standard for assistence and review.
+standard for assistance and review.
 
 <p>To isolate this data this standard defines a <a for=/>storage shed</a> which segments
 <a>storage shelves</a> by a <a>storage key</a>. A <a>storage shelf</a> in turn consists of a
@@ -138,8 +137,9 @@ allow for different storage policies. And lastly, a <a>storage bucket</a> consis
 
 <h3 id=storage-endpoints>Storage endpoints</h3>
 
-<p>A <dfn export>storage endpoint</dfn> is a local or session storage API that uses the
-infrastructure defined by this standard to keep track of its storage needs.
+<p>A <dfn export>storage endpoint</dfn> is a <a lt="local storage">local</a> or
+<a>session storage</a> API that uses the infrastructure defined by this standard to keep track of
+its storage needs.
 
 <p>A <a>storage endpoint</a> has an <dfn for="storage endpoint">identifier</dfn>, which is a
 <a>storage identifier</a>.
@@ -179,7 +179,7 @@ defined by the following table:
   <td>« "<code>session</code>" »
 </table>
 
-<p class="note no-backref">As mentioned, standards can use these <a>storage identifiers</a> with
+<p class=note>As mentioned, standards can use these <a>storage identifiers</a> with
 <a>obtain a local storage bottle map</a> and <a>obtain a session storage bottle map</a>. It is
 anticipated that some APIs will be applicable to both <a>storage types</a> going forward.
 <!-- If that does not happen by 2024 we probably ought to admit defeat and simplify this a bit. -->
@@ -198,10 +198,12 @@ It is initially empty.
 <hr>
 
 <p>A <a for=/>user agent</a> holds a <dfn for="user agent">storage shed</dfn>, which is a
-<a for=/>storage shed</a>.
+<a for=/>storage shed</a>. A user agent's <a for="user agent">storage shed</a> holds all
+<dfn>local storage</dfn> data.
 
 <p>A browsing session holds a <dfn for="browsing session">storage shed</dfn>, which is a
-<a for=/>storage shed</a>.
+<a for=/>storage shed</a>. A browsing session's <a for="browsing session">storage shed</a> holds all
+<dfn>session storage</dfn> data.
 
 <p class="XXX" id=lack-of-browsing-session>See
 <a href="https://github.com/whatwg/html/issues/4782">whatwg/html issue #4782</a> and
@@ -212,15 +214,14 @@ be replaced due to <code>Cross-Origin-Opener-Policy</code> or navigation.
 
 <h3 id=storage-shelves>Storage shelves</h3>
 
-<p>A <dfn oldids=site-storage-unit lt="storage shelf|storage shelves">storage shelf</dfn> is the
-biggest storage container, apart from the user agent itself. It holds a <dfn>bucket map</dfn>, which
-is a <a for=/>map</a> of <a for=/>strings</a> to <a>storage buckets</a>.
+<p>A <dfn oldids=site-storage-unit lt="storage shelf|storage shelves">storage shelf</dfn> exists for
+each <a>storage key</a> within a <a for=/>storage shed</a>. It holds a <dfn>bucket map</dfn>,
+which is a <a for=/>map</a> of <a for=/>strings</a> to <a>storage buckets</a>.
 
-<p class="note no-backref">For now "<code>default</code>" is the only <a for=map>key</a> that
-exists in a <a>bucket map</a>. See
-<a href="https://github.com/whatwg/storage/issues/2">issue #2</a>. It is given a
-<a for=map>value</a> when a <a>storage shelf</a> is <a lt="obtain a storage shelf">obtained</a> for
-the first time.
+<p class=note>For now "<code>default</code>" is the only <a for=map>key</a> that exists in a
+<a>bucket map</a>. See <a href="https://github.com/whatwg/storage/issues/2">issue #2</a>. It is
+given a <a for=map>value</a> when a <a>storage shelf</a> is
+<a lt="obtain a storage shelf">obtained</a> for the first time.
 
 <p>To <dfn>obtain a storage shelf</dfn>, given a <a for=/>storage shed</a> <var>shed</var>, an
 <a>environment settings object</a> <var>environment</var>, and a <a>storage type</a>
@@ -265,8 +266,8 @@ agent's <a for="user agent">storage shed</a>, <var>environment</var>, and "<code
 
 <hr>
 
-<p>A <dfn id=bucket oldids=box>local storage bucket</dfn> is a <a>storage bucket</a> for local
-storage APIs.
+<p>A <dfn id=bucket oldids=box>local storage bucket</dfn> is a <a>storage bucket</a> for
+<a>local storage</a> APIs.
 
 <p>A <a>local storage bucket</a> has a
 <dfn for="local storage bucket" id=bucket-mode oldids=box-mode>mode</dfn>, which is
@@ -274,7 +275,7 @@ storage APIs.
 
 <hr>
 
-<p>A <dfn>session storage bucket</dfn> is a <a>storage bucket</a> for session storage APIs.
+<p>A <dfn>session storage bucket</dfn> is a <a>storage bucket</a> for <a>session storage</a> APIs.
 
 <hr>
 
