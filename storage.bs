@@ -102,7 +102,7 @@ function retrieveNextChunk(nextChunkInfo) {
  <dd><p>HTTP cache, cookies, authentication entries, TLS client certificates
  <dt id=site-storage>Storage
  <dd>Indexed DB, Cache API, service worker registrations, <code>localStorage</code>,
- <code>history.pushState()</code>, application caches, notifications, etc.
+ <code>sessionStorage</code>, application caches, notifications, etc.
 </dl>
 
 <p>This standard primarily concerns itself with storage.
@@ -605,13 +605,15 @@ dictionary StorageEstimate {
 
 <p>With that, many thanks to
 Adrian Bateman,
-Alex Russell,
 Aislinn Grigas,
+Alex Russell,
 Ali Alabbas,
+Andrew Sutherland,
 Ben Kelly,
 Ben Turner,
 Dale Harvey,
 David Grogan,
+Domenic Denicola,
 fantasai,
 Jake Archibald<!-- technically B.J. Archibald -->,
 Jeffrey Yasskin,
@@ -624,8 +626,9 @@ Luke Wagner,
 Michael Nordman,
 Mounir Lamouri,
 Shachar Zohar,
-黃強 (Shawn Huang), and
-簡冠庭 (Timothy Guan-tin Chien)
+黃強 (Shawn Huang),
+簡冠庭 (Timothy Guan-tin Chien), and
+Victor Costan
 for being awesome!
 
 <p>This standard is written by <a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
