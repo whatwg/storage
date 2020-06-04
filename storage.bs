@@ -477,7 +477,7 @@ evaluating quotas.
 <h2 id=management>Management</h2>
 
 <p>Whenever a <a>storage bucket</a> is cleared by the user agent, it must be cleared in its
-entirety. User agents should avoid clearing <a>storage bucket</a> while script that is able to
+entirety. User agents should avoid clearing <a>storage buckets</a> while script that is able to
 access them is running, unless instructed otherwise by the user.
 
 <p>If removal of <a>storage buckets</a> leaves the encompassing <a>storage shelf</a>'s
