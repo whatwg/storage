@@ -218,18 +218,13 @@ It is initially empty.
 <a for=/>storage shed</a>. A user agent's <a for="user agent">storage shed</a> holds all
 <dfn>local storage</dfn> data.
 
-<p>A browsing session holds a <dfn for="browsing session">storage shed</dfn>, which is a
-<a for=/>storage shed</a>. A browsing session's <a for="browsing session">storage shed</a> holds all
-<dfn>session storage</dfn> data.
+<p>A <a for=/>browsing session</a> holds a <dfn for="browsing session">storage shed</dfn>, which is
+a <a for=/>storage shed</a>. A <a for=/>browsing session</a>'s
+<a for="browsing session">storage shed</a> holds all <dfn>session storage</dfn> data.
 
-<p class="XXX" id=lack-of-browsing-session>See
-<a href="https://github.com/whatwg/html/issues/4782">whatwg/html issue #4782</a> and
-<a href="https://github.com/whatwg/html/issues/5350">whatwg/html issue #5350</a> for defining
-browsing session. It is roughly analogous to <a>top-level browsing context</a> except that it cannot
-be replaced due to <code>Cross-Origin-Opener-Policy</code> or navigation.
-
-<p>To <dfn export>legacy-clone a browsing session storage shed</dfn>, given a browsing session
-<var>A</var> and a browsing session <var>B</var>, run these steps:
+<p>To <dfn export>legacy-clone a browsing session storage shed</dfn>, given a
+<a for=/>browsing session</a> <var>A</var> and a <a for=/>browsing session</a> <var>B</var>, run
+these steps:
 
 <ol>
  <li>
@@ -249,6 +244,10 @@ be replaced due to <code>Cross-Origin-Opener-Policy</code> or navigation.
    <var>newShelf</var>.
   </ol>
 </ol>
+
+<p class="note">This is considered legacy as the benefits, if any, do not outweigh the
+implementation complexity. And therefore it will not be used for <a>session storage</a> beyond the
+above.
 
 
 <h3 id=storage-shelves>Storage shelves</h3>
@@ -377,7 +376,7 @@ standard and standards using this standard can access the contents.
    <li><p>Assert: <var>type</var> is "<code>session</code>".
 
    <li><p>Set <var>shed</var> to <var>environment</var>'s
-   <a class=XXX href=#lack-of-browsing-session>browsing session</a>'s
+   <a for="environment settings object">browsing session</a>'s
    <a for="browsing session">storage shed</a>.
   </ol>
 
@@ -497,10 +496,10 @@ access them is running, unless instructed otherwise by the user.
 user and offer a way to clear the remaining <a>local storage buckets</a>, i.e., those whose
 <a for="local storage bucket">mode</a> is "<code>persistent</code>".
 
-<p><a>Session storage buckets</a> must be cleared as browsing sessions are closed.
+<p><a>Session storage buckets</a> must be cleared as <a for=/>browsing sessions</a> are closed.
 
-<p class="note">If the user agent allows revival of browsing sessions, then nothing can be cleared
-until revival is no longer possible.
+<p class="note">If the user agent allows revival of <a for=/>browsing sessions</a>, then nothing can
+be cleared until revival is no longer possible.
 
 
 <h3 id=ui-guidelines>User interface guidelines</h3>
