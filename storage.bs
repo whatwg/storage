@@ -84,8 +84,8 @@ function retrieveNextChunk(nextChunkInfo) {
 
 <p>This specification depends on the Infra Standard. [[!INFRA]]
 
-<p>This specification uses terminology from the DOM, HTML, IDL, Permissions API, and URL Standards.
-[[DOM]] [[HTML]] [[WEBIDL]] [[PERMISSIONS]] [[URL]]
+<p>This specification uses terminology from the HTML, IDL, and Permissions Standards.
+[[!HTML]] [[!WEBIDL]] [[!PERMISSIONS]]
 
 
 
@@ -187,9 +187,9 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
 
 <h3 id=storage-keys>Storage keys</h3>
 
-<p>A <dfn>storage key</dfn> is an <a for=/>origin</a>. [[HTML]]
+<p>A <dfn>storage key</dfn> is an <a for=/>origin</a>. [[!HTML]]
 
-<p class=XXX>This is expected to change, see
+<p class=XXX>This is expected to change; see
 <a href="https://privacycg.github.io/storage-partitioning/">Client-Side Storage Partitioning</a>.
 
 <p>To <dfn export>obtain a storage key</dfn>, given an <a>environment settings object</a>
@@ -246,8 +246,8 @@ these steps:
 </ol>
 
 <p class="note">This is considered legacy as the benefits, if any, do not outweigh the
-implementation complexity. And therefore it will not be used for <a>session storage</a> beyond the
-above.
+implementation complexity. And therefore it will not be expanded or used outside of
+<cite>HTML</cite>. [[HTML]]
 
 
 <h3 id=storage-shelves>Storage shelves</h3>
@@ -498,8 +498,9 @@ user and offer a way to clear the remaining <a>local storage buckets</a>, i.e., 
 
 <p><a>Session storage buckets</a> must be cleared as <a for=/>browsing sessions</a> are closed.
 
-<p class="note">If the user agent allows revival of <a for=/>browsing sessions</a>, then nothing can
-be cleared until revival is no longer possible.
+<p class="note">If the user agent allows for revival of <a for=/>browsing sessions</a>, e.g.,
+through reopening <a for=/>browsing sessions</a> or continued use of them after restarting the user
+agent, then clearing necessarily involves a more complex set of heuristics.
 
 
 <h3 id=ui-guidelines>User interface guidelines</h3>
@@ -526,7 +527,7 @@ Navigator includes NavigatorStorage;
 WorkerNavigator includes NavigatorStorage;
 </pre>
 
-<p>Each <a>environment settings object</a> has an associated {{StorageManager}} object. [[HTML]]
+<p>Each <a>environment settings object</a> has an associated {{StorageManager}} object. [[!HTML]]
 
 <p>The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> getter steps are to return
 <a>this</a>'s <a>relevant settings object</a>'s {{StorageManager}} object.
