@@ -147,8 +147,9 @@ allow for different storage policies. And lastly, a <a>storage bucket</a> consis
 <p>A <a>storage endpoint</a> also has <dfn for="storage endpoint">types</dfn>, which is a
 <a for=/>set</a> of <a>storage types</a>.
 
-<p>A <a>storage endpoint</a> also has a <dfn for="storage endpoint">quota</dfn>, which is a number
-representing a recommended <a for=/>storage bottle</a>'s <a for="storage bottle">quota</a>.
+<p>A <a>storage endpoint</a> also has a <dfn for="storage endpoint">quota</dfn>, which is null or a
+number representing a recommended <a for="storage bottle">quota</a> (in bytes) for all
+<a for=/>storage bottles</a> corresponding to this <a>storage endpoint</a>.
 
 <p>A <dfn>storage identifier</dfn> is an <a for=/>ASCII string</a>.
 
@@ -323,7 +324,7 @@ steps:
 initially an empty <a for=/>map</a>. A <a>storage bottle</a> also has a
 <dfn for="storage bottle">proxy map reference set</dfn>, which is initially an empty
 <a for=/>set</a>. A <a>storage bottle</a> also has a <dfn for="storage bottle">quota</dfn>, which is
-null or a number representing a conservative estimate of the amount of bytes available to it. Null
+null or a number representing a conservative estimate of the total amount of bytes it can hold. Null
 indicates the lack of a limit. <span class=note>It is still bound by the <a>storage quota</a> of its
 encompassing <a for=/>storage shelf</a>.
 
@@ -440,7 +441,7 @@ deduplication, compression, and other techniques that obscure exactly how much b
 <a>storage shelf</a> uses.
 
 <p>The <dfn export>storage quota</dfn> of a <a>storage shelf</a> is a conservative estimate of the
-amount of bytes available to it. This amount should be less than the total available storage space
+total amount of bytes it can hold. This amount should be less than the total available storage space
 on the device to give users some wiggle room.
 
 <p class=note>User agents are strongly encouraged to consider navigation frequency, recency of
