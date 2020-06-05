@@ -138,14 +138,18 @@ allow for different storage policies. And lastly, a <a>storage bucket</a> consis
 <h3 id=storage-endpoints>Storage endpoints</h3>
 
 <p>A <dfn export>storage endpoint</dfn> is a <a lt="local storage">local</a> or
-<a>session storage</a> API that uses the infrastructure defined by this standard to keep track of
-its storage needs.
+<a>session storage</a> API that uses the infrastructure defined by this standard, most notably
+<a for=/>storage bottles</a>, to keep track of its storage needs.
 
 <p>A <a>storage endpoint</a> has an <dfn for="storage endpoint">identifier</dfn>, which is a
 <a>storage identifier</a>.
 
 <p>A <a>storage endpoint</a> also has <dfn for="storage endpoint">types</dfn>, which is a
 <a for=/>set</a> of <a>storage types</a>.
+
+<p>A <a>storage endpoint</a> also has a <dfn for="storage endpoint">quota</dfn>, which is null or a
+number representing a recommended <a for="storage bottle">quota</a> (in bytes) for all
+<a for=/>storage bottles</a> corresponding to this <a>storage endpoint</a>.
 
 <p>A <dfn>storage identifier</dfn> is an <a for=/>ASCII string</a>.
 
@@ -160,23 +164,29 @@ defined by the following table:
 
 <table>
  <tr>
-  <th><a>Storage identifier</a>
-  <th><a>Storage types</a>
+  <th><a for="storage endpoint">Identifier</a>
+  <th><a for="storage endpoint">Type</a>
+  <th><a for="storage endpoint">Quota</a>
  <tr>
   <td>"<code>caches</code>"
   <td>« "<code>local</code>" »
+  <td>null
  <tr>
   <td>"<code>indexedDB</code>"
   <td>« "<code>local</code>" »
+  <td>null
  <tr>
   <td>"<code>localStorage</code>"
   <td>« "<code>local</code>" »
+  <td>5 &times; 2<sup>20</sup> (i.e., 5 mebibytes)
  <tr>
   <td>"<code>serviceWorkerRegistrations</code>"
   <td>« "<code>local</code>" »
+  <td>null
  <tr>
   <td>"<code>sessionStorage</code>"
   <td>« "<code>session</code>" »
+  <td>5 &times; 2<sup>20</sup> (i.e., 5 mebibytes)
 </table>
 
 <p class=note>As mentioned, standards can use these <a>storage identifiers</a> with
@@ -300,7 +310,8 @@ steps:
  <li><p><a for=set>For each</a> <var>endpoint</var> of <a>registered storage endpoints</a> whose
  <a for="storage endpoint">types</a> <a for=set>contain</a> <var>type</var>, set <var>bucket</var>'s
  <a>bottle map</a>[<var>endpoint</var>'s <a for="storage endpoint">identifier</a>] to a new
- <a>storage bottle</a>.
+ <a>storage bottle</a> whose <a for="storage bottle">quota</a> is <var>endpoint</var>'s
+ <a for="storage endpoint">quota</a>.
 
  <li><p>Return <var>bucket</var>.
 </ol>
@@ -312,7 +323,10 @@ steps:
 <a>storage endpoint</a>. A <a>storage bottle</a> has a <dfn for="storage bottle">map</dfn>, which is
 initially an empty <a for=/>map</a>. A <a>storage bottle</a> also has a
 <dfn for="storage bottle">proxy map reference set</dfn>, which is initially an empty
-<a for=/>set</a>.
+<a for=/>set</a>. A <a>storage bottle</a> also has a <dfn for="storage bottle">quota</dfn>, which is
+null or a number representing a conservative estimate of the total amount of bytes it can hold. Null
+indicates the lack of a limit. <span class=note>It is still bound by the <a>storage quota</a> of its
+encompassing <a for=/>storage shelf</a>.
 
 <p>A <a>storage bottle</a>'s <a for="storage bottle">map</a> is where the actual data meant to be
 stored lives. User agents are expected to store this data, and make it available across <a>agent</a>
@@ -427,7 +441,7 @@ deduplication, compression, and other techniques that obscure exactly how much b
 <a>storage shelf</a> uses.
 
 <p>The <dfn export>storage quota</dfn> of a <a>storage shelf</a> is a conservative estimate of the
-amount of bytes available to it. This amount should be less than the total available storage space
+total amount of bytes it can hold. This amount should be less than the total available storage space
 on the device to give users some wiggle room.
 
 <p class=note>User agents are strongly encouraged to consider navigation frequency, recency of
