@@ -84,8 +84,8 @@ function retrieveNextChunk(nextChunkInfo) {
 
 <p>This specification depends on the Infra Standard. [[!INFRA]]
 
-<p>This specification uses terminology from the DOM, HTML, IDL, Permissions API, and URL Standards.
-[[DOM]] [[HTML]] [[WEBIDL]] [[PERMISSIONS]] [[URL]]
+<p>This specification uses terminology from the HTML, IDL, and Permissions Standards.
+[[!HTML]] [[!WEBIDL]] [[!PERMISSIONS]]
 
 
 
@@ -195,12 +195,29 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
 <!-- If that does not happen by 2024 we probably ought to admit defeat and simplify this a bit. -->
 
 
-<h3 id=storage-sheds>Storage sheds</h3>
+<h3 id=storage-keys>Storage keys</h3>
 
-<p>A <dfn>storage key</dfn> is an <a for=/>origin</a>. [[HTML]]
+<p>A <dfn>storage key</dfn> is an <a for=/>origin</a>. [[!HTML]]
 
-<p class=XXX>This is expected to change, see
+<p class=XXX>This is expected to change; see
 <a href="https://privacycg.github.io/storage-partitioning/">Client-Side Storage Partitioning</a>.
+
+<p>To <dfn export>obtain a storage key</dfn>, given an <a>environment settings object</a>
+<var>environment</var>, run these steps:
+
+<ol>
+ <li><p>Let <var>key</var> be <var>environment</var>'s
+ <a for="environment settings object">origin</a>.
+
+ <li><p>If <var>key</var> is an <a>opaque origin</a>, then return failure.
+
+ <li><p>If the user has disabled storage, then return failure.
+
+ <li><p>Return <var>key</var>.
+</ol>
+
+
+<h3 id=storage-sheds>Storage sheds</h3>
 
 <p>A <dfn>storage shed</dfn> is a <a for=/>map</a> of <a>storage keys</a> to <a>storage shelves</a>.
 It is initially empty.
@@ -211,15 +228,36 @@ It is initially empty.
 <a for=/>storage shed</a>. A user agent's <a for="user agent">storage shed</a> holds all
 <dfn>local storage</dfn> data.
 
-<p>A browsing session holds a <dfn for="browsing session">storage shed</dfn>, which is a
-<a for=/>storage shed</a>. A browsing session's <a for="browsing session">storage shed</a> holds all
-<dfn>session storage</dfn> data.
+<p>A <a for=/>browsing session</a> holds a <dfn for="browsing session">storage shed</dfn>, which is
+a <a for=/>storage shed</a>. A <a for=/>browsing session</a>'s
+<a for="browsing session">storage shed</a> holds all <dfn>session storage</dfn> data.
 
-<p class="XXX" id=lack-of-browsing-session>See
-<a href="https://github.com/whatwg/html/issues/4782">whatwg/html issue #4782</a> and
-<a href="https://github.com/whatwg/html/issues/5350">whatwg/html issue #5350</a> for defining
-browsing session. It is roughly analogous to <a>top-level browsing context</a> except that it cannot
-be replaced due to <code>Cross-Origin-Opener-Policy</code> or navigation.
+<p>To <dfn export>legacy-clone a browsing session storage shed</dfn>, given a
+<a for=/>browsing session</a> <var>A</var> and a <a for=/>browsing session</a> <var>B</var>, run
+these steps:
+
+<ol>
+ <li>
+  <p><a for=map>For each</a> <var>key</var> → <var>shelf</var> of <var>A</var>'s
+  <a for="browsing session">storage shed</a>:
+
+  <ol>
+   <li><p>Let <var>newShelf</var> be the result of running <a>create a storage shelf</a> with
+   "<code>session</code>".
+
+   <li><p>Set <var>newShelf</var>'s <a>bucket map</a>["<code>default</code>"]'s
+   <a>bottle map</a>["<code>sessionStorage</code>"]'s <a for="storage bottle">map</a> to a
+   <a for=map>clone</a> of <var>shelf</var>'s <a>bucket map</a>["<code>default</code>"]'s
+   <a>bottle map</a>["<code>sessionStorage</code>"]'s <a for="storage bottle">map</a>.
+
+   <li><p>Set <var>B</var>'s <a for="browsing session">storage shed</a>[<var>key</var>] to
+   <var>newShelf</var>.
+  </ol>
+</ol>
+
+<p class="note">This is considered legacy as the benefits, if any, do not outweigh the
+implementation complexity. And therefore it will not be expanded or used outside of
+<cite>HTML</cite>. [[HTML]]
 
 
 <h3 id=storage-shelves>Storage shelves</h3>
@@ -238,24 +276,14 @@ given a <a for=map>value</a> when a <a>storage shelf</a> is
 <var>type</var>, run these steps:
 
 <ol>
- <li><p>Let <var>key</var> be <var>environment</var>'s
- <a for="environment settings object">origin</a>.
+ <li><p>Let <var>key</var> be the result of running <a>obtain a storage key</a> with
+ <var>environment</var>.
 
- <li><p>If <var>key</var> is an <a>opaque origin</a>, then return failure.
+ <li><p>If <var>key</var> is failure, then return failure.
 
- <li><p>If the user has disabled storage, then return failure.
-
- <li>
-  <p>If <var>shed</var>[<var>key</var>] does not <a for=map>exist</a>, then:
-
-  <ol>
-   <li><p>Let <var>shelf</var> be a new <a>storage shelf</a>.
-
-   <li><p>Set <var>shelf</var>'s <a>bucket map</a>["<code>default</code>"] to the result of
-   <a>create a storage bucket</a> with <var>type</var>.
-
-   <li><p>Set <var>shed</var>[<var>key</var>] to <var>shelf</var>.
-  </ol>
+ <li><p>If <var>shed</var>[<var>key</var>] does not <a for=map>exist</a>, then set
+ <var>shed</var>[<var>key</var>] to the result of running <a>create a storage shelf</a> with
+ <var>type</var>.
 
  <li><p>Return <var>shed</var>[<var>key</var>].
 </ol>
@@ -264,12 +292,22 @@ given a <a for=map>value</a> when a <a>storage shelf</a> is
 <var>environment</var>, return the result of running <a>obtain a storage shelf</a> with the user
 agent's <a for="user agent">storage shed</a>, <var>environment</var>, and "<code>local</code>".
 
+<p>To <dfn>create a storage shelf</dfn>, given a <a>storage type</a> <var>type</var>, run these
+steps:
+
+<ol>
+ <li><p>Let <var>shelf</var> be a new <a>storage shelf</a>.
+
+ <li><p>Set <var>shelf</var>'s <a>bucket map</a>["<code>default</code>"] to the result of running
+ <a>create a storage bucket</a> with <var>type</var>.
+
+ <li><p>Return <var>shelf</var>.
+</ol>
+
 
 <h3 id=buckets oldids=boxes>Storage buckets</h3>
 
-<p>A <dfn>storage bucket</dfn> is a place for <a>storage endpoints</a> to store data. Whenever a
-<a>storage bucket</a> is cleared by the user agent, it must be cleared in its entirety.
-<!-- This is probably better defined in some kind of storage lifetime section. -->
+<p>A <dfn>storage bucket</dfn> is a place for <a>storage endpoints</a> to store data.
 
 <p>A <a>storage bucket</a> has a <dfn>bottle map</dfn> of <a>storage identifiers</a> to
 <a>storage bottles</a>.
@@ -352,7 +390,7 @@ standard and standards using this standard can access the contents.
    <li><p>Assert: <var>type</var> is "<code>session</code>".
 
    <li><p>Set <var>shed</var> to <var>environment</var>'s
-   <a class=XXX href=#lack-of-browsing-session>browsing session</a>'s
+   <a for="environment settings object">browsing session</a>'s
    <a for="browsing session">storage shed</a>.
   </ol>
 
@@ -450,28 +488,45 @@ evaluating quotas.
 
 
 
-<h2 id=ui-guidelines>User Interface Guidelines</h2>
+<h2 id=management>Management</h2>
+
+<p>Whenever a <a>storage bucket</a> is cleared by the user agent, it must be cleared in its
+entirety. User agents should avoid clearing <a>storage buckets</a> while script that is able to
+access them is running, unless instructed otherwise by the user.
+
+<p>If removal of <a>storage buckets</a> leaves the encompassing <a>storage shelf</a>'s
+<a>bucket map</a> <a for=map lt="is empty">empty</a>, then <a for=map>remove</a> that
+<a>storage shelf</a> and corresponding <a>storage key</a> from the encompassing
+<a for=/>storage shed</a>.
+
+
+<h3 id=storage-pressure>Storage pressure</h3>
+
+<p>A user agent that comes under storage pressure should clear network state and
+<a>local storage buckets</a> whose <a for="local storage bucket">mode</a> is
+"<code>best-effort</code>", ideally prioritizing removal in a manner that least impacts the user.
+
+<p>If a user agent continues to be under storage pressure, then the user agent should inform the
+user and offer a way to clear the remaining <a>local storage buckets</a>, i.e., those whose
+<a for="local storage bucket">mode</a> is "<code>persistent</code>".
+
+<p><a>Session storage buckets</a> must be cleared as <a for=/>browsing sessions</a> are closed.
+
+<p class="note">If the user agent allows for revival of <a for=/>browsing sessions</a>, e.g.,
+through reopening <a for=/>browsing sessions</a> or continued use of them after restarting the user
+agent, then clearing necessarily involves a more complex set of heuristics.
+
+
+<h3 id=ui-guidelines>User interface guidelines</h3>
 
 <p>User agents should not distinguish between network state and storage in their user interface.
-Instead user agents should offer users the ability to remove all storage for each group of
+Instead user agents should offer users the ability to clear all storage for each group of
 <a>schemelessly same site</a> <a for=/>origins</a>. This ensures to some extent that network state
 cannot be used to revive storage. This also reduces the amount users need to know about the
 different ways in which websites can store data.
-<!-- To some extent, since HTTP ETag... And also, permissions/credentials, maybe? -->
 
 <p>Credentials should be separated as they contain data the user might not be able to revive, such
 as an autogenerated password. Permissions are best separated too to avoid inconveniencing the user.
-Credentials and permissions are also somewhat easier to understand and differentiate for users from
-network state and storage.
-
-
-<h3 id=storage-pressure>Storage Pressure</h3>
-
-<p>When the user agent notices it comes under storage pressure and it cannot free up sufficient
-space by clearing network state, <a>session storage buckets</a>, and <a>local storage buckets</a>
-whose <a for="local storage bucket">mode</a> is "<code>best-effort</code>", then the user agent
-should inform the user and offer a way to clear the remaining <a>local storage buckets</a>, i.e.,
-those whose <a for="local storage bucket">mode</a> is "<code>persistent</code>".
 
 
 
@@ -486,7 +541,7 @@ Navigator includes NavigatorStorage;
 WorkerNavigator includes NavigatorStorage;
 </pre>
 
-<p>Each <a>environment settings object</a> has an associated {{StorageManager}} object. [[HTML]]
+<p>Each <a>environment settings object</a> has an associated {{StorageManager}} object. [[!HTML]]
 
 <p>The <dfn attribute for=NavigatorStorage><code>storage</code></dfn> getter steps are to return
 <a>this</a>'s <a>relevant settings object</a>'s {{StorageManager}} object.
