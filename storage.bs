@@ -479,8 +479,9 @@ deduplication, compression, and other techniques that obscure exactly how much b
 <a>storage shelf</a> uses.
 
 <p>The <dfn export>storage quota</dfn> of a <a>storage shelf</a> is a conservative estimate of the
-total amount of bytes it can hold. This amount should be less than the total available storage space
-on the device to give users some wiggle room.
+total amount of bytes it can hold. This amount should be less than the total storage capacity on
+the device to give users some wiggle room. This amount should not reflect the available storage
+space on the device, to avoid facilitating a cross-origin resource size leak.
 
 <p class=note>User agents are strongly encouraged to consider navigation frequency, recency of
 visits, bookmarking, and <a href="#persistence">permission</a> for {{"persistent-storage"}} when
