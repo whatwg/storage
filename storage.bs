@@ -148,8 +148,8 @@ allow for different storage policies. And lastly, a <a>storage bucket</a> consis
 <a for=/>set</a> of <a>storage types</a>.
 
 <p>A <a>storage endpoint</a> also has a <dfn for="storage endpoint">quota</dfn>, which is null or a
-number representing a recommended <a for="storage bottle">quota</a> (in bytes) for all
-<a for=/>storage bottles</a> corresponding to this <a>storage endpoint</a>.
+number representing a recommended <a for="storage bottle">quota</a> (in bytes) for each
+<a for=/>storage bottle</a> corresponding to this <a>storage endpoint</a>.
 
 <p>A <dfn>storage identifier</dfn> is an <a for=/>ASCII string</a>.
 
