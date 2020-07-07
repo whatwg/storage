@@ -478,14 +478,19 @@ rough estimate of the amount of bytes used by it.
 deduplication, compression, and other techniques that obscure exactly how much bytes a
 <a>storage shelf</a> uses.
 
-<p>The <dfn export>storage quota</dfn> of a <a>storage shelf</a> is an <a>implementation-defined</a>
-conservative estimate of the total amount of bytes it can hold. This amount should be less than the
-total storage space on the device. It must not be a function of the available storage space on the
-device.
+<p tracking-vector>The <dfn export>storage quota</dfn> of a <a>storage shelf</a> is an
+<a>implementation-defined</a> conservative estimate of the total amount of bytes it can hold. This
+amount should be less than the total storage space on the device. It must not be a function of the
+available storage space on the device.
 
-<p class=note>User agents are strongly encouraged to consider navigation frequency, recency of
-visits, bookmarking, and <a href="#persistence">permission</a> for {{"persistent-storage"}} when
-determining quotas.
+<div class=note>
+ <p>User agents are strongly encouraged to consider navigation frequency, recency of visits,
+ bookmarking, and <a href="#persistence">permission</a> for {{"persistent-storage"}} when
+ determining quotas.
+
+ <p>Directly or indirectly revealing available storage space can lead to fingerprinting and leaking
+ information outside the scope of the <a for=/>origin</a> involved.
+</div>
 
 
 
