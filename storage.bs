@@ -112,9 +112,9 @@ function retrieveNextChunk(nextChunkInfo) {
 <h2 id=model>Model</h2>
 
 <p>Standards defining local or session storage APIs will define a <a>storage endpoint</a> and
-<a lt="registered storage endpoints">register</a> it by changing this standard. They will use either
-<a>obtain a local storage bottle map</a> or <a>obtain a session storage bottle map</a>, which
-will give them:
+<a lt="registered storage endpoints">register</a> it by changing this standard. They will invoke
+either the <a>obtain a local storage bottle map</a> or the
+<a>obtain a session storage bottle map</a> algorithm, which will give them:
 
 <ul>
  <li><p>Failure, which might mean the API has to throw or otherwise indicate there is no storage
