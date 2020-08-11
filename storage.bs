@@ -125,7 +125,7 @@ either the <a>obtain a local storage bottle map</a> or the
  from other APIs, <a>storage keys</a>, and <a>storage types</a>.
 </ul>
 
-<p class=note>If you are defining a standard for such an API, consider filing an issue agains this
+<p class=note>If you are defining a standard for such an API, consider filing an issue against this
 standard for assistance and review.
 
 <p>To isolate this data this standard defines a <a for=/>storage shed</a> which segments
