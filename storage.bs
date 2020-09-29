@@ -3,6 +3,7 @@ Group: WHATWG
 H1: Storage
 Shortname: storage
 Text Macro: TWITTER storagestandard
+Text Macro: LATESTRD 2020-08
 Abstract: The Storage Standard defines an API for persistent storage and quota estimates, as well as the platform storage architecture.
 Translation: ja https://triple-underscore.github.io/storage-ja.html
 </pre>
