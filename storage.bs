@@ -54,9 +54,9 @@ Promise.all([
   navigator.storage.persisted(),
   navigator.permissions.query({name: "persistent-storage"})
 ]).then(([persisted, permission]) => {
-  if (!persisted &amp;&amp; permission.status == "granted") {
+  if (!persisted &amp;&amp; permission.state == "granted") {
     navigator.storage.persist().then( /* &hellip; */ );
-  } else if (!persisted &amp;&amp; permission.status == "prompt") {
+  } else if (!persisted &amp;&amp; permission.state == "prompt") {
     showPersistentStorageExplanation();
   }
 });
