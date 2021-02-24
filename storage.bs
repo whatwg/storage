@@ -13,6 +13,9 @@ urlPrefix: https://tc39.github.io/ecma262/; spec: ECMASCRIPT
     text: agent; url: #sec-agents; type: dfn
     text: agent cluster; url: #sec-agent-clusters; type: dfn
 </pre>
+<pre class=link-defaults>
+spec:permissions-1; type:enum-value; text:"persistent-storage"
+</pre>
 
 
 
@@ -447,7 +450,7 @@ as persistent without involvement from the <a for=/>origin</a> or user. This mak
 useful for resources the user needs to have available while offline or resources the user creates
 locally.
 
-<p>The <dfn for="PermissionName" enum-value>"<code>persistent-storage</code>"</dfn>
+<p>The {{"persistent-storage"}}
 <a>powerful feature</a>'s permission-related flags, algorithms, and types are defaulted, except for:
 
 <dl>
