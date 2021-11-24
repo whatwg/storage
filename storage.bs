@@ -460,7 +460,7 @@ locally.
  <dd algorithm="permission-revocation">
   <ol>
    <li><p>If the result of <a>getting the current permission state</a> with
-   "{{PermissionName/persistent-storage}}" is {{PermissionState/"granted"}}, then return.
+   "{{PermissionName/persistent-storage}}" is "{{PermissionState/granted}}", then return.
 
    <li><p>Let <var>shelf</var> be the result of running <a>obtain a local storage shelf</a> with
    <a>current settings object</a>.
@@ -629,7 +629,7 @@ dictionary StorageEstimate {
     <p class=note>It will be false when there's an internal error.
 
    <li>
-    <p>If <var>persisted</var> is false and <var>permission</var> is {{PermissionState/"granted"}},
+    <p>If <var>persisted</var> is false and <var>permission</var> is "{{PermissionState/granted}}",
     then:
 
     <ol>
