@@ -198,7 +198,8 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
 
 <h3 id=storage-keys>Storage keys</h3>
 
-<p>A <dfn>storage key</dfn> is an <a for=/>origin</a>. [[!HTML]]
+<p>A <dfn>storage key</dfn> is a <a>tuple</a> consisting of an <dfn for="storage key">origin</dfn>
+(an <a for=/>origin</a>). [[!HTML]]
 
 <p class=XXX>This is expected to change; see
 <a href="https://privacycg.github.io/storage-partitioning/">Client-Side Storage Partitioning</a>.
@@ -207,22 +208,22 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
 <var>environment</var>, run these steps:
 
 <ol>
- <li><p>Let <var>origin</var> be <var>environment</var>'s
- <a for="environment settings object">origin</a>.
+ <li><p>Let <var>key</var> be the result of running <a>obtain a storage key for non-storage
+ purposes</a> with <var>environment</var>.
 
- <li><p>If <var>origin</var> is an <a>opaque origin</a>, then return failure.
+ <li><p>If <var>key</var>'s <a for="storage key">origin</a> is an <a>opaque origin</a>, then return
+ failure.
 
  <li><p>If the user has disabled storage, then return failure.
 
- <li><p>Return the result of running <a>obtain a storage key for non-storage purposes</a> with
- <var>environment</var>.
+ <li><p>Return <var>key</var>.
 </ol>
 
 <p>To <dfn export>obtain a storage key for non-storage purposes</dfn>, given an <a>environment
 settings object</a> <var>environment</var>, run these steps:
 
 <ol>
- <li><p>Let <var>key</var> be <var>environment</var>'s
+ <li><p>Let <var>key</var> be a <a>tuple</a> consisting of <var>environment</var>'s
  <a for="environment settings object">origin</a>.
 
  <li><p>Return <var>key</var>.
