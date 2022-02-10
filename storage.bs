@@ -208,7 +208,7 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
 <var>environment</var>, run these steps:
 
 <ol>
- <li><p>Let <var>key</var> be the result of running 
+ <li><p>Let <var>key</var> be the result of running
  <a>obtain a storage key for non-storage purposes</a> with <var>environment</var>.
 
  <li><p>If <var>key</var>'s <a for="storage key">origin</a> is an <a>opaque origin</a>, then return
