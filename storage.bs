@@ -229,6 +229,17 @@ settings object</a> <var>environment</var>, run these steps:
  <li><p>Return <var>key</var>.
 </ol>
 
+<p>To determine whether a <a>storage key</a> <var>A</var>
+<dfn export for="storage key" id=concept-storage-key-equals lt=equal>equals</dfn> <var>B</var>, run
+these steps:
+
+<ol>
+ <li><p>If <var>A</var>'s <a for="storage key">origin</a> is not <a lt="same origin">same-origin</a>
+ with <var>B</var>'s <a for="storage key">origin</a>, then return false.
+
+ <li><p>Return true.
+</ol>
+
 
 <h3 id=storage-sheds>Storage sheds</h3>
 
@@ -702,6 +713,7 @@ Aislinn Grigas,
 Alex Russell,
 Ali Alabbas,
 Andrew Sutherland,
+Andrew Williams,
 Ben Kelly,
 Ben Turner,
 Dale Harvey,
