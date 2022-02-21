@@ -1,5 +1,6 @@
 <pre class=metadata>
 Group: WHATWG
+Date: 2022-02-23
 H1: Storage
 Shortname: storage
 Text Macro: TWITTER storagestandard
