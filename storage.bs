@@ -462,7 +462,7 @@ is needed for <a href="https://github.com/whatwg/storage/issues/4">issue #4</a> 
 
 <p>A <a>local storage bucket</a> can only have its <a for="local storage bucket">mode</a> change to
 "<code>persistent</code>" if the user (or user agent on behalf of the user) has granted permission
-to use the "persistent-storage" <a>powerful feature</a>.
+to use the "<code>persistent-storage</code>" <a>powerful feature</a>.
 
 <p class="note">When granted to an <a for=/>origin</a>, the persistence permission can be used to
 protect storage from the user agent's clearing policies. The user agent cannot clear storage marked
@@ -470,20 +470,19 @@ as persistent without involvement from the <a for=/>origin</a> or user. This mak
 useful for resources the user needs to have available while offline or resources the user creates
 locally.
 
-<p>The "persistent-storage"
-<a>powerful feature</a>'s permission-related algorithms, and types are defaulted, except for:
+<p>The "<code>persistent-storage</code>" <a>powerful feature</a>'s permission-related algorithms,
+and types are defaulted, except for:
 
 <dl>
  <dt><a>permission state</a>
- <dd><p>"persistent-storage"'s <a>permission state</a> must have the same value
- for all <a>environment settings objects</a> with a given
- <a for="environment settings object">origin</a>.
+ <dd><p>"<code>persistent-storage</code>"'s <a>permission state</a> must have the same value for all
+ <a>environment settings objects</a> with a given <a for="environment settings object">origin</a>.
 
  <dt><a>permission revocation algorithm</a>
  <dd algorithm="permission-revocation">
   <ol>
    <li><p>If the result of <a>getting the current permission state</a> with
-   "persistent-storage" is "{{PermissionState/granted}}", then return.
+   "<code>persistent-storage</code>" is "{{PermissionState/granted}}", then return.
 
    <li><p>Let <var>shelf</var> be the result of running <a>obtain a local storage shelf</a> with
    <a>current settings object</a>.
@@ -511,8 +510,8 @@ available storage space on the device.
 
 <div class=note>
  <p>User agents are strongly encouraged to consider navigation frequency, recency of visits,
- bookmarking, and <a href="#persistence">permission</a> for "persistent-storage"
- when determining quotas.
+ bookmarking, and <a href="#persistence">permission</a> for "<code>persistent-storage</code>" when
+ determining quotas.
 
  <p>Directly or indirectly revealing available storage space can lead to fingerprinting and leaking
  information outside the scope of the <a for=/>origin</a> involved.
@@ -637,7 +636,7 @@ dictionary StorageEstimate {
   <ol>
    <li>
     <p>Let <var>permission</var> be the result of <a>requesting permission to use</a>
-    "persistent-storage".
+    "<code>persistent-storage</code>".
 
     <p class="note">User agents are encouraged to not let the user answer this question twice for
     the same <a for=/>origin</a> around the same time and this algorithm is not equipped to handle
