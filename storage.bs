@@ -204,7 +204,7 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
 <p class=XXX>This is expected to change; see
 <a href="https://privacycg.github.io/storage-partitioning/">Client-Side Storage Partitioning</a>.
 
-<p>To <dfn export>obtain a storage key</dfn>, given an <a>environment settings object</a>
+<p>To <dfn export>obtain a storage key</dfn>, given an <a for=/>environment</a>
 <var>environment</var>, run these steps:
 
 <ol>
@@ -219,14 +219,16 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
  <li><p>Return <var>key</var>.
 </ol>
 
-<p>To <dfn export>obtain a storage key for non-storage purposes</dfn>, given an <a>environment
-settings object</a> <var>environment</var>, run these steps:
+<p>To <dfn export>obtain a storage key for non-storage purposes</dfn>, given an
+<a for=/>environment</a> <var>environment</var>, run these steps:
 
 <ol>
- <li><p>Let <var>key</var> be a <a>tuple</a> consisting of <var>environment</var>'s
- <a for="environment settings object">origin</a>.
+ <li><p>Let <var>origin</var> be <var>environment</var>'s
+ <a for="environment settings object">origin</a> if <var>environment</var> is an
+ <a>environment settings object</a>; otherwise <var>environment</var>'s
+ <a for=environment>creation URL</a>'s <a for=url>origin</a>.
 
- <li><p>Return <var>key</var>.
+ <li><p>Return a <a>tuple</a> consisting of <var>origin</var>.
 </ol>
 
 <p>To determine whether a <a>storage key</a> <var>A</var>
