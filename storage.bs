@@ -222,6 +222,9 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
 <p>To <dfn export>obtain a storage key for non-storage purposes</dfn>, given an
 <a for=/>environment</a> <var>environment</var>, run these steps:
 
+<p class=note>This algorithm will be removed or updated once the html spec is
+modified to store a storage key directly on environment.
+
 <ol>
  <li><p>Let <var>origin</var> be <var>environment</var>'s
  <a for="environment settings object">origin</a> if <var>environment</var> is an
@@ -229,6 +232,29 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
  <a for=environment>creation URL</a>'s <a for=url>origin</a>.
 
  <li><p>Return a <a>tuple</a> consisting of <var>origin</var>.
+</ol>
+
+<p>To <dfn export>compute a storage key for an environment settings object</dfn>,
+given an <a for=/>origin</a> <var>origin</var> and an optional
+<a for=/>storage key</a> <var>parent-or-outer storage key</var>, run these steps:
+
+<ol>
+  <li>Return a <a>tuple</a> consisting of <var>origin</var>.
+</ol>
+
+<p class=note>The <var>parent-or-outer storage key</var> will be used in the future to
+compute and propagate additional values in the storage key in the future.
+For example, top-level site, the ancestor-chain bit, or anonymous iframe
+nonce.</p>
+
+<p>To <dfn export>compute a storage key for an environment</dfn>, given a
+<a for=/>url</a> <var>creation url</var> and an optional <a for=/>storage key</a>
+<var>parent storage key</var>, run these steps:
+
+<ol>
+  <li>Let <var>origin</var> be <var>creation url</var>'s <a for=url>origin</a>.
+  <li>Return the result of running <a for=/>compute a storage key for an environment
+  settings object</a> given <var>origin</var> and <var>parent storage key</var>
 </ol>
 
 <p>To determine whether a <a>storage key</a> <var>A</var>
