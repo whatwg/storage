@@ -199,7 +199,7 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
 <h3 id=storage-keys>Storage keys</h3>
 
 <p>A <dfn>storage key</dfn> is a <a>tuple</a> consisting of an <dfn for="storage key">origin</dfn>
-(an <a for=/>origin</a>). [[!HTML]]
+(an <a for=/>origin</a>) and a <dfn for="storage key">top-level site</dfn> (a <a for=/>site</a>). [[!HTML]]
 
 <p class=XXX>This is expected to change; see
 <a href="https://privacycg.github.io/storage-partitioning/">Client-Side Storage Partitioning</a>.
@@ -228,7 +228,15 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
  <a>environment settings object</a>; otherwise <var>environment</var>'s
  <a for=environment>creation URL</a>'s <a for=url>origin</a>.
 
- <li><p>Return a <a>tuple</a> consisting of <var>origin</var>.
+ <li><p>Let <var>topLevelOrigin</var> be <var>environment</var>'s
+ <a for=environment>top-level origin</a>.
+
+ <li><p>If <var>topLevelOrigin</var> is null, then set it to <var>origin</var>.
+
+ <li><p>Let <var>topLevelSite</var> be the result of of running <a>obtain a site</a>
+ given <var>topLevelOrigin</var>.
+
+ <li><p>Return (<var>origin</var>, <var>topLevelSite</var>).
 </ol>
 
 <p>To determine whether a <a>storage key</a> <var>A</var>
@@ -238,6 +246,9 @@ steps:
 <ol>
  <li><p>If <var>A</var>'s <a for="storage key">origin</a> is not <a>same origin</a> with
  <var>B</var>'s <a for="storage key">origin</a>, then return false.
+
+ <li><p>If <var>A</var>'s <a for="storage key">top-level site</a> is not <a for=site>same site</a>
+ with <var>B</var>'s <a for="storage key">top-level site</a>, then return false.
 
  <li><p>Return true.
 </ol>
