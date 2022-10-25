@@ -254,18 +254,18 @@ It is initially empty.
 <a for=/>storage shed</a>. A user agent's <a for="user agent">storage shed</a> holds all
 <dfn>local storage</dfn> data.
 
-<p>A <a for=/>browsing session</a> holds a <dfn for="browsing session">storage shed</dfn>, which is
-a <a for=/>storage shed</a>. A <a for=/>browsing session</a>'s
-<a for="browsing session">storage shed</a> holds all <dfn>session storage</dfn> data.
+<p>A <a for=/>traversable navigable</a> holds a <dfn for="traversable navigable">storage shed</dfn>,
+which is a <a for=/>storage shed</a>. A <a for=/>traversable navigable</a>'s
+<a for="traversable navigable">storage shed</a> holds all <dfn>session storage</dfn> data.
 
-<p>To <dfn export>legacy-clone a browsing session storage shed</dfn>, given a
-<a for=/>browsing session</a> <var>A</var> and a <a for=/>browsing session</a> <var>B</var>, run
-these steps:
+<p>To <dfn export>legacy-clone a traversable's storage shed</dfn>, given a
+<a for=/>traversable navigable</a> <var>A</var> and a <a for=/>traversable navigable</a>
+<var>B</var>, run these steps:
 
 <ol>
  <li>
   <p><a for=map>For each</a> <var>key</var> → <var>shelf</var> of <var>A</var>'s
-  <a for="browsing session">storage shed</a>:
+  <a for="traversable navigable">storage shed</a>:
 
   <ol>
    <li><p>Let <var>newShelf</var> be the result of running <a>create a storage shelf</a> with
@@ -276,7 +276,7 @@ these steps:
    <a for=map>clone</a> of <var>shelf</var>'s <a>bucket map</a>["<code>default</code>"]'s
    <a>bottle map</a>["<code>sessionStorage</code>"]'s <a for="storage bottle">map</a>.
 
-   <li><p>Set <var>B</var>'s <a for="browsing session">storage shed</a>[<var>key</var>] to
+   <li><p>Set <var>B</var>'s <a for="traversable navigable">storage shed</a>[<var>key</var>] to
    <var>newShelf</var>.
   </ol>
 </ol>
@@ -416,8 +416,15 @@ standard and standards using this standard can access the contents.
    <li><p>Assert: <var>type</var> is "<code>session</code>".
 
    <li><p>Set <var>shed</var> to <var>environment</var>'s
-   <a for="environment settings object">browsing session</a>'s
-   <a for="browsing session">storage shed</a>.
+   <a for=/>global object</a>'s
+   <a>associated <code>Document</code></a>'s
+   <a>node navigable</a>'s
+   <a>traversable navigable</a>'s
+   <a for="traversable navigable">storage shed</a>.
+
+   XXX: Need to export node navigable.
+
+   XXX: Need to export navigable's traversable navigable, and probably add a "for" above.
   </ol>
 
  <li><p>Let <var>shelf</var> be the result of running <a>obtain a storage shelf</a>, with
@@ -543,11 +550,11 @@ access them is running, unless instructed otherwise by the user.
 user and offer a way to clear the remaining <a>local storage buckets</a>, i.e., those whose
 <a for="local storage bucket">mode</a> is "<code>persistent</code>".
 
-<p><a>Session storage buckets</a> must be cleared as <a for=/>browsing sessions</a> are closed.
+<p><a>Session storage buckets</a> must be cleared as <a for=/>traversable navigables</a> are closed.
 
-<p class="note">If the user agent allows for revival of <a for=/>browsing sessions</a>, e.g.,
-through reopening <a for=/>browsing sessions</a> or continued use of them after restarting the user
-agent, then clearing necessarily involves a more complex set of heuristics.
+<p class="note">If the user agent allows for revival of <a for=/>traversable navigables</a>, e.g.,
+through reopening <a for=/>traversable navigables</a> or continued use of them after restarting the
+user agent, then clearing necessarily involves a more complex set of heuristics.
 
 
 <h3 id=ui-guidelines>User interface guidelines</h3>
