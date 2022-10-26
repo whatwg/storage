@@ -258,7 +258,7 @@ It is initially empty.
 which is a <a for=/>storage shed</a>. A <a for=/>traversable navigable</a>'s
 <a for="traversable navigable">storage shed</a> holds all <dfn>session storage</dfn> data.
 
-<p>To <dfn export>legacy-clone a traversable's storage shed</dfn>, given a
+<p>To <dfn export>legacy-clone a traversable storage shed</dfn>, given a
 <a for=/>traversable navigable</a> <var>A</var> and a <a for=/>traversable navigable</a>
 <var>B</var>, run these steps:
 
