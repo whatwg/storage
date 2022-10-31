@@ -419,7 +419,7 @@ standard and standards using this standard can access the contents.
    <a for=/>global object</a>'s
    <a>associated <code>Document</code></a>'s
    <a>node navigable</a>'s
-   <a>traversable navigable</a>'s
+   <a for=navigable>traversable navigable</a>'s
    <a for="traversable navigable">storage shed</a>.
 
    XXX: Need to export node navigable.
