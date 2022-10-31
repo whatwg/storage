@@ -421,10 +421,6 @@ standard and standards using this standard can access the contents.
    <a>node navigable</a>'s
    <a for=navigable>traversable navigable</a>'s
    <a for="traversable navigable">storage shed</a>.
-
-   XXX: Need to export node navigable.
-
-   XXX: Need to export navigable's traversable navigable, and probably add a "for" above.
   </ol>
 
  <li><p>Let <var>shelf</var> be the result of running <a>obtain a storage shelf</a>, with
