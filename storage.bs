@@ -254,12 +254,14 @@ It is initially empty.
 <a for=/>storage shed</a>. A user agent's <a for="user agent">storage shed</a> holds all
 <dfn>local storage</dfn> data.
 
-<p>A <a for=/>traversable navigable</a> holds a <dfn for="traversable navigable">storage shed</dfn>,
-which is a <a for=/>storage shed</a>. A <a for=/>traversable navigable</a>'s
+<p>A <a for=/>traversable navigable</a> holds a
+<dfn oldids="browsing-session-storage-shed" for="traversable navigable">storage shed</dfn>, which is
+a <a for=/>storage shed</a>. A <a for=/>traversable navigable</a>'s
 <a for="traversable navigable">storage shed</a> holds all <dfn>session storage</dfn> data.
 
-<p>To <dfn export>legacy-clone a traversable storage shed</dfn>, given a
-<a for=/>traversable navigable</a> <var>A</var> and a <a for=/>traversable navigable</a>
+<p>To
+<dfn export oldids="legacy-clone-a-browsing-session-storage-shed">legacy-clone a traversable storage shed</dfn>,
+given a <a for=/>traversable navigable</a> <var>A</var> and a <a for=/>traversable navigable</a>
 <var>B</var>, run these steps:
 
 <ol>
