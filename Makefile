@@ -21,3 +21,7 @@ local: storage.bs
 deploy: storage.bs
 	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh
 	bash ./deploy.sh
+
+build-diagram: assets/model-diagram.mmd
+	mmdc -i assets/model-diagram.mmd -o assets/model-diagram.svg -c assets/mmdc.config.json
+	svgo -f assets -o assets/ --config assets/svgo.config.js

@@ -1,0 +1,11 @@
+erDiagram
+
+%% This is the source file for `model-diagram.svg`.
+%% Prerequisites: `npm i -g @mermaid-js/mermaid-cli svgo`
+%% Build command: `make model-diagram`
+
+"User agent" ||--|| "Storage shed" : "holds (local)"
+"Browsing session" ||--|| "Storage shed" : "holds (session)"
+"Storage shed" ||--o{ "Storage shelf" : "for each storage key"
+"Storage shelf" ||--|| "Storage bucket" : "holds (default)"
+"Storage bucket" ||--|{ "Storage bottle" : "for each storage endpoint"
