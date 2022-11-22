@@ -1,0 +1,14 @@
+{
+  "name": "storage",
+  "version": "0.0.0",
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^9.2.2",
+    "svgo": "^3.0.2"
+  },
+  "scripts": {
+    "mmdc": "mmdc -i assets/model-diagram.mmd -o assets/model-diagram.svg -c assets/mmdc.config.json",
+    "svgo": "svgo -f assets -o assets/ --config assets/svgo.config.js",
+    "build-diagram": "npm run mmdc && npm run svgo"
+  },
+  "private": true
+}
