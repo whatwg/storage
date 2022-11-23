@@ -21,5 +21,4 @@ local: storage.bs
 deploy: storage.bs
 	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh
 	EXTRA_FILES="assets/*" \
-	POST_BUILD_STEP='npm run build-diagram' \
 	bash ./deploy.sh

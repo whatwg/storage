@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-labelledby="chart-title-mermaid-1669212827198 chart-desc-mermaid-1669212827198" style="max-width:434.141px;background-color:#fff;font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px;fill:#333" viewBox="0 0 434.141 815">
+  <defs>
+    <marker id="b" markerHeight="18" markerWidth="18" orient="auto" refX="0" refY="9">
+      <path fill="none" stroke="gray" d="M9 0v18m6-18v18"/>
+    </marker>
+  </defs>
+  <defs>
+    <marker id="a" markerHeight="18" markerWidth="18" orient="auto" refX="18" refY="9">
+      <path fill="none" stroke="gray" d="M3 0v18M9 0v18"/>
+    </marker>
+  </defs>
+  <defs>
+    <marker id="d" markerHeight="36" markerWidth="45" orient="auto" refX="27" refY="18">
+      <path fill="none" stroke="gray" d="M3 9v18m6-9q18-18 36 0-18 18-36 0"/>
+    </marker>
+  </defs>
+  <defs>
+    <marker id="c" markerHeight="36" markerWidth="57" orient="auto" refX="39" refY="18">
+      <circle cx="9" cy="18" r="6" fill="#fff" stroke="gray"/>
+      <path fill="none" stroke="gray" d="M21 18q18-18 36 0-18 18-36 0"/>
+    </marker>
+  </defs>
+  <path fill="none" stroke="gray" marker-end="url(#a)" marker-start="url(#b)" d="M73.762 95v8.333c0 8.334 0 25 11.765 41.667s35.296 33.333 47.061 41.667L144.353 195" class="er relationshipLine"/>
+  <path fill="none" stroke="gray" marker-end="url(#a)" marker-start="url(#b)" d="M320.832 95v8.333c0 8.334 0 25-11.765 41.667s-35.296 33.333-47.061 41.667L250.24 195" class="er relationshipLine"/>
+  <path fill="none" stroke="gray" marker-end="url(#c)" marker-start="url(#b)" d="M197.297 270v100" class="er relationshipLine"/>
+  <path fill="none" stroke="gray" marker-end="url(#a)" marker-start="url(#b)" d="M197.297 445v100" class="er relationshipLine"/>
+  <path fill="none" stroke="gray" marker-end="url(#d)" marker-start="url(#b)" d="M197.297 620v100" class="er relationshipLine"/>
+  <path fill="#f0fff0" fill-opacity="100%" stroke="gray" d="M20 20h107.523v75H20z" class="er entityBox"/>
+  <text class="er entityLabel" dominant-baseline="middle" style="font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px" text-anchor="middle" transform="translate(73.762 57.5)">User agent</text>
+  <path fill="#f0fff0" fill-opacity="100%" stroke="gray" d="M136.41 195h121.773v75H136.41z" class="er entityBox"/>
+  <text class="er entityLabel" dominant-baseline="middle" style="font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px" text-anchor="middle" transform="translate(197.297 232.5)">Storage shed</text>
+  <path fill="#f0fff0" fill-opacity="100%" stroke="gray" d="M227.523 20H414.14v75H227.523z" class="er entityBox"/>
+  <text class="er entityLabel" dominant-baseline="middle" style="font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px" text-anchor="middle" transform="translate(320.832 57.5)">Traversable navigable</text>
+  <path fill="#f0fff0" fill-opacity="100%" stroke="gray" d="M135.05 370h124.492v75H135.05z" class="er entityBox"/>
+  <text class="er entityLabel" dominant-baseline="middle" style="font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px" text-anchor="middle" transform="translate(197.296 407.5)">Storage shelf</text>
+  <path fill="#f0fff0" fill-opacity="100%" stroke="gray" d="M128.195 545h138.203v75H128.195z" class="er entityBox"/>
+  <text class="er entityLabel" dominant-baseline="middle" style="font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px" text-anchor="middle" transform="translate(197.297 582.5)">Storage bucket</text>
+  <path fill="#f0fff0" fill-opacity="100%" stroke="gray" d="M130.93 720h132.734v75H130.93z" class="er entityBox"/>
+  <text class="er entityLabel" dominant-baseline="middle" style="font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px" text-anchor="middle" transform="translate(197.297 757.5)">Storage bottle</text>
+  <path fill="#fff" fill-opacity="85%" d="M49.311 145.163h88.484v19H49.311z" class="er relationshipLabelBox"/>
+  <text x="93.553" y="154.663" class="er relationshipLabel" dominant-baseline="middle" style="font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px" text-anchor="middle">holds (local)</text>
+  <path fill="#fff" fill-opacity="85%" d="M248.95 145.163h104.18v19H248.95z" class="er relationshipLabelBox"/>
+  <text x="301.04" y="154.663" class="er relationshipLabel" dominant-baseline="middle" style="font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px" text-anchor="middle">holds (session)</text>
+  <path fill="#fff" fill-opacity="85%" d="M123.516 310.5h147.563v19H123.516z" class="er relationshipLabelBox"/>
+  <text x="197.297" y="320" class="er relationshipLabel" dominant-baseline="middle" style="font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px" text-anchor="middle">for each storage key</text>
+  <path fill="#fff" fill-opacity="85%" d="M144.348 485.5h105.898v19H144.348z" class="er relationshipLabelBox"/>
+  <text x="197.297" y="495" class="er relationshipLabel" dominant-baseline="middle" style="font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px" text-anchor="middle">holds (default)</text>
+  <path fill="#fff" fill-opacity="85%" d="M104.32 660.5h185.953v19H104.32z" class="er relationshipLabelBox"/>
+  <text x="197.297" y="670" class="er relationshipLabel" dominant-baseline="middle" style="font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px" text-anchor="middle">for each storage endpoint</text>
+</svg>
