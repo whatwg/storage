@@ -7,7 +7,7 @@
     "svgo": "^3.0.2"
   },
   "scripts": {
-    "mmdc": "mmdc -c scripts/mmdc.config.json -i scripts/model-diagram.mmd -o assets/model-diagram.svg",
+    "mmdc": "mmdc -c scripts/mmdc.config.json -i model-diagram.mmd -o assets/model-diagram.svg",
     "svgo": "svgo --config scripts/svgo.config.js -f assets -o assets/",
     "build-diagram": "mkdirp assets && npm run mmdc && npm run svgo"
   }
