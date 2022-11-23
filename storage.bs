@@ -130,7 +130,7 @@ either the <a>obtain a local storage bottle map</a> or the
 standard for assistance and review.
 
 <p><img src=assets/model-diagram.svg alt="Storage model diagram (described in the next paragraph)."
-width=396 height=815>
+width=434 height=815>
 
 <p id=model-description>To isolate this data this standard defines a <a for=/>storage shed</a>
 which segments <a>storage shelves</a> by a <a>storage key</a>. A <a>storage shelf</a> in turn

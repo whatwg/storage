@@ -1,5 +1,6 @@
 /storage.spec.whatwg.org/
 /deploy.sh
 /storage.html
+/assets/
 /node_modules/
 package-lock.json

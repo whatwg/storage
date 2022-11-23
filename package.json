@@ -1,14 +1,14 @@
 {
-  "name": "storage",
-  "version": "0.0.0",
+  "private": true,
+  "description": "Builds and compresses the diagram",
   "dependencies": {
     "@mermaid-js/mermaid-cli": "^9.2.2",
+    "mkdirp": "^1.0.4",
     "svgo": "^3.0.2"
   },
   "scripts": {
-    "mmdc": "mmdc -i assets/model-diagram.mmd -o assets/model-diagram.svg -c assets/mmdc.config.json",
-    "svgo": "svgo -f assets -o assets/ --config assets/svgo.config.js",
-    "build-diagram": "npm run mmdc && npm run svgo"
-  },
-  "private": true
+    "mmdc": "mmdc -c scripts/mmdc.config.json -i scripts/model-diagram.mmd -o assets/model-diagram.svg",
+    "svgo": "svgo --config scripts/svgo.config.js -f assets -o assets/",
+    "build-diagram": "mkdirp assets && npm run mmdc && npm run svgo"
+  }
 }
