@@ -129,13 +129,12 @@ either the <a>obtain a local storage bottle map</a> or the
 <p class=note>If you are defining a standard for such an API, consider filing an issue against this
 standard for assistance and review.
 
-<p><img src=assets/model-diagram.svg alt="Storage model diagram (described in the next paragraph)."
-width=434 height=815>
+<p><img src=assets/model-diagram.svg alt="Storage model diagram (described in the next paragraph)." width=434 height=815>
 
-<p id=model-description>To isolate this data this standard defines a <a for=/>storage shed</a>
-which segments <a>storage shelves</a> by a <a>storage key</a>. A <a>storage shelf</a> in turn
-consists of a <a>storage bucket</a> and will likely consist of multiple <a>storage buckets</a> in
-the future to allow for different storage policies. And lastly, a <a>storage bucket</a> consists of
+<p>To isolate this data this standard defines a <a for=/>storage shed</a> which segments
+<a>storage shelves</a> by a <a>storage key</a>. A <a>storage shelf</a> in turn consists of a
+<a>storage bucket</a> and will likely consist of multiple <a>storage buckets</a> in the future to
+allow for different storage policies. And lastly, a <a>storage bucket</a> consists of
 <a>storage bottles</a>, one for each <a>storage endpoint</a>.
 
 
