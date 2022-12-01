@@ -20,4 +20,5 @@ local: storage.bs
 
 deploy: storage.bs
 	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh
+	EXTRA_FILES="assets/*" \
 	bash ./deploy.sh

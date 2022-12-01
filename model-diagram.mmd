@@ -1,0 +1,12 @@
+erDiagram
+
+%% This is the source file for `assets/model-diagram.svg`.
+%% Build command: `npm i && npm run build-diagram`
+%% Don't forget to adjust the size in storage.bs when modifying this.
+%% (See viewBox attribute of the resulting SVG)
+
+"User agent" ||--|| "Storage shed" : "holds (local)"
+"Traversable navigable" ||--|| "Storage shed" : "holds (session)"
+"Storage shed" ||--o{ "Storage shelf" : "for each storage key"
+"Storage shelf" ||--|| "Storage bucket" : "holds (default)"
+"Storage bucket" ||--|{ "Storage bottle" : "for each storage endpoint"

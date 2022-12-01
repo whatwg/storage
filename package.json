@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "description": "Builds and compresses the diagram",
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^9.2.2",
+    "svgo": "^3.0.2"
+  },
+  "scripts": {
+    "mmdc": "mmdc -c scripts/mmdc.config.json -i model-diagram.mmd -o assets/model-diagram.svg",
+    "svgo": "svgo --config scripts/svgo.config.js -f assets -o assets/",
+    "build-diagram": "npm run mmdc && npm run svgo"
+  }
+}
