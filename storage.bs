@@ -713,6 +713,16 @@ dictionary StorageEstimate {
 
 
 
+<h2 id=the-storage-task-source>The Storage Task Source</h2>
+
+<p>This specification defines a new generic task source called the
+<dfn export id="storage-task-source">storage task source</dfn>, which is to be
+used for all tasks that are queued by a <a>storage endpoint</a> which may modify
+or are dependent on the value of the <var>endpoint</var>'s
+<a for="storage endpoint">quota</a>.
+
+
+
 <h2 class=no-num id="acks">Acknowledgments</h2>
 
 <p>With that, many thanks to
@@ -722,6 +732,7 @@ Alex Russell,
 Ali Alabbas,
 Andrew Sutherland,
 Andrew Williams,
+Austin Sullivan,
 Ben Kelly,
 Ben Turner,
 Dale Harvey,
