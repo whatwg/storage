@@ -472,9 +472,15 @@ is needed for <a href="https://github.com/whatwg/storage/issues/4">issue #4</a> 
 
 <h3 id=storage-task-source>Storage task source</h2>
 
-<p>The <dfn export>storage task source</dfn> is a <a for=/>task source</a> to be used for all
-<a for=/>tasks</a> related to a <a>storage endpoint</a>. In particular those that relate to a
-<a>storage endpoint</a>'s <a for="storage endpoint">quota</a>.
+<p>The <dfn export id=task-source>storage task source</dfn> is a <a for=/>task source</a> to be used
+for all <a for=/>tasks</a> related to a <a>storage endpoint</a>. In particular those that relate to
+a <a>storage endpoint</a>'s <a for="storage endpoint">quota</a>.
+
+<div algorithm>
+<p>To <dfn export>queue a storage task</dfn> given a <a for=/>global object</a> <var>global</var>
+and a series of steps <var>steps</var>, <a>queue a global task</a> on the <a>storage task source</a>
+with <var>global</var> and <var>steps</var>.
+</div>
 
 
 
@@ -613,15 +619,19 @@ dictionary StorageEstimate {
 };
 </pre>
 
+<div algorithm>
 <p>The <dfn method for=StorageManager><code>persisted()</code></dfn> method steps are:
 
 <ol>
- <li><p>Let <var>promise</var> be a new promise.
+ <li><p>Let <var>promise</var> be <a>a new promise</a>.
+
+ <li><p>Let <var>global</var> be <a>this</a>'s <a>relevant global object</a>.
 
  <li><p>Let <var>shelf</var> be the result of running <a>obtain a local storage shelf</a> with
  <a>this</a>'s <a>relevant settings object</a>.
 
- <li><p>If <var>shelf</var> is failure, then reject <var>promise</var> with a {{TypeError}}.
+ <li><p>If <var>shelf</var> is failure, then <a for=/>reject</a> <var>promise</var> with a
+ {{TypeError}}.
 
  <li>
   <p>Otherwise, run these steps <a>in parallel</a>:
@@ -634,21 +644,27 @@ dictionary StorageEstimate {
 
     <p class=note>It will be false when there's an internal error.
 
-   <li><p><a>Queue a task</a> to resolve <var>promise</var> with <var>persisted</var>.
+   <li><p><a>Queue a storage task</a> with <var>global</var> to <a for=/>resolve</a>
+   <var>promise</var> with <var>persisted</var>.
   </ol>
 
  <li><p>Return <var>promise</var>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn method for=StorageManager><code>persist()</code></dfn> method steps are:
 
 <ol>
- <li><p>Let <var>promise</var> be a new promise.
+ <li><p>Let <var>promise</var> be <a>a new promise</a>.
+
+ <li><p>Let <var>global</var> be <a>this</a>'s <a>relevant global object</a>.
 
  <li><p>Let <var>shelf</var> be the result of running <a>obtain a local storage shelf</a> with
  <a>this</a>'s <a>relevant settings object</a>.
 
- <li><p>If <var>shelf</var> is failure, then reject <var>promise</var> with a {{TypeError}}.
+ <li><p>If <var>shelf</var> is failure, then <a for=/>reject</a> <var>promise</var> with a
+ {{TypeError}}.
 
  <li>
   <p>Otherwise, run these steps <a>in parallel</a>:
@@ -681,21 +697,27 @@ dictionary StorageEstimate {
      <li><p>If there was no internal error, then set <var>persisted</var> to true.
     </ol>
 
-   <li><p><a>Queue a task</a> to resolve <var>promise</var> with <var>persisted</var>.
+   <li><p><a>Queue a storage task</a> with <var>global</var> to <a for=/>resolve</a>
+   <var>promise</var> with <var>persisted</var>.
   </ol>
 
  <li><p>Return <var>promise</var>.
 </ol>
+</div>
 
+<div algorithm>
 <p>The <dfn method for=StorageManager><code>estimate()</code></dfn> method steps are:
 
 <ol>
- <li><p>Let <var>promise</var> be a new promise.
+ <li><p>Let <var>promise</var> be <a>a new promise</a>.
+
+ <li><p>Let <var>global</var> be <a>this</a>'s <a>relevant global object</a>.
 
  <li><p>Let <var>shelf</var> be the result of running <a>obtain a local storage shelf</a> with
  <a>this</a>'s <a>relevant settings object</a>.
 
- <li><p>If <var>shelf</var> is failure, then reject <var>promise</var> with a {{TypeError}}.
+ <li><p>If <var>shelf</var> is failure, then <a for=/>reject</a> <var>promise</var> with a
+ {{TypeError}}.
 
  <li>
   <p>Otherwise, run these steps <a>in parallel</a>:
@@ -710,17 +732,20 @@ dictionary StorageEstimate {
 
    <li>
     <p>If there was an internal error while obtaining <var>usage</var> and <var>quota</var>, then
-    <a>queue a task</a> to reject <var>promise</var> with a {{TypeError}}.
+    <a>queue a storage task</a> with <var>global</var> to <a for=/>reject</a> <var>promise</var>
+    with a {{TypeError}}.
 
     <p class=note>Internal errors are supposed to be extremely rare and indicate some kind of
     low-level platform or hardware fault. However, at the scale of the web with the diversity of
     implementation and platforms, the unexpected does occur.
 
-   <li><p>Otherwise, <a>queue a task</a> to resolve <var>promise</var> with <var>dictionary</var>.
+   <li><p>Otherwise, <a>queue a storage task</a> with <var>global</var> to <a for=/>resolve</a>
+   <var>promise</var> with <var>dictionary</var>.
   </ol>
 
  <li><p>Return <var>promise</var>.
 </ol>
+</div>
 
 
 
