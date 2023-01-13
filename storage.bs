@@ -14,6 +14,10 @@ urlPrefix: https://tc39.github.io/ecma262/; spec: ECMASCRIPT
     text: agent cluster; url: #sec-agent-clusters; type: dfn
 </pre>
 
+<pre class=link-defaults>
+spec:infra; type:dfn; text:implementation-defined
+</pre>
+
 
 
 <h2 id=introduction>Introduction</h2>
@@ -466,6 +470,13 @@ is needed for <a href="https://github.com/whatwg/storage/issues/4">issue #4</a> 
 <a href="https://privacycg.github.io/storage-access/">Storage Access API</a>.
 
 
+<h3 id=storage-task-source>Storage task source</h2>
+
+<p>The <dfn export>storage task source</dfn> is a <a for=/>task source</a> to be used for all
+<a for=/>tasks</a> related to a <a>storage endpoint</a>. In particular those that relate to a
+<a>storage endpoint</a>'s <a for="storage endpoint">quota</a>.
+
+
 
 <h2 id=persistence>Persistence permission</h2>
 
@@ -710,16 +721,6 @@ dictionary StorageEstimate {
 
  <li><p>Return <var>promise</var>.
 </ol>
-
-
-
-<h2 id=the-storage-task-source>The Storage Task Source</h2>
-
-<p>This specification defines a new generic task source called the
-<dfn export id="storage-task-source">storage task source</dfn>, which is to be
-used for all tasks that are queued by a <a>storage endpoint</a> which may modify
-or are dependent on the value of the <var>endpoint</var>'s
-<a for="storage endpoint">quota</a>.
 
 
 
