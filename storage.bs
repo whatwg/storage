@@ -14,6 +14,10 @@ urlPrefix: https://tc39.github.io/ecma262/; spec: ECMASCRIPT
     text: agent cluster; url: #sec-agent-clusters; type: dfn
 </pre>
 
+<pre class=link-defaults>
+spec:infra; type:dfn; text:implementation-defined
+</pre>
+
 
 
 <h2 id=introduction>Introduction</h2>
