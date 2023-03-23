@@ -16,6 +16,7 @@ urlPrefix: https://tc39.github.io/ecma262/; spec: ECMASCRIPT
 
 <pre class=link-defaults>
 spec:infra; type:dfn; text:implementation-defined
+spec:infra; type:dfn; text:user agent
 </pre>
 
 
