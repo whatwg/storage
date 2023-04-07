@@ -182,7 +182,7 @@ defined by the following table:
  <tr>
   <td>"<code>fileSystem</code>"
   <td>« "<code>local</code>" »
-  <td>5 &times; 2<sup>20</sup> (i.e., 5 mebibytes)
+  <td>null
  <tr>
   <td>"<code>indexedDB</code>"
   <td>« "<code>local</code>" »
