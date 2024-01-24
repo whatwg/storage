@@ -16,7 +16,7 @@ remote: storage.bs
 	);
 
 local: storage.bs
-	bikeshed spec storage.bs storage.html --md-Text-Macro="COMMIT-SHA LOCAL COPY"
+	bikeshed spec storage.bs storage.html --md-Text-Macro="COMMIT-SHA LOCAL-COPY"
 
 deploy: storage.bs
 	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh
