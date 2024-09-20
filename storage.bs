@@ -6,6 +6,7 @@ Text Macro: TWITTER storagestandard
 Text Macro: LATESTRD 2023-02
 Abstract: The Storage Standard defines an API for persistent storage and quota estimates, as well as the platform storage architecture.
 Translation: ja https://triple-underscore.github.io/storage-ja.html
+Translation: zh-Hans https://htmlspecs.com/storage/
 </pre>
 
 <pre class=anchors>
