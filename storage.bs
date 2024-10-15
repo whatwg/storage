@@ -181,6 +181,10 @@ defined by the following table:
   <td>« "<code>local</code>" »
   <td>null
  <tr>
+  <td>"<code>fileSystem</code>"
+  <td>« "<code>local</code>" »
+  <td>null
+ <tr>
   <td>"<code>indexedDB</code>"
   <td>« "<code>local</code>" »
   <td>null
