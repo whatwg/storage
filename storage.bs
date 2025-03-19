@@ -206,8 +206,8 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
 
 <h3 id=storage-keys>Storage keys</h3>
 
-<p>A <dfn>storage key</dfn> is a <a>tuple</a> consisting of an <dfn for="storage key">origin</dfn>
-(an <a for=/>origin</a>). [[!HTML]]
+<p>A <dfn export>storage key</dfn> is a <a>tuple</a> consisting of an
+<dfn for="storage key">origin</dfn> (an <a for=/>origin</a>). [[!HTML]]
 
 <p class=XXX>This is expected to change; see
 <a href="https://privacycg.github.io/storage-partitioning/">Client-Side Storage Partitioning</a>.
@@ -253,8 +253,8 @@ steps:
 
 <h3 id=storage-sheds>Storage sheds</h3>
 
-<p>A <dfn>storage shed</dfn> is a <a for=/>map</a> of <a>storage keys</a> to <a>storage shelves</a>.
-It is initially empty.
+<p>A <dfn export>storage shed</dfn> is a <a for=/>map</a> of <a>storage keys</a> to
+<a>storage shelves</a>. It is initially empty.
 
 <hr>
 
@@ -393,7 +393,7 @@ steps:
 
 <h3 id=storage-bottles>Storage bottles</h3>
 
-<p>A <dfn>storage bottle</dfn> is a part of a <a>storage bucket</a> carved out for a single
+<p>A <dfn export>storage bottle</dfn> is a part of a <a>storage bucket</a> carved out for a single
 <a>storage endpoint</a>. A <a>storage bottle</a> has a <dfn for="storage bottle">map</dfn>, which is
 initially an empty <a for=/>map</a>. A <a>storage bottle</a> also has a
 <dfn for="storage bottle">proxy map reference set</dfn>, which is initially an empty
