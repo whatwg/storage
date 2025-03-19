@@ -472,7 +472,7 @@ is needed for <a href="https://github.com/whatwg/storage/issues/4">issue #4</a> 
 <a href="https://privacycg.github.io/storage-access/">Storage Access API</a>.
 
 
-<h3 id=storage-task-source>Storage task source</h2>
+<h3 id=storage-task-source>Storage task source</h3>
 
 <p>The <dfn export id=task-source>storage task source</dfn> is a <a for=/>task source</a> to be used
 for all <a for=/>tasks</a> related to a <a>storage endpoint</a>. In particular those that relate to
