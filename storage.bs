@@ -754,7 +754,22 @@ dictionary StorageEstimate {
 </ol>
 </div>
 
+<h2>Security and Privacy Considerations</h2>
 
+<h3>Exposing new data</h3>
+Global quota usage is a function of all calls made by an origin to the respective
+storage APIs. The number summarizes information that the origin already has
+An origin can monitor the change in total quota with every
+storage API call to keep a running total.
+
+<h3>User identification and tracking</h3>
+An origin that has data stored on the client (non-zero quota usage) can store a
+unique identifier for the user. Instead of using this new API, the origin can
+simply read a user ID from IndexedDB, or from Cache Storage etc. In other words,
+the new API does not make it any easier to identify or track users.
+
+<h3>Padding Opaque Responses</h3>
+TODO: Recommend padding for opaque responses.
 
 <h2 class=no-num id="acks">Acknowledgments</h2>
 
