@@ -811,7 +811,7 @@ Mike Taylor,
 Mounir Lamouri,
 Shachar Zohar,
 黃強 (Shawn Huang),
-簡冠庭 (Timothy Guan-tin Chien)
+簡冠庭 (Timothy Guan-tin Chien),
 Victor Costan, and
 Yoshisato Yanagisawa
 for being awesome!
