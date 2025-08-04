@@ -466,6 +466,31 @@ standard and standards using this standard can access the contents.
 <var>identifier</var>, return the result of running <a>obtain a storage bottle map</a> with
 "<code>session</code>", <var>environment</var>, and <var>identifier</var>.
 
+<p>To <dfn export>obtain a local storage bottle map given a storage key</dfn>, given a
+<a>storage key</a> <var>key</var> and <a>storage identifier</a> <var>identifier</var>, run these
+steps:
+
+<ol>
+ <li><p>Let <var>shed</var> be the user agent's <a for="user agent">storage shed</a>.
+
+ <li><p>If <var>shed</var>[<var>key</var>] does not <a for=map>exist</a>, then set
+ <var>shed</var>[<var>key</var>] to the result of running <a>create a storage shelf</a> with
+ "<code>local</code>".
+
+ <li><p>Let <var>shelf</var> be <var>shed</var>[<var>key</var>].
+
+ <li><p>Let <var>bucket</var> be <var>shelf</var>'s <a>bucket map</a>["<code>default</code>"].
+
+ <li><p>Let <var>bottle</var> be <var>bucket</var>'s <a>bottle map</a>[<var>identifier</var>].
+
+ <li><p>Let <var>proxyMap</var> be a new <a>storage proxy map</a> whose
+ <a for="storage proxy map">backing map</a> is <var>bottle</var>'s <a for="storage bottle">map</a>.
+
+ <li><p><a for=set>Append</a> <var>proxyMap</var> to <var>bottle</var>'s
+ <a for="storage bottle">proxy map reference set</a>.
+
+ <li><p>Return <var>proxyMap</var>.
+</ol>
 
 <h3 id=storage-proxy-maps>Storage proxy maps</h3>
 
@@ -786,8 +811,9 @@ Mike Taylor,
 Mounir Lamouri,
 Shachar Zohar,
 黃強 (Shawn Huang),
-簡冠庭 (Timothy Guan-tin Chien), and
-Victor Costan
+簡冠庭 (Timothy Guan-tin Chien)
+Victor Costan, and
+Yoshisato Yanagisawa
 for being awesome!
 
 <p>This standard is written by <a lang=nl href=https://annevankesteren.nl/>Anne van Kesteren</a>
