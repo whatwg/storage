@@ -354,7 +354,6 @@ steps:
 </ol>
 
 
-
 <h3 id=buckets oldids=boxes>Storage buckets</h3>
 
 <p>A <dfn>storage bucket</dfn> is a place for <a>storage endpoints</a> to store data.
