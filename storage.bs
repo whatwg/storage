@@ -414,30 +414,12 @@ standard and standards using this standard can access the contents.
 
 <hr>
 
-<p>To <dfn export>obtain a storage bottle map given a storage key</dfn>, given a
-<a>storage type</a> <var>type</var>, <a>storage key</a> <var>key</var>, and
-<a>storage identifier</a> <var>identifier</var>, run these steps:
+<p>To <dfn>obtain a storage bottle map given a storage key</dfn>, given a
+<a>storage type</a> <var>type</var>, <a>storage key</a> <var>key</var>,
+<a>storage identifier</a> <var>identifier</var>, and a <a>storage shed</a> <var>shed</var>, run
+these steps:
 
 <ol>
- <li><p>Let <var>shed</var> be null.
-
- <li><p>If <var>type</var> is "<code>local</code>", then set <var>shed</var> to the user agent's
- <a for="user agent">storage shed</a>.
-
- <li>
-  <p>Otherwise:
-
-  <ol>
-   <li><p>Assert: <var>type</var> is "<code>session</code>".
-
-   <li><p>Set <var>shed</var> to <var>environment</var>'s
-   <a for=/>global object</a>'s
-   <a>associated <code>Document</code></a>'s
-   <a>node navigable</a>'s
-   <a for=navigable>traversable navigable</a>'s
-   <a for="traversable navigable">storage shed</a>.
-  </ol>
-
  <li><p>If <var>shed</var>[<var>key</var>] does not <a for=map>exist</a>, then set
  <var>shed</var>[<var>key</var>] to the result of running <a>create a storage shelf</a> with
  <var>type</var>.
@@ -467,8 +449,27 @@ standard and standards using this standard can access the contents.
 
  <li><p>If <var>key</var> is failure, then return failure.
 
+ <li><p>Let <var>shed</var> be null.
+
+ <li><p>If <var>type</var> is "<code>local</code>", then set <var>shed</var> to the user agent's
+ <a for="user agent">storage shed</a>.
+
+ <li>
+  <p>Otherwise:
+
+  <ol>
+   <li><p>Assert: <var>type</var> is "<code>session</code>".
+
+   <li><p>Set <var>shed</var> to <var>environment</var>'s
+   <a for=/>global object</a>'s
+   <a>associated <code>Document</code></a>'s
+   <a>node navigable</a>'s
+   <a for=navigable>traversable navigable</a>'s
+   <a for="traversable navigable">storage shed</a>.
+  </ol>
+
  <li><p>Return the result of running <a>obtain a storage bottle map given a storage key</a> with
- <var>type</var>, <var>key</var>, and <var>identifier</var>.
+ <var>type</var>, <var>key</var>, <var>identifier</var>, and <var>shed</var>.
 </ol>
 
 <p>To <dfn export>obtain a local storage bottle map</dfn>, given an
@@ -484,7 +485,8 @@ standard and standards using this standard can access the contents.
 <p>To <dfn export>obtain a local storage bottle map given a storage key</dfn>, given a
 <a>storage key</a> <var>key</var> and <a>storage identifier</a> <var>identifier</var>, return the
 result of running <a>obtain a storage bottle map given a storage key</a> with
-"<code>local</code>", <var>key</var>, and <var>identifier</var>.
+"<code>local</code>", <var>key</var>, <var>identifier</var>, and the user agent's
+<a for="user agent">storage shed</a>.
 
 <h3 id=storage-proxy-maps>Storage proxy maps</h3>
 
