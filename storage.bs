@@ -312,6 +312,17 @@ which is a <a for=/>map</a> of <a for=/>strings</a> to <a>storage buckets</a>.
 given a <a for=map>value</a> when a <a>storage shelf</a> is
 <a lt="obtain a storage shelf">obtained</a> for the first time.
 
+<p>To <dfn>get or create a storage shelf</dfn>, given a <a>storage shed</a> <var>shed</var>, a
+<a>storage key</a> <var>key</var>, and a <a>storage type</a> <var>type</var>, run these steps:
+
+<ol>
+ <li><p>If <var>shed</var>[<var>key</var>] does not <a for=map>exist</a>, then set
+ <var>shed</var>[<var>key</var>] to the result of running <a>create a storage shelf</a> with
+ <var>type</var>.
+
+ <li><p>Return <var>shed</var>[<var>key</var>].
+</ol>
+
 <p>To <dfn>obtain a storage shelf</dfn>, given a <a for=/>storage shed</a> <var>shed</var>, an
 <a>environment settings object</a> <var>environment</var>, and a <a>storage type</a>
 <var>type</var>, run these steps:
@@ -322,11 +333,8 @@ given a <a for=map>value</a> when a <a>storage shelf</a> is
 
  <li><p>If <var>key</var> is failure, then return failure.
 
- <li><p>If <var>shed</var>[<var>key</var>] does not <a for=map>exist</a>, then set
- <var>shed</var>[<var>key</var>] to the result of running <a>create a storage shelf</a> with
- <var>type</var>.
-
- <li><p>Return <var>shed</var>[<var>key</var>].
+ <li><p>Return the result of running <a>get or create a storage shelf</a> with <var>shed</var>,
+ <var>key</var>, and <var>type</var>.
 </ol>
 
 <p>To <dfn>obtain a local storage shelf</dfn>, given an <a>environment settings object</a>
@@ -344,6 +352,7 @@ steps:
 
  <li><p>Return <var>shelf</var>.
 </ol>
+
 
 
 <h3 id=buckets oldids=boxes>Storage buckets</h3>
@@ -420,11 +429,8 @@ standard and standards using this standard can access the contents.
 these steps:
 
 <ol>
- <li><p>If <var>shed</var>[<var>key</var>] does not <a for=map>exist</a>, then set
- <var>shed</var>[<var>key</var>] to the result of running <a>create a storage shelf</a> with
- <var>type</var>.
-
- <li><p>Let <var>shelf</var> be <var>shed</var>[<var>key</var>].
+ <li><p>Let <var>shelf</var> be the result of running <a>get or create a storage shelf</a> with
+ <var>shed</var>, <var>key</var>, and <var>type</var>.
 
  <li><p>Let <var>bucket</var> be <var>shelf</var>'s <a>bucket map</a>["<code>default</code>"].
 
