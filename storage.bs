@@ -406,7 +406,7 @@ initially an empty <a for=/>map</a>. A <a>storage bottle</a> also has a
 <a for=/>set</a>. A <a>storage bottle</a> also has a <dfn for="storage bottle">quota</dfn>, which is
 null or a number representing a conservative estimate of the total amount of bytes it can hold. Null
 indicates the lack of a limit. <span class=note>It is still bound by the <a>storage quota</a> of its
-encompassing <a for=/>storage shelf</a>.
+encompassing <a for=/>storage shelf</a>.</span>
 
 <p>A <a>storage bottle</a>'s <a for="storage bottle">map</a> is where the actual data meant to be
 stored lives. User agents are expected to store this data, and make it available across <a>agent</a>
