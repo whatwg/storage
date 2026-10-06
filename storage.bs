@@ -210,6 +210,9 @@ anticipated that some APIs will be applicable to both <a>storage types</a> going
 <p>A <dfn export>storage key</dfn> is a <a>tuple</a> consisting of an
 <dfn for="storage key">origin</dfn> (an <a for=/>origin</a>). [[!HTML]]
 
+<p>A <a>storage key</a>'s <a>equality</a>, given <a>storage keys</a> <var>A</var> and <var>B</var>,
+returns true if <var>A</var> <a for="storage key">equals</a> <var>B</var>; otherwise false.
+
 <p class=XXX>This is expected to change; see
 <a href="https://privacycg.github.io/storage-partitioning/">Client-Side Storage Partitioning</a>.
 
