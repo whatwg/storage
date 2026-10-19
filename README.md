@@ -1,4 +1,4 @@
-This repository hosts the [Storage Standard](https://storage.spec.whatwg.org/).
+This repository hosts the [Storage Standard](https://storage.spec.whatwg.org/). It is one of [many web standards](https://spec.whatwg.org/) developed by the [WHATWG community](https://whatwg.org/).
 
 ## Code of conduct
 
