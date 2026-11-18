@@ -276,6 +276,15 @@ It is initially empty.
 a <a for=/>storage shed</a>. A <a for=/>traversable navigable</a>'s
 <a for="traversable navigable">storage shed</a> holds all <dfn>session storage</dfn> data.
 
+<p class=note>In this standard, <a>local storage</a> and <a>session storage</a> are general
+categories of storage, not the <code>localStorage</code> and <code>sessionStorage</code> APIs. The
+categories differ in the lifetime of their data: <a>local storage</a> is kept by the user agent
+until it is cleared, whereas <a>session storage</a> is tied to a <a for=/>traversable navigable</a>
+and is cleared when that <a for=/>traversable navigable</a> is closed. The <code>localStorage</code>
+API is one of several <a>storage endpoints</a> whose data is <a>local storage</a>, alongside Indexed
+DB, the Cache API, and service worker registrations. The <code>sessionStorage</code> API is
+currently the only <a>storage endpoint</a> whose data is <a>session storage</a>.
+
 <p>To
 <dfn export oldids="legacy-clone-a-browsing-session-storage-shed">legacy-clone a traversable storage shed</dfn>,
 given a <a for=/>traversable navigable</a> <var>A</var> and a <a for=/>traversable navigable</a>
@@ -776,6 +785,7 @@ Dale Harvey,
 David Grogan,
 Domenic Denicola,
 fantasai,
+Harveer Singh,
 Jake Archibald<!-- technically B.J. Archibald -->,
 Jeffrey Yasskin,
 Jesse Mykolyn,
